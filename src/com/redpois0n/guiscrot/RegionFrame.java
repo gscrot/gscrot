@@ -14,6 +14,8 @@ import org.jnativehook.mouse.NativeMouseMotionListener;
 @SuppressWarnings("serial")
 public class RegionFrame extends JFrame implements MouseInputListener, NativeMouseMotionListener, NativeMouseInputListener {
 	
+	public static final float OPACITY = 0.5F;
+	
 	public RegionFrame() {
 		setAlwaysOnTop(true);
 		setBounds(0, 0, 450, 450);
@@ -28,7 +30,7 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 		});
 		setUndecorated(true);
 		setLocationRelativeTo(null);
-		setOpacity(0.5F);
+		setOpacity(OPACITY);
 	}
 
 	@Override
