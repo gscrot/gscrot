@@ -2,6 +2,7 @@ package com.redpois0n.guiscrot;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ public class Main {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			registerNativeHook();
 
-			createBackground();
+			createBackground(true);
 			createRegionalScreenshot();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -37,15 +38,17 @@ public class Main {
 		GlobalScreen.registerNativeHook();
 	}
 
-	public static void createBackground() throws Exception {
+	public static void createBackground(boolean still) throws Exception {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] screens = ge.getScreenDevices();
 
 		for (GraphicsDevice screen : screens) {
-			Robot robotForScreen = new Robot(screen);
-			Rectangle screenBounds = screen.getDefaultConfiguration().getBounds();
-
-			CoverFrame frame = new CoverFrame(screenBounds);
+			Rectangle rect = screen.getDefaultConfiguration().getBounds();
+			Robot robot = new Robot(screen);
+			
+			Image image = still ? robot.createScreenCapture(rect) : null;
+			
+			CoverFrame frame = new CoverFrame(rect, image);
 			frame.setVisible(true);
 		}
 	}
