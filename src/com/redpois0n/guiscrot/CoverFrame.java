@@ -134,10 +134,10 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
 
-			if (dragging) {	
+			if (x2 != 0 && y2 != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
 			}
-			
+
 			if (x2 != 0 && y2 != 0) {
 				g.setColor(Color.red);
 				g.drawRect(x, y, tx - x, ty - y);
@@ -172,9 +172,9 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		if (!dragging) {
-			x = arg0.getX();// - rect.x;
-			y = arg0.getY();// - rect.y;
+		if (!dragging && x2 == 0 && y2 == 0) {
+			x = arg0.getX();
+			y = arg0.getY();
 		}
 
 		repaint();
@@ -198,15 +198,16 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		dragging = true;
-
+		x = arg0.getX();
+		y = arg0.getY();
+		x2 = 0;
+		y2 = 0;
 		repaint();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		dragging = false;
-		x2 = 0;
-		y2 = 0;
 		repaint();
 	}
 
