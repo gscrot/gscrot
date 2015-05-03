@@ -130,7 +130,6 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			RendererUtils.drawMovingRect(x, 0, 1, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, y, getWidth(), 1, g, seed);
 			
-			g.setColor(Color.white);
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
