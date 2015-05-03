@@ -2,6 +2,7 @@ package com.redpois0n.guiscrot;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.Image;
@@ -49,6 +50,8 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		setUndecorated(true);
 		setBounds(rect);
 		setContentPane(new CoverPanel());
+		addMouseListener(this);
+		addMouseMotionListener(this);
 
 		if (image == null) {
 			setOpacity(OPACITY);
@@ -83,13 +86,13 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		public void paintComponent(Graphics g) {		
 			super.paintComponent(g);
 			
-			if (x > x2) {
+			if (x > x2 && x2 != 0) {
 				int temp = x;
 				x = x2;
 				x2 = temp;
 			}
 			
-			if (y > y2) {
+			if (y > y2 && y2 != 0) {
 				int temp = y;
 				y = y2;
 				y2 = temp;
@@ -121,8 +124,12 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			RendererUtils.drawMovingRect(x, 0, 1, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, y, getWidth(), 1, g, seed);
 			
+			g.setColor(Color.white);
+			g.setFont(new Font("Arial", Font.BOLD, 16));
+
 			if (dragging) {
-				g.drawString("X: " + (x + rect.x) + ", Y: " + (y + rect.y), x, y);
+				g.drawString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 4 - g.getFontMetrics().getHeight());
+				g.drawString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 2);
 			}
 			
 			if (x2 != 0 && y2 != 0) {
@@ -142,28 +149,29 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	public void nativeMouseDragged(NativeMouseEvent arg0) {
 		x2 = arg0.getX() - rect.x;
 		y2 = arg0.getY() - rect.y;
-		
+
 		repaint();
 	}
 
 	@Override
 	public void nativeMouseMoved(NativeMouseEvent arg0) {
-		if (!dragging) {
-			x = arg0.getX() - rect.x;
-			y = arg0.getY() - rect.y;
-		}
-
-		repaint();
+		
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		
+		dragging = true;
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		
+		if (!dragging) {
+			x = arg0.getX();// - rect.x;
+			y = arg0.getY();// - rect.y;
+		}
+
+		repaint();
 	}
 
 	@Override
@@ -184,6 +192,7 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		dragging = true;
+
 		repaint();
 	}
 
