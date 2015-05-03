@@ -12,7 +12,7 @@ public abstract class Plugin {
 	 * Returns unique name for this plugin
 	 * @return
 	 */
-	public String getName() {
+	public final String getName() {
 		return this.name;
 	}
 
