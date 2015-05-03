@@ -19,8 +19,6 @@ import org.jnativehook.GlobalScreen;
 
 public class Main {
 
-	public static final List<CoverFrame> ACTIVE_COVER_FRAMES = new ArrayList<CoverFrame>();
-
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

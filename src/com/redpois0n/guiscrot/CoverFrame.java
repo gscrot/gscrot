@@ -54,7 +54,6 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			setOpacity(OPACITY);
 		}
 		
-		Main.ACTIVE_COVER_FRAMES.add(this);
 		thread = new RepaintThread();
 		thread.start();
 	}
@@ -135,7 +134,6 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 
 	@Override
 	protected void finalize() {
-		Main.ACTIVE_COVER_FRAMES.remove(this);
 		thread.interrupt();
 	}
 
