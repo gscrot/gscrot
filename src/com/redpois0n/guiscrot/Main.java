@@ -29,7 +29,6 @@ public class Main {
 			boolean still = true;
 
 			createBackground(still);
-			// createRegionalScreenshot(still);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -83,13 +82,6 @@ public class Main {
         BufferedImage screenShot = robot.createScreenCapture(rect);
 		
 		CoverFrame frame = new CoverFrame(rect, screenShot);
-		frame.setVisible(true);
-	}
-
-	public static void createRegionalScreenshot(boolean still) {
-		RegionFrame frame = new RegionFrame(still);
-		GlobalScreen.addNativeMouseMotionListener(frame);
-		GlobalScreen.addNativeMouseListener(frame); // TODO remove
 		frame.setVisible(true);
 	}
 }
