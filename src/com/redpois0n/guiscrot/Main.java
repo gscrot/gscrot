@@ -14,7 +14,7 @@ public class Main {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			registerNativeHook();
 			
-			new RegionFrame().setVisible(true);
+			createRegionalScreenshot();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -29,5 +29,12 @@ public class Main {
 		logger.setLevel(Level.OFF);
 		
 		GlobalScreen.registerNativeHook();
+	}
+	
+	public static void createRegionalScreenshot() {
+		RegionFrame frame = new RegionFrame();
+		GlobalScreen.addNativeMouseMotionListener(frame);
+		GlobalScreen.addNativeMouseListener(frame);
+		frame.setVisible(true);
 	}
 }
