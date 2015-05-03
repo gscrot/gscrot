@@ -4,9 +4,11 @@ import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -86,6 +88,10 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		public void paintComponent(Graphics g) {		
 			super.paintComponent(g);
 			
+			if (g instanceof Graphics2D) {
+				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+			}
+			
 			if (x > x2 && x2 != 0) {
 				int temp = x;
 				x = x2;
@@ -127,9 +133,10 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			g.setColor(Color.white);
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
-			if (dragging) {
-				g.drawString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 4 - g.getFontMetrics().getHeight());
-				g.drawString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 2);
+			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
+
+			if (dragging) {	
+				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
 			}
 			
 			if (x2 != 0 && y2 != 0) {
