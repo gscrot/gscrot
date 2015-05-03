@@ -66,13 +66,12 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			if (image != null) {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 				g.setColor(new Color(0, 0, 0, 100));		
-				
-				g.drawImage(image, x, y, x2, y2, x, y, x2, y2, null);
-				
+								
 				g.fillRect(0, 0, x, getHeight());
 				g.fillRect(x, 0, getWidth(), y);			
 
-				g.fillRect(tx, ty, getWidth(), getHeight());
+				g.fillRect(tx, y, getWidth(), getHeight());
+				g.fillRect(x, ty, tx - x, getHeight());
 			} else {
 				g.setColor(Color.black);
 				g.fillRect(0, 0, getWidth(), getHeight());
