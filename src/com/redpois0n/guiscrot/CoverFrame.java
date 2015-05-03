@@ -33,8 +33,11 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	private int y2;
 	
 	private boolean dragging;
+	private int seed;
 	
+	private RepaintThread thread;
 	
+
 	public CoverFrame(Rectangle rect) {
 		this(rect, null);
 	}
@@ -52,12 +55,32 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		}
 		
 		Main.ACTIVE_COVER_FRAMES.add(this);
+		thread = new RepaintThread();
+		thread.start();
+	}
+	
+	private class RepaintThread extends Thread {
+		@Override
+		public void run() {
+			while (!interrupted()) {
+				if (seed++ >= 10) {
+					seed = 0;
+				}
+				try {
+					Thread.sleep(100L);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
+				repaint();
+			}
+		}
 	}
 	
 	private class CoverPanel extends JPanel {
 		
 		@Override
-		public void paintComponent(Graphics g) {
+		public void paintComponent(Graphics g) {		
 			super.paintComponent(g);
 			
 			if (x > x2) {
@@ -93,25 +116,27 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 				g.setColor(Color.black);
 				g.fillRect(0, 0, getWidth(), getHeight());
 			}	
-			
-			if (x2 != 0 && y2 != 0 && dragging) {
-				g.setColor(Color.red);
-				g.drawRect(x, y, tx - x, ty - x);
-			}			
 						
 			g.setColor(Color.white);
-			g.fillRect(x, 0, 1, getHeight());
-			g.fillRect(0, y, getWidth(), 1);
+			RendererUtils.drawMovingRect(x, 0, 1, getHeight(), g, seed);
+			RendererUtils.drawMovingRect(0, y, getWidth(), 1, g, seed);
 			
 			if (dragging) {
 				g.drawString("X: " + (x + rect.x) + ", Y: " + (y + rect.y), x, y);
 			}
+			
+			if (x2 != 0 && y2 != 0) {
+				g.setColor(Color.red);
+				g.drawRect(x, y, tx - x, ty - y);
+				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
+			}			
 		}
 	}
 
 	@Override
 	protected void finalize() {
 		Main.ACTIVE_COVER_FRAMES.remove(this);
+		thread.interrupt();
 	}
 
 	@Override
