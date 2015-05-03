@@ -1,15 +1,14 @@
 package com.redpois0n.guiscrot;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -22,7 +21,7 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseMotionListener;
 
 @SuppressWarnings("serial")
-public class CoverFrame extends JFrame implements MouseMotionListener, MouseInputListener, NativeMouseMotionListener {
+public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener, NativeMouseMotionListener {
 	
 	public static final float OPACITY = 0.5F;
 	
@@ -51,9 +50,13 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		GlobalScreen.addNativeMouseMotionListener(this);
 		setUndecorated(true);
 		setBounds(rect);
-		setContentPane(new CoverPanel());
+		
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		
+		CoverPanel cp = new CoverPanel();
+		cp.addKeyListener(this);
+		setContentPane(cp);
 
 		if (image == null) {
 			setOpacity(OPACITY);
@@ -83,6 +86,10 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	}
 	
 	private class CoverPanel extends JPanel {
+		
+		public CoverPanel() {
+			setFocusable(true);
+		}
 		
 		@Override
 		public void paintComponent(Graphics g) {		
@@ -142,6 +149,11 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
 			}		
 		}
+	}
+	
+	public void submit() {
+		setVisible(false);
+		dispose();
 	}
 
 	@Override
@@ -207,6 +219,23 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	public void mouseReleased(MouseEvent arg0) {
 		dragging = false;
 		repaint();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+			submit();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
 	}
 
 }
