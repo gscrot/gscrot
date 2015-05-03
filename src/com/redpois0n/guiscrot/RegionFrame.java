@@ -16,6 +16,8 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 	
 	public static final float OPACITY = 0.5F;
 	
+	private boolean dragging;
+	
 	public RegionFrame() {
 		setAlwaysOnTop(true);
 		setBounds(0, 0, 450, 450);
@@ -31,6 +33,7 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setOpacity(OPACITY);
+		addMouseListener(this);
 	}
 
 	@Override
@@ -54,12 +57,12 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 
 	@Override
 	public void nativeMousePressed(NativeMouseEvent arg0) {
-
+		dragging = true;
 	}
 
 	@Override
 	public void nativeMouseReleased(NativeMouseEvent arg0) {
-		
+		dragging = false;
 	}
 
 	@Override
