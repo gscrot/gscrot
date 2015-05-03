@@ -5,13 +5,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.event.MouseInputListener;
 
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.jnativehook.mouse.NativeMouseMotionListener;
 
 @SuppressWarnings("serial")
-public class RegionFrame extends JFrame implements NativeMouseMotionListener, NativeMouseInputListener {
+public class RegionFrame extends JFrame implements MouseInputListener, NativeMouseMotionListener, NativeMouseInputListener {
 	
 	public RegionFrame() {
 		setAlwaysOnTop(true);
@@ -51,11 +52,46 @@ public class RegionFrame extends JFrame implements NativeMouseMotionListener, Na
 
 	@Override
 	public void nativeMousePressed(NativeMouseEvent arg0) {
-		super.setLocation(arg0.getX(), arg0.getY());
+
 	}
 
 	@Override
 	public void nativeMouseReleased(NativeMouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		super.setLocation((int) arg0.getLocationOnScreen().getX(), (int) arg0.getLocationOnScreen().getY());
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
 		
 	}
 
