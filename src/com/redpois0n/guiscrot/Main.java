@@ -5,17 +5,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
 
 public class Main {
-	
+
 	public static final List<CoverFrame> ACTIVE_COVER_FRAMES = new ArrayList<CoverFrame>();
 
 	public static void main(String[] args) {
@@ -24,9 +27,9 @@ public class Main {
 			registerNativeHook();
 
 			boolean still = true;
-			
+
 			createBackground(still);
-			//createRegionalScreenshot(still);
+			// createRegionalScreenshot(still);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -46,17 +49,41 @@ public class Main {
 
 	public static void createBackground(boolean still) throws Exception {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] screens = ge.getScreenDevices();
+        GraphicsDevice[] screens = ge.getScreenDevices();
 
-		for (GraphicsDevice screen : screens) {
-			Rectangle rect = screen.getDefaultConfiguration().getBounds();
-			Robot robot = new Robot(screen);
-			
-			Image image = still ? robot.createScreenCapture(rect) : null;
-			
-			CoverFrame frame = new CoverFrame(rect, image);
-			frame.setVisible(true);
-		}
+        Rectangle rect = new Rectangle();
+        
+        int x = 0;
+        int y = 0;
+        
+        for (GraphicsDevice screen : screens) {
+            Rectangle screenBounds = screen.getDefaultConfiguration().getBounds();
+
+            if (rect.x > screenBounds.x) {
+                rect.x = screenBounds.x;
+            }
+            
+            if (rect.y > screenBounds.y) {
+                rect.y = screenBounds.y;
+            }
+
+            if (x < (screenBounds.x + screenBounds.width)) {
+                x = screenBounds.x + screenBounds.width;
+            }
+            
+            if (y < (screenBounds.y + screenBounds.height)) {
+                y = screenBounds.y + screenBounds.height;
+            }
+            
+            rect.width = x - rect.x;
+            rect.height = y - rect.y;
+        }
+        
+        Robot robot = new Robot();
+        BufferedImage screenShot = robot.createScreenCapture(rect);
+		
+		CoverFrame frame = new CoverFrame(rect, screenShot);
+		frame.setVisible(true);
 	}
 
 	public static void createRegionalScreenshot(boolean still) {
