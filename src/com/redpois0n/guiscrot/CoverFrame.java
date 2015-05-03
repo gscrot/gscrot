@@ -60,13 +60,30 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			
+			if (x > x2) {
+				int temp = x;
+				x = x2;
+				x2 = temp;
+			}
+			
+			if (y > y2) {
+				int temp = y;
+				y = y2;
+				y2 = temp;
+			}
+			
+			/** If nothing is selected, default to x and y**/
 			int tx = x2 == 0 ? x : x2;
 			int ty = y2 == 0 ? y : y2;
 			
 			if (image != null) {
+				/** Draw image over frame **/
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+				
+				/** Set color to transparent black **/
 				g.setColor(new Color(0, 0, 0, 100));		
-								
+				
+				/** Draw black transparent color over all areas that isn't being selected **/
 				g.fillRect(0, 0, x, getHeight());
 				g.fillRect(x, 0, getWidth(), y);			
 
@@ -85,6 +102,10 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 			g.setColor(Color.white);
 			g.fillRect(x, 0, 1, getHeight());
 			g.fillRect(0, y, getWidth(), 1);
+			
+			if (dragging) {
+				g.drawString("X: " + (x + rect.x) + ", Y: " + (y + rect.y), x, y);
+			}
 		}
 	}
 
@@ -96,7 +117,7 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	@Override
 	public void nativeMouseDragged(NativeMouseEvent arg0) {
 		x2 = arg0.getX() - rect.x;
-		y2 = arg0.getY() - rect.y ;
+		y2 = arg0.getY() - rect.y;
 		
 		repaint();
 	}
@@ -139,6 +160,7 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		dragging = true;
+		repaint();
 	}
 
 	@Override
