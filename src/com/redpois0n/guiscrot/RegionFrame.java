@@ -1,10 +1,13 @@
 package com.redpois0n.guiscrot;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
 import org.jnativehook.mouse.NativeMouseEvent;
@@ -18,7 +21,7 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 	
 	private boolean dragging;
 	
-	public RegionFrame() {
+	public RegionFrame(boolean still) {
 		setAlwaysOnTop(true);
 		setBounds(0, 0, 450, 450);
 		addMouseListener(new MouseAdapter() {
@@ -32,9 +35,19 @@ public class RegionFrame extends JFrame implements MouseInputListener, NativeMou
 		});
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+		setContentPane(new CoverPanel());
 		setOpacity(OPACITY);
 		addMouseListener(this);
 	}
+	
+	private class CoverPanel extends JPanel {
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			
+		}
+	} 
 
 	@Override
 	public void nativeMouseDragged(NativeMouseEvent arg0) {		
