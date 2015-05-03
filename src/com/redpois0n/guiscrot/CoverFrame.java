@@ -17,11 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseMotionListener;
 
 @SuppressWarnings("serial")
-public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener, NativeMouseMotionListener {
+public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
 	
 	public static final float OPACITY = 0.5F;
 	
@@ -47,7 +45,6 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 	public CoverFrame(Rectangle rect, Image image) {
 		this.rect = rect;
 		this.image = image;
-		GlobalScreen.addNativeMouseMotionListener(this);
 		setUndecorated(true);
 		setBounds(rect);
 		
@@ -151,33 +148,30 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 		}
 	}
 	
+	/**
+	 * Called when enter is pressed or mouse released, if preferred
+	 */
 	public void submit() {
 		setVisible(false);
 		dispose();
 	}
 
+	/**
+	 * Closes thread when object is gb'd
+	 */
 	@Override
 	protected void finalize() {
 		thread.interrupt();
 	}
 
 	@Override
-	public void nativeMouseDragged(NativeMouseEvent arg0) {
-		x2 = arg0.getX() - rect.x;
-		y2 = arg0.getY() - rect.y;
-
-		repaint();
-	}
-
-	@Override
-	public void nativeMouseMoved(NativeMouseEvent arg0) {
-		
-	}
-
-	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		dragging = true;
 
+		x2 = arg0.getX();
+		y2 = arg0.getY();
+
+		repaint();
 	}
 
 	@Override
