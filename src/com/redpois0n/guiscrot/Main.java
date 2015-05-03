@@ -77,7 +77,7 @@ public class Main {
         }
         
         Robot robot = new Robot();
-        BufferedImage screenShot = robot.createScreenCapture(rect);
+        BufferedImage screenShot = still ? robot.createScreenCapture(rect) : null;
 		
 		CoverFrame frame = new CoverFrame(rect, screenShot);
 		frame.setVisible(true);

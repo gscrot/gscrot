@@ -94,19 +94,12 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			if (g instanceof Graphics2D) {
 				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
-			}
+			}				
 			
-			if (x > x2 && x2 != 0) {
-				int temp = x;
-				x = x2;
-				x2 = temp;
-			}
-			
-			if (y > y2 && y2 != 0) {
-				int temp = y;
-				y = y2;
-				y2 = temp;
-			}
+			int x = Math.min(CoverFrame.this.x, CoverFrame.this.x2);
+			int y = Math.min(CoverFrame.this.y, CoverFrame.this.y2);
+			int x2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
+			int y2 = Math.max(CoverFrame.this.y, CoverFrame.this.y2);
 			
 			/** If nothing is selected, default to x and y**/
 			int tx = x2 == 0 ? x : x2;
@@ -117,22 +110,22 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 				
 				/** Set color to transparent black **/
-				g.setColor(new Color(0, 0, 0, 100));		
-				
-				/** Draw black transparent color over all areas that isn't being selected **/
-				g.fillRect(0, 0, x, getHeight());
-				g.fillRect(x, 0, getWidth(), y);			
-
-				g.fillRect(tx, y, getWidth(), getHeight());
-				g.fillRect(x, ty, tx - x, getHeight());
+				g.setColor(new Color(0, 0, 0, 100));							 
 			} else {
 				g.setColor(Color.black);
-				g.fillRect(0, 0, getWidth(), getHeight());
 			}	
-						
+
+			/** Draw black transparent color over all areas that isn't being selected **/
+			g.fillRect(0, 0, x, getHeight());
+			g.fillRect(x, 0, getWidth(), y);			
+
+			g.fillRect(tx, y, getWidth(), getHeight());
+			g.fillRect(x, ty, tx - x, getHeight());		
+			
+			
 			g.setColor(Color.white);
-			RendererUtils.drawMovingRect(x, 0, 1, getHeight(), g, seed);
-			RendererUtils.drawMovingRect(0, y, getWidth(), 1, g, seed);
+			RendererUtils.drawMovingRect(tx, 0, 1, getHeight(), g, seed);
+			RendererUtils.drawMovingRect(0, ty, getWidth(), 1, g, seed);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -167,10 +160,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		dragging = true;
-
+		
 		x2 = arg0.getX();
 		y2 = arg0.getY();
-
+		
+		
 		repaint();
 	}
 
@@ -219,6 +213,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 	public void keyPressed(KeyEvent arg0) {
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 			submit();
+		} else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			x = 0;
+			y = 0;
+			x2 = 0;
+			y2 = 0;
 		}
 	}
 
