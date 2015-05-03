@@ -136,13 +136,11 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 
 			if (x2 != 0 && y2 != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
-			}
-
-			if (x2 != 0 && y2 != 0) {
+			
 				g.setColor(Color.red);
 				g.drawRect(x, y, tx - x, ty - y);
 				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
-			}			
+			}		
 		}
 	}
 
