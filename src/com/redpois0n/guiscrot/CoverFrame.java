@@ -62,16 +62,17 @@ public class CoverFrame extends JFrame implements MouseMotionListener, MouseInpu
 		@Override
 		public void run() {
 			while (!interrupted()) {
-				if (seed++ >= 10) {
+				if (seed++ >= 20) {
 					seed = 0;
 				}
+				
+				repaint();
+
 				try {
 					Thread.sleep(100L);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				
-				repaint();
 			}
 		}
 	}
