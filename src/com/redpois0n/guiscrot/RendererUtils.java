@@ -19,8 +19,8 @@ public class RendererUtils {
 					continue;
 				}
 				
-				g.drawLine(i + seed, y, i + seed + 10, y);
-				g.drawLine(i + seed, y + height, i + seed + 10, y + height);
+				g.drawLine(i + seed, y, z, y);
+				g.drawLine(i + seed, y + height, z, y + height);
 			}
 		}
 
@@ -37,8 +37,8 @@ public class RendererUtils {
 					continue;
 				}
 				
-				g.drawLine(x, i + seed, x, i + seed + 10);
-				g.drawLine(x + width, i + seed, x + width, i + seed + 10);
+				g.drawLine(x, i + seed, x, z);
+				g.drawLine(x + width, i + seed, x + width, z);
 			}
 		}
 	}

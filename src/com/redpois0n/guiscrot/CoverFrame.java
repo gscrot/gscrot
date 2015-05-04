@@ -67,8 +67,8 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 		@Override
 		public void run() {
 			while (!interrupted()) {
-				if (seed++ > 10) {
-					seed = 0;
+				if (seed++ > 20) {
+					seed = 2;
 				}
 				
 				repaint();
