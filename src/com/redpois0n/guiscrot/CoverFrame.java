@@ -116,11 +116,15 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			}	
 
 			/** Draw black transparent color over all areas that isn't being selected **/
-			g.fillRect(0, 0, x, getHeight());
-			g.fillRect(x, 0, getWidth(), y);			
+			if (x2 == 0 && y2 == 0) {
+				g.fillRect(0, 0, getWidth(), getHeight());
+			} else {
+				g.fillRect(0, 0, x, getHeight());
+				g.fillRect(x, 0, getWidth(), y);			
 
-			g.fillRect(tx, y, getWidth(), getHeight());
-			g.fillRect(x, ty, tx - x, getHeight());		
+				g.fillRect(tx, y, getWidth(), getHeight());
+				g.fillRect(x, ty, tx - x, getHeight());		
+			}
 			
 			
 			/** Draw cross **/
@@ -137,7 +141,10 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
 
-			if (x2 != 0 && y2 != 0) {
+			System.out.println(x + "; " + y + ", " + x2 + ", " + y2);
+			System.out.println(x != 0 && y != 0 && x2 != 0 && y2 != 0);
+			
+			if (x != 0 && y != 0 && x2 != 0 && y2 != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
 			
 				g.setColor(Color.red);
@@ -176,9 +183,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		if (!dragging && x2 == 0 && y2 == 0) {
+		if (!dragging && x == x2 && y == y2) {
 			x = arg0.getX();
 			y = arg0.getY();
+			x2 = arg0.getX();
+			y2 = arg0.getY();
 		}
 
 		repaint();
@@ -204,8 +213,8 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 		dragging = true;
 		x = arg0.getX();
 		y = arg0.getY();
-		x2 = 0;
-		y2 = 0;
+		x2 = arg0.getX();
+		y2 = arg0.getY();
 		repaint();
 	}
 
