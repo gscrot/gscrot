@@ -167,9 +167,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 				pg = preview.createGraphics();
 
+				// Crosshair
 				pg.setColor(new Color(0, 0, 255, 100));
-				pg.fillRect(preview.getWidth() / 2 - (int) PREVIEW_SCALE / 2, 0, (int) PREVIEW_SCALE, preview.getHeight());
-				pg.fillRect(0, preview.getHeight() / 2 - (int) PREVIEW_SCALE / 2, getWidth(), (int) PREVIEW_SCALE);
+				pg.fillRect(preview.getWidth() / 2 - (int) PREVIEW_SCALE / 2 + 1, 0, (int) PREVIEW_SCALE, preview.getHeight());
+				pg.fillRect(0, preview.getHeight() / 2 - (int) PREVIEW_SCALE / 2 + 1, getWidth(), (int) PREVIEW_SCALE);
+				
 				RendererUtils.grid(preview, (int) PREVIEW_SCALE);
 				
 				preview = RendererUtils.createCircle(preview);
