@@ -138,5 +138,19 @@ public class RendererUtils {
 		g.setColor(fill);
 		g.drawString(s, x, y);
 	}
+	
+	public static void grid(BufferedImage image, int between) {
+		Graphics g = image.getGraphics();
+		
+		g.setColor(Color.gray.brighter());
+		
+		for (int x = 0; x < image.getWidth(); x += between) {
+			g.drawRect(x, 0, 0, image.getHeight());
+		}
+		
+		for (int y = 0; y < image.getHeight(); y += between) {
+			g.drawRect(0, y, image.getWidth(), 0);
+		}
+	}
 
 }
