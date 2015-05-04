@@ -156,14 +156,15 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 				
 				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
-				g.drawRect(x2, y2, PREVIEW_SIZE, PREVIEW_SIZE);
 				int pos = PREVIEW_SIZE / (int) PREVIEW_SCALE;
 				pos /= 2;
 				preview.createGraphics().drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
 
 				preview = RendererUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
 	
-				g.drawImage(preview, x2 + 50, y2 + 50, PREVIEW_SIZE, PREVIEW_SIZE, null);
+				preview = RendererUtils.createCircle(preview);
+				
+				g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
 			}		
 		}
 	}
