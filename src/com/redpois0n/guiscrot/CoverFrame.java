@@ -14,10 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
@@ -26,7 +23,8 @@ import javax.swing.event.MouseInputListener;
 public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
 	
 	public static final int PREVIEW_SIZE = 150;
-	public static final float PREVIEW_SCALE = 8F;
+	public static final float PREVIEW_SCALEF = 8F;
+	public static final int PREVIEW_SCALE = (int) PREVIEW_SCALEF;
 	public static final float OPACITY = 0.5F;
 	
 	private Rectangle rect;
@@ -156,7 +154,7 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 				
 				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
-				int pos = PREVIEW_SIZE / (int) PREVIEW_SCALE;
+				int pos = PREVIEW_SIZE / PREVIEW_SCALE;
 				pos /= 2;
 				
 				Graphics2D pg = preview.createGraphics();
@@ -167,24 +165,27 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 				pg = preview.createGraphics();
 
-				int cheight = preview.getHeight() / 2 - (int) PREVIEW_SCALE / 2 + 1;
+				int cheight = preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1;
 				
 				// Crosshair
 				pg.setColor(new Color(0, 0, 255, 100));
 				// north
-				pg.fillRect(preview.getWidth() / 2 - (int) PREVIEW_SCALE / 2 + 1, 0, (int) PREVIEW_SCALE, preview.getHeight() / 2 - (int) PREVIEW_SCALE / 2);
+				pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, 0, PREVIEW_SCALE, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1);
 				
 				// west
-				pg.fillRect(0, cheight, preview.getWidth() / 2 - (int) PREVIEW_SCALE / 2, (int) PREVIEW_SCALE);
+				pg.fillRect(0, cheight, preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE);
 				
 				// east
-				pg.fillRect(preview.getWidth() / 2 + (int) PREVIEW_SCALE - 1, cheight, preview.getWidth() / 2, (int) PREVIEW_SCALE);
+				pg.fillRect(preview.getWidth() / 2 + PREVIEW_SCALE - 2, cheight, preview.getWidth() / 2, PREVIEW_SCALE);
 				
 				// south
-				pg.fillRect(preview.getWidth() / 2 - (int) PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + (int) PREVIEW_SCALE - 1, (int) PREVIEW_SCALE, preview.getHeight() / 2);
+				pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
 
+				RendererUtils.grid(preview, PREVIEW_SCALE);
 				
-				RendererUtils.grid(preview, (int) PREVIEW_SCALE);
+				// dot in middle off crosshair
+				pg.setColor(Color.black);
+				pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);				
 				
 				preview = RendererUtils.createCircle(preview);
 				
