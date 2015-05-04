@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.event.MouseInputListener;
 @SuppressWarnings("serial")
 public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
 	
+	public static final int PREVIEW_SIZE = 100;
 	public static final float OPACITY = 0.5F;
 	
 	private Rectangle rect;
@@ -148,6 +150,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 				/** Draw cursor **/
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
+				
+				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
+				preview.createGraphics().drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - PREVIEW_SIZE / 2, y2 - PREVIEW_SIZE / 2, x2 + PREVIEW_SIZE / 2, y2 + PREVIEW_SIZE / 2, null);
+				
+				g.drawImage(preview, x, y, null);
 			}		
 		}
 	}
