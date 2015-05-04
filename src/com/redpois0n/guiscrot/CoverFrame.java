@@ -138,9 +138,9 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
 			
-			if (x != 0 && y != 0 && x2 != 0 && y2 != 0) {
+			if (x2 - x != 0 && y2 - y != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
-			
+				
 				g.setColor(Color.white);
 				g.drawRect(x, y, tx - x, ty - y);
 				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
