@@ -1,5 +1,7 @@
 package com.redpois0n.guiscrot;
 
+import iconlib.IconUtils;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,8 +17,6 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
-
-import org.jnativehook.GlobalScreen;
 
 @SuppressWarnings("serial")
 public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
@@ -123,9 +123,13 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			g.fillRect(x, ty, tx - x, getHeight());		
 			
 			
+			/** Draw cross **/
 			g.setColor(Color.white);
 			RendererUtils.drawMovingRect(tx, 0, 1, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 1, g, seed);
+			
+			/** Draw cursor **/
+			g.drawImage(IconUtils.getIcon("cursor").getImage(), tx - 8, ty - 8, null);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
