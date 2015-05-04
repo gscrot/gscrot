@@ -107,21 +107,21 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			int x2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
 			int y2 = Math.max(CoverFrame.this.y, CoverFrame.this.y2);
 			
-			/** If nothing is selected, default to x and y**/
+			// If nothing is selected, default to x and y
 			int tx = x2 == 0 ? x : x2;
 			int ty = y2 == 0 ? y : y2;
 			
 			if (image != null) {
-				/** Draw image over frame **/
+				// Draw image over frame
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 				
-				/** Set color to transparent black **/
+				// Set color to transparent black
 				g.setColor(new Color(0, 0, 0, 100));							 
 			} else {
 				g.setColor(Color.black);
 			}	
 
-			/** Draw black transparent color over all areas that isn't being selected **/
+			// Draw black transparent color over all areas that isn't being selected
 			if (x2 == 0 && y2 == 0) {
 				g.fillRect(0, 0, getWidth(), getHeight());
 			} else {
@@ -139,7 +139,7 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
 			
-			/** Draw cross **/
+			// Cross over screen(s)
 			g.setColor(Color.white);
 			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
@@ -152,7 +152,7 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
 			
 			
-				/** Draw cursor **/
+				// Cursor
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 				
 				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
