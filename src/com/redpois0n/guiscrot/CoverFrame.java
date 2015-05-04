@@ -67,7 +67,7 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 		@Override
 		public void run() {
 			while (!interrupted()) {
-				if (seed++ >= 20) {
+				if (seed++ > 10) {
 					seed = 0;
 				}
 				
@@ -129,9 +129,6 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			Image cursor = IconUtils.getIcon("cursor").getImage();
 			
-			/** Draw cursor **/
-			g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
-			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
@@ -144,9 +141,13 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			if (x != 0 && y != 0 && x2 != 0 && y2 != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
 			
-				g.setColor(Color.red);
+				g.setColor(Color.white);
 				g.drawRect(x, y, tx - x, ty - y);
 				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
+			
+			
+				/** Draw cursor **/
+				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 			}		
 		}
 	}
