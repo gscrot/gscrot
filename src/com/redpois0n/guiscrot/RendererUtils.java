@@ -17,6 +17,15 @@ import javax.swing.JOptionPane;
 
 public class RendererUtils {
 
+	/**
+	 * Draws moving rectangle used for cross and borders in cover
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param g
+	 * @param seed
+	 */
 	public static void drawMovingRect(int x, int y, int width, int height, Graphics g, int seed) {		
 		if (width > 1) {
 			for (int i = x, pos = 0; i < x + width; i += 10, pos++) {
@@ -55,6 +64,15 @@ public class RendererUtils {
 		}
 	}
 	
+	/**
+	 * Scales to center
+	 * @param sbi
+	 * @param imageType
+	 * @param w
+	 * @param h
+	 * @param scale
+	 * @return
+	 */
 	public static BufferedImage scale(BufferedImage sbi, int imageType, int w, int h, float scale) {
 	    BufferedImage dbi = new BufferedImage(w, h, imageType);
 	    Graphics2D g = dbi.createGraphics();
@@ -102,6 +120,15 @@ public class RendererUtils {
 		return i1;
 	}
 
+	/**
+	 * Draws basic nice looking outlined string
+	 * @param s
+	 * @param x
+	 * @param y
+	 * @param fill
+	 * @param outline
+	 * @param g
+	 */
 	public static void drawOutlinedString(String s, int x, int y, Color fill, Color outline, Graphics g) {
 		g.setColor(outline);
 		g.drawString(s, x + 1, y - 1);
@@ -110,11 +137,6 @@ public class RendererUtils {
 		g.drawString(s, x + 1, y + 1);
 		g.setColor(fill);
 		g.drawString(s, x, y);
-	}
-	
-	public static void resize(BufferedImage image, float scale) {
-		Graphics2D g = (Graphics2D) image.getGraphics();
-		g.scale(scale, scale);
 	}
 
 }
