@@ -127,11 +127,6 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			}
 			
 			
-			/** Draw cross **/
-			g.setColor(Color.white);
-			RendererUtils.drawMovingRect(tx, 0, 1, getHeight(), g, seed);
-			RendererUtils.drawMovingRect(0, ty, getWidth(), 1, g, seed);
-			
 			Image cursor = IconUtils.getIcon("cursor").getImage();
 			
 			/** Draw cursor **/
@@ -140,9 +135,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
-
-			System.out.println(x + "; " + y + ", " + x2 + ", " + y2);
-			System.out.println(x != 0 && y != 0 && x2 != 0 && y2 != 0);
+			
+			/** Draw cross **/
+			g.setColor(Color.white);
+			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
+			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
 			
 			if (x != 0 && y != 0 && x2 != 0 && y2 != 0) {
 				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	

@@ -13,8 +13,9 @@ public class RendererUtils {
 				} else {
 					g.setColor(Color.white);
 				}
-
+				
 				g.drawLine(i + seed, y, i + seed + 10, y);
+				g.drawLine(i + seed, y + height, i + seed + 10, y + height);
 			}
 		}
 
@@ -25,8 +26,9 @@ public class RendererUtils {
 				} else {
 					g.setColor(Color.white);
 				}
-
+				
 				g.drawLine(x, i + seed, x, i + seed + 10);
+				g.drawLine(x + width, i + seed, x + width, i + seed + 10);
 			}
 		}
 	}
