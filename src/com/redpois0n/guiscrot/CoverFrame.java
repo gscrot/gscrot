@@ -100,6 +100,8 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 			}				
 			
+			// Get values in "order" to not fuck up rectangles
+			
 			int x = Math.min(CoverFrame.this.x, CoverFrame.this.x2);
 			int y = Math.min(CoverFrame.this.y, CoverFrame.this.y2);
 			int x2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
@@ -136,20 +138,32 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
 			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
+					
+			boolean selected = x2 - x != 0 && y2 - y != 0;
+			
+			if (selected) {
+				g.setColor(Color.white);
+				g.drawRect(x, y, tx - x, ty - y);
+				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
+				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
+			}
+			
+			// Reset all values to global
+			
+			x = CoverFrame.this.x;
+			y = CoverFrame.this.y;
+			x2 = CoverFrame.this.x2;
+			y2 = CoverFrame.this.y2;
+			
+			tx = x2 == 0 ? x : x2;
+			ty = y2 == 0 ? y : y2;
 			
 			// Cross over screen(s)
 			g.setColor(Color.white);
 			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
 			
-			if (x2 - x != 0 && y2 - y != 0) {
-				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
-				
-				g.setColor(Color.white);
-				g.drawRect(x, y, tx - x, ty - y);
-				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
-			
-			
+			if (selected) {
 				// Cursor
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 				
