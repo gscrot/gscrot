@@ -14,7 +14,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
@@ -22,7 +25,8 @@ import javax.swing.event.MouseInputListener;
 @SuppressWarnings("serial")
 public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
 	
-	public static final int PREVIEW_SIZE = 100;
+	public static final int PREVIEW_SIZE = 150;
+	public static final float PREVIEW_SCALE = 8F;
 	public static final float OPACITY = 0.5F;
 	
 	private Rectangle rect;
@@ -152,9 +156,12 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 				
 				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
-				preview.createGraphics().drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - PREVIEW_SIZE / 2, y2 - PREVIEW_SIZE / 2, x2 + PREVIEW_SIZE / 2, y2 + PREVIEW_SIZE / 2, null);
-				
-				g.drawImage(preview, x, y, null);
+				g.drawRect(x2, y2, PREVIEW_SIZE, PREVIEW_SIZE);
+				preview.createGraphics().drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2, y2, x2 + PREVIEW_SIZE, y2 + PREVIEW_SIZE, null);
+
+				preview = RendererUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
+	
+				g.drawImage(preview, x2 + 50, y2 + 50, PREVIEW_SIZE, PREVIEW_SIZE, null);
 			}		
 		}
 	}
