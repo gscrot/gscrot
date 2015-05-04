@@ -203,9 +203,23 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 				
 				preview = RendererUtils.createCircle(preview);
 				
-				g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
+				// draw preview
+				if (isInsideSelection(x2 + 1, y2 + 1)) {
+					g.drawImage(preview, x2 - PREVIEW_SIZE, y2 - PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SIZE, null);
+				} else {
+					g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
+				}				
 			}		
 		}
+	}
+	
+	private boolean isInsideSelection(int x, int y) {
+		int px = Math.min(CoverFrame.this.x, CoverFrame.this.x2);
+		int py = Math.min(CoverFrame.this.y, CoverFrame.this.y2);
+		int px2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
+		int py2 = Math.max(CoverFrame.this.y, CoverFrame.this.y2);
+		
+		return x >= px && y >= py && x <= px2 && y <= py2;
 	}
 	
 	/**
