@@ -2,8 +2,6 @@ package com.redpois0n.guiscrot;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 public class RendererUtils {
 
@@ -34,8 +32,6 @@ public class RendererUtils {
 	}
 
 	public static void drawOutlinedString(String s, int x, int y, Color fill, Color outline, Graphics g) {
-		
-		
 		g.setColor(outline);
 		g.drawString(s, x + 1, y - 1);
 		g.drawString(s, x - 1, y + 1);

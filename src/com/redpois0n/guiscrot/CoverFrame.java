@@ -128,8 +128,10 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			RendererUtils.drawMovingRect(tx, 0, 1, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 1, g, seed);
 			
+			Image cursor = IconUtils.getIcon("cursor").getImage();
+			
 			/** Draw cursor **/
-			g.drawImage(IconUtils.getIcon("cursor").getImage(), tx - 8, ty - 8, null);
+			g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
