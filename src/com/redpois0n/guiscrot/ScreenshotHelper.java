@@ -69,5 +69,12 @@ public class ScreenshotHelper {
 				
 		return p.getDefaultConfiguration().getBounds();
 	}
+	
+	public static GraphicsDevice[] getScreens() {
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] screens = ge.getScreenDevices();
+
+        return screens;
+	}
 
 }

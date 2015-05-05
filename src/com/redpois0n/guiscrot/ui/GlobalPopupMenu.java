@@ -2,6 +2,7 @@ package com.redpois0n.guiscrot.ui;
 
 import iconlib.IconUtils;
 
+import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import com.redpois0n.guiscrot.Main;
+import com.redpois0n.guiscrot.ScreenshotHelper;
 
 public class GlobalPopupMenu {
 	
@@ -39,6 +41,23 @@ public class GlobalPopupMenu {
 	    		
 	    	}
 	    });
+	    
+	    GraphicsDevice[] devices = ScreenshotHelper.getScreens();
+	    
+	    for (int i = 0; i < devices.length; i++) {
+	    	GraphicsDevice device = devices[i];
+	    	
+	    	JMenuItem item = new JMenuItem("Monitor " + i, IconUtils.getIcon("monitor"));
+	    	
+	    	item.addActionListener(new ActionListener() {
+	    		public void actionPerformed(ActionEvent e) {
+	    			// TODO capture selected monitor
+	    		}
+	    	});
+	    	
+	    	mntmMonitor.add(item);
+	    }
+	    
 	    mnCapture.add(mntmMonitor);
 	    
 	    popup.add(mnCapture);
