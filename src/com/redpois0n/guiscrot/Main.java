@@ -5,6 +5,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.SystemTray;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
+			if (!SystemTray.isSupported()) {
+				System.err.println("SystemTray is not supported");
+			} else {
+				TrayIconHelper.initialize();
+			}
+			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			registerNativeHook();
 
