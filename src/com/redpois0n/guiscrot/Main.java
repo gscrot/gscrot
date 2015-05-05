@@ -36,8 +36,6 @@ public class Main {
 			MainFrame.INSTANCE.setVisible(true);
 			
 			registerNativeHook();
-
-			createBackground();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
