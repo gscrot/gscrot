@@ -1,19 +1,38 @@
 package com.redpois0n.guiscrot.ui;
 
+import iconlib.IconUtils;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+
+import com.redpois0n.guiscrot.Main;
 
 public class GlobalPopupMenu {
 	
 	public static JPopupMenu getPopupMenu() {
 	    JPopupMenu popup = new JPopupMenu();
-
-	    popup.add(new JMenuItem("test"));
 	    
-	    JMenu menu = new JMenu("JMenu");
-	    menu.add(new JMenuItem("Test menu"));
-	    popup.add(menu);
+	    // Capture category
+	    JMenu mnCapture = new JMenu("Capture");
+	    mnCapture.setIcon(IconUtils.getIcon("camera"));
+	    
+	    JMenuItem mntmRegion = new JMenuItem("Region");
+	    mntmRegion.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		try {
+					Main.createBackground(true);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+	    	}
+	    });
+	    mnCapture.add(mntmRegion);
+	    
+	    popup.add(mnCapture);
 	    
 	    return popup;
 	}
