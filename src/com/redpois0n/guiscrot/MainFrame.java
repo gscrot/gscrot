@@ -2,6 +2,8 @@ package com.redpois0n.guiscrot;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,15 +19,24 @@ import javax.swing.JPopupMenu;
 public class MainFrame extends JFrame {
 
 	public static final MainFrame INSTANCE = new MainFrame();
+	
+	private JPanel list;
 
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.WEST);
-
+		
+		list = new JPanel();
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] { 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		list.setLayout(gridBagLayout);
+		
+		add(list, BorderLayout.WEST);
+		
 		JPopupMenu global = GlobalPopupMenu.getPopupMenu();
 
 		for (Component c : global.getComponents()) {
@@ -33,7 +44,7 @@ public class MainFrame extends JFrame {
 				JMenu m = (JMenu) c;
 
 				final JButton btn = new JButton(m.getText(), m.getIcon());
-				panel.add(btn);
+				addToList(btn);
 
 				final JPopupMenu menu2 = new JPopupMenu();
 
@@ -50,14 +61,22 @@ public class MainFrame extends JFrame {
 			} else if (c instanceof JMenuItem) {
 				JMenuItem mi = (JMenuItem) c;
 				JButton btn = new JButton(mi.getText(), mi.getIcon());
-				panel.add(btn);
+				addToList(btn);
 
 				for (ActionListener l : mi.getActionListeners()) {
 					btn.addActionListener(l);
 				}
 			}
 		}
-
+	}
+	
+	public void addToList(Component c) {
+		GridBagConstraints grid = new GridBagConstraints();
+		grid.gridx = 0;
+		grid.gridy = list.getComponentCount();
+		grid.anchor = GridBagConstraints.WEST;
+		
+		list.add(c, grid);
 	}
 
 }
