@@ -3,6 +3,7 @@ package com.redpois0n.gscrot;
 import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,14 +18,21 @@ public class Main {
 
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+		
+		try {
+			Config.load();
+		} catch (FileNotFoundException e) {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		try {
 			if (!SystemTray.isSupported()) {
 				System.err.println("SystemTray is not supported");
 			} else {
 				TrayIconHelper.initialize();
 			}
-			
-			Config.load();
 			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			
