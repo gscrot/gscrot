@@ -2,6 +2,8 @@ package com.redpois0n.guiscrot;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.MouseInfo;
+import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
@@ -54,6 +56,20 @@ public class ScreenshotHelper {
         BufferedImage screenShot = robot.createScreenCapture(rect);
         
         return screenShot;
+	}
+	
+	/**
+	 * Gets current screen bounds where mouse pointer is
+	 * @return
+	 * @throws Exception
+	 */
+	public static Rectangle getCurrentScreen() throws Exception {
+		PointerInfo i = MouseInfo.getPointerInfo();
+		GraphicsDevice p = i.getDevice();
+		
+		Robot robot = new Robot();
+		
+		return p.getDefaultConfiguration().getBounds();
 	}
 
 }
