@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTable;
 
 import com.redpois0n.gscrot.Capture;
 
@@ -24,6 +23,7 @@ public class MainFrame extends JFrame {
 	
 	private MenuPanel menuPanel;
 	private StatusTable table;
+	private ImagePanel imagePanel;
 	
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -70,16 +70,43 @@ public class MainFrame extends JFrame {
 		
 		JScrollPane scrollPaneTable = new JScrollPane();
 		table = new StatusTable();
+		table.addMouseListener(new CaptureClickListener());
 		scrollPaneTable.setViewportView(table);
+		
+		JScrollPane scrollPaneImage = new JScrollPane();
+		imagePanel = new ImagePanel();
+		scrollPaneImage.setViewportView(imagePanel);
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setLeftComponent(scrollPaneTable);
+		splitPane.setRightComponent(scrollPaneImage);
 		add(splitPane, BorderLayout.CENTER);
 		
 	}
 
 	public void add(Capture p) {
 		table.add(p);
+	}
+	
+	private class CaptureClickListener extends MouseAdapter {
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int row = table.getSelectedRow();
+			
+			if (row != -1) {
+				Capture capture = null;
+				
+				for (int i = 0; i < table.getColumnCount(); i++) {
+					if (table.getValueAt(row, i) instanceof Capture) {
+						capture = (Capture) table.getValueAt(row, i);
+						break;
+					}
+				}
+				
+				imagePanel.setImage(capture.getImage());
+			}
+		}
 	}
 
 }
