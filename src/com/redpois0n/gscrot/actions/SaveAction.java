@@ -1,9 +1,11 @@
-package com.redpois0n.gscrot;
+package com.redpois0n.gscrot.actions;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+
+import com.redpois0n.gscrot.Logger;
 
 public class SaveAction extends AfterCaptureAction {
 	

@@ -1,8 +1,10 @@
-package com.redpois0n.gscrot;
+package com.redpois0n.gscrot.actions;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.redpois0n.gscrot.Config;
 
 public abstract class AfterCaptureAction {
 	

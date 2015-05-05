@@ -2,6 +2,7 @@ package com.redpois0n.gscrot;
 
 import java.awt.image.BufferedImage;
 
+import com.redpois0n.gscrot.actions.AfterCaptureAction;
 import com.redpois0n.gscrot.ui.MainFrame;
 
 public class Capture extends Thread {
