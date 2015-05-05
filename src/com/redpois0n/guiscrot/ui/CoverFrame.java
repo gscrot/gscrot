@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.guiscrot.ui;
 
 import iconlib.IconUtils;
 
@@ -18,6 +18,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
+
+import com.redpois0n.guiscrot.RenderUtils;
 
 @SuppressWarnings("serial")
 public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {

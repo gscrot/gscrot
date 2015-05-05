@@ -18,6 +18,9 @@ import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
 
+import com.redpois0n.guiscrot.ui.CoverFrame;
+import com.redpois0n.guiscrot.ui.MainFrame;
+
 public class Main {
 
 	public static void main(String[] args) {

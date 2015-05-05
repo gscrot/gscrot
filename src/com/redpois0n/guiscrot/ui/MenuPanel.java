@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.guiscrot.ui;
 
 import java.awt.Component;
 import java.awt.Dimension;

@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.guiscrot.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

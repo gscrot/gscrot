@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
+import com.redpois0n.guiscrot.ui.GlobalPopupMenu;
+import com.redpois0n.guiscrot.ui.MainFrame;
+
 public class TrayIconHelper {
 
 	public static void initialize() throws Exception {		
