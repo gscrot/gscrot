@@ -55,7 +55,6 @@ public class ScreenshotHelper {
 		try {
 			BufferedImage image = ScreenshotHelper.getScreen(screen);
 			Capture p = new Capture(Type.MONITOR, image);
-			MainFrame.INSTANCE.add(p);
 			p.start();
 		} catch (Exception e) {
 			e.printStackTrace();

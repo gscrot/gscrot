@@ -2,6 +2,8 @@ package com.redpois0n.gscrot;
 
 import java.awt.image.BufferedImage;
 
+import com.redpois0n.gscrot.ui.MainFrame;
+
 public class Capture extends Thread {
 	
 	public static enum Type {
@@ -31,7 +33,7 @@ public class Capture extends Thread {
 	
 	@Override
 	public void run() {
-		
+		MainFrame.INSTANCE.add(this);
 	}
 	
 	public Type getType() {
