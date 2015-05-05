@@ -162,54 +162,52 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			g.setColor(Color.white);
 			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
 			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
-			
-			if (selected) {
-				// Cursor
-				g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
-				
-				BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
-				int pos = PREVIEW_SIZE / PREVIEW_SCALE;
-				pos /= 2;
-				
-				Graphics2D pg = preview.createGraphics();
-							
-				pg.drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
-								
-				preview = RendererUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);	
 
-				pg = preview.createGraphics();
+			// Cursor
+			g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
 
-				int cheight = preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1;
-				
-				// Crosshair
-				pg.setColor(new Color(0, 0, 255, 100));
-				// north
-				pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, 0, PREVIEW_SCALE, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1);
-				
-				// west
-				pg.fillRect(0, cheight, preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE);
-				
-				// east
-				pg.fillRect(preview.getWidth() / 2 + PREVIEW_SCALE - 2, cheight, preview.getWidth() / 2, PREVIEW_SCALE);
-				
-				// south
-				pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
+			BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
+			int pos = PREVIEW_SIZE / PREVIEW_SCALE;
+			pos /= 2;
 
-				RendererUtils.grid(preview, PREVIEW_SCALE);
-				
-				// dot in middle off crosshair
-				pg.setColor(Color.black);
-				pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);				
-				
-				preview = RendererUtils.createCircle(preview);
-				
-				// draw preview
-				if (isInsideSelection(x2 + 1, y2 + 1)) {
-					g.drawImage(preview, x2 - PREVIEW_SIZE, y2 - PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SIZE, null);
-				} else {
-					g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
-				}				
-			}		
+			Graphics2D pg = preview.createGraphics();
+
+			pg.drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
+
+			preview = RendererUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
+
+			pg = preview.createGraphics();
+
+			int cheight = preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1;
+
+			// Crosshair
+			pg.setColor(new Color(0, 0, 255, 100));
+			// north
+			pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, 0, PREVIEW_SCALE, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1);
+
+			// west
+			pg.fillRect(0, cheight, preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE);
+
+			// east
+			pg.fillRect(preview.getWidth() / 2 + PREVIEW_SCALE - 2, cheight, preview.getWidth() / 2, PREVIEW_SCALE);
+
+			// south
+			pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
+
+			RendererUtils.grid(preview, PREVIEW_SCALE);
+
+			// dot in middle off crosshair
+			pg.setColor(Color.black);
+			pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);
+
+			preview = RendererUtils.createCircle(preview);
+
+			// draw preview
+			if (isInsideSelection(x2 + 1, y2 + 1)) {
+				g.drawImage(preview, x2 - PREVIEW_SIZE, y2 - PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SIZE, null);
+			} else {
+				g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
+			}
 		}
 	}
 	
