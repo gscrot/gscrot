@@ -297,10 +297,8 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 			submit();
 		} else if (arg0.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			x = 0;
-			y = 0;
-			x2 = 0;
-			y2 = 0;
+			setVisible(false);
+			dispose();
 		}
 	}
 
