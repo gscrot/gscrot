@@ -34,6 +34,10 @@ public class Capture extends Thread {
 	@Override
 	public void run() {
 		MainFrame.INSTANCE.add(this);
+		
+		for (AfterCaptureAction aca : AfterCaptureAction.actions) {
+			
+		}
 	}
 	
 	public Type getType() {

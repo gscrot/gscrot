@@ -15,6 +15,10 @@ public class Config {
 	public static final Map<String, String> CONFIG = new HashMap<String, String>();
 	public static final File CONFIG_FILE = new File(".gscrot");
 		
+	public static String get(String s) {
+		return CONFIG.get(s);
+	}
+	
 	public static void load() throws Exception {
 		CONFIG.clear();
 		
