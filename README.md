@@ -4,6 +4,7 @@ Cross-platform screenshot capture tool, inspired much by [ShareX](https://github
 
 ## Dependencies
 
+- [JNativeHook](https://github.com/kwhat/jnativehook)
 - [pluginlib](https://github.com/redpois0n/pluginlib)
 - [iconlib](https://github.com/redpois0n/iconlib)
 
