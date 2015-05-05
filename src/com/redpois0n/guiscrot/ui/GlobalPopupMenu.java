@@ -32,6 +32,15 @@ public class GlobalPopupMenu {
 	    });
 	    mnCapture.add(mntmRegion);
 	    
+	    JMenu mntmMonitor = new JMenu("Monitor");
+	    mntmMonitor.setIcon(IconUtils.getIcon("monitor"));
+	    mntmMonitor.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    	}
+	    });
+	    mnCapture.add(mntmMonitor);
+	    
 	    popup.add(mnCapture);
 	    
 	    return popup;

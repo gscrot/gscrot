@@ -66,9 +66,7 @@ public class ScreenshotHelper {
 	public static Rectangle getCurrentScreen() throws Exception {
 		PointerInfo i = MouseInfo.getPointerInfo();
 		GraphicsDevice p = i.getDevice();
-		
-		Robot robot = new Robot();
-		
+				
 		return p.getDefaultConfiguration().getBounds();
 	}
 
