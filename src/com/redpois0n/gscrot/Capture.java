@@ -5,7 +5,20 @@ import java.awt.image.BufferedImage;
 public class Capture extends Thread {
 	
 	public static enum Type {
-		REGION, MONITOR, FULL;
+		REGION("Region"), 
+		MONITOR("Monitor"), 
+		FULL("Fullscreen");
+		
+		private String textual;
+		
+		private Type(String textual) {
+			this.textual = textual;
+		}
+		
+		@Override
+		public String toString() {
+			return this.textual;
+		}
 	}
 	
 	private final Type type;

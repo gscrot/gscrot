@@ -34,13 +34,19 @@ public class StatusTable extends JTable {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			
-			Capture capture;
+			Capture capture = null;
 			
 			for (int i = 0; i < column; i++) {
 				if (table.getValueAt(row, i) instanceof Capture) {
 					capture = (Capture) table.getValueAt(row, i);
 					break;
 				}
+			}
+			
+			String colname = table.getColumnName(column);
+			
+			if (colname.equals(COLUMN_TYPE)) {
+				label.setText(capture.getType().toString());
 			}
 			
 			return label;
