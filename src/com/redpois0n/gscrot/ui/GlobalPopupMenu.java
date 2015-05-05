@@ -34,6 +34,7 @@ public class GlobalPopupMenu {
 	    });
 	    mnCapture.add(mntmRegion);
 	    
+	    // Monitor item
 	    JMenu mntmMonitor = new JMenu("Monitor");
 	    mntmMonitor.setIcon(IconUtils.getIcon("monitor"));
 	    
@@ -56,6 +57,16 @@ public class GlobalPopupMenu {
 	    mnCapture.add(mntmMonitor);
 	    
 	    popup.add(mnCapture);
+	    
+	    // Exit item
+	    JMenuItem mntmExit = new JMenuItem("Exit", IconUtils.getIcon("cross"));
+	    mntmExit.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		System.exit(0);
+	    	}
+	    });
+	    
+	    popup.add(mntmExit);
 	    
 	    return popup;
 	}
