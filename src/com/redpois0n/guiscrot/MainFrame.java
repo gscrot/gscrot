@@ -2,7 +2,6 @@ package com.redpois0n.guiscrot;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -25,9 +25,11 @@ public class MainFrame extends JFrame {
 		setBounds(100, 100, 450, 300);
 		setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane sp = new JScrollPane();
 		menuPanel = new MenuPanel();
+		sp.setViewportView(menuPanel);
 		
-		add(menuPanel, BorderLayout.WEST);
+		add(sp, BorderLayout.WEST);
 		
 		JPopupMenu global = GlobalPopupMenu.getPopupMenu();
 
@@ -36,7 +38,7 @@ public class MainFrame extends JFrame {
 				JMenu m = (JMenu) c;
 
 				final JButton btn = new JButton(m.getText(), m.getIcon());
-				menuPanel.addComponent(btn);
+				menuPanel.addButton(btn);
 
 				final JPopupMenu menu2 = new JPopupMenu();
 
@@ -53,7 +55,7 @@ public class MainFrame extends JFrame {
 			} else if (c instanceof JMenuItem) {
 				JMenuItem mi = (JMenuItem) c;
 				JButton btn = new JButton(mi.getText(), mi.getIcon());
-				menuPanel.addComponent(btn);
+				menuPanel.addButton(btn);
 
 				for (ActionListener l : mi.getActionListeners()) {
 					btn.addActionListener(l);

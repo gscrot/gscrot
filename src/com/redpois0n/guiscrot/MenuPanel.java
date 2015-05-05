@@ -1,10 +1,13 @@
 package com.redpois0n.guiscrot;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
@@ -18,12 +21,16 @@ public class MenuPanel extends JPanel {
 		setLayout(gridBagLayout);
 	}
 
-	public void addComponent(Component c) {
+	public void addButton(JButton btn) {
 		GridBagConstraints grid = new GridBagConstraints();
 		grid.gridx = 0;
 		grid.gridy = getComponentCount();
 		grid.anchor = GridBagConstraints.WEST;
 		
-		add(c, grid);
+		JToolBar bar = new JToolBar();
+		bar.setFloatable(false);
+		bar.add(btn);
+		
+		add(bar, grid);
 	}
 }
