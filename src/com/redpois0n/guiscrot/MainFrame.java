@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
+	
+	public static final MainFrame INSTANCE = new MainFrame();
 
 	private JPanel contentPane;
 
