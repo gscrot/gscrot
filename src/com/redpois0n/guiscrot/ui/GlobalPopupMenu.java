@@ -36,22 +36,17 @@ public class GlobalPopupMenu {
 	    
 	    JMenu mntmMonitor = new JMenu("Monitor");
 	    mntmMonitor.setIcon(IconUtils.getIcon("monitor"));
-	    mntmMonitor.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		
-	    	}
-	    });
 	    
 	    GraphicsDevice[] devices = ScreenshotHelper.getScreens();
 	    
 	    for (int i = 0; i < devices.length; i++) {
-	    	GraphicsDevice device = devices[i];
+	    	final GraphicsDevice device = devices[i];
 	    	
 	    	JMenuItem item = new JMenuItem("Monitor " + i, IconUtils.getIcon("monitor"));
 	    	
 	    	item.addActionListener(new ActionListener() {
 	    		public void actionPerformed(ActionEvent e) {
-	    			// TODO capture selected monitor
+	    			ScreenshotHelper.captureScreen(device);
 	    		}
 	    	});
 	    	
