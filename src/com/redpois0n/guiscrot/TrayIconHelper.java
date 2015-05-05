@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class TrayIconHelper {
 
-	public static void initialize() {		
+	public static void initialize() throws Exception {		
 		if (SystemTray.isSupported()) {
 		    SystemTray tray = SystemTray.getSystemTray();
 
@@ -34,6 +34,8 @@ public class TrayIconHelper {
 					}
 		    	}
 		    });
+		    
+		    tray.add(icon);
 		}
 	}
 	
