@@ -8,15 +8,21 @@ public class Capture extends Thread {
 		REGION, MONITOR, FULL;
 	}
 	
+	private final Type type;
 	private final BufferedImage image;
 	
-	public Capture(BufferedImage image) {
+	public Capture(Type type, BufferedImage image) {
+		this.type = type;
 		this.image = image;
 	}
 	
 	@Override
 	public void run() {
 		
+	}
+	
+	public Type getType() {
+		return type;
 	}
 
 	public BufferedImage getImage() {

@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
+import com.redpois0n.guiscrot.Capture.Type;
 import com.redpois0n.guiscrot.ui.MainFrame;
 
 public class ScreenshotHelper {
@@ -53,7 +54,7 @@ public class ScreenshotHelper {
 	public static void captureScreen(GraphicsDevice screen) {
 		try {
 			BufferedImage image = ScreenshotHelper.getScreen(screen);
-			Capture p = new Capture(image);
+			Capture p = new Capture(Type.MONITOR, image);
 			MainFrame.INSTANCE.add(p);
 			p.start();
 		} catch (Exception e) {
