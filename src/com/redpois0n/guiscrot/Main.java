@@ -37,9 +37,7 @@ public class Main {
 			
 			registerNativeHook();
 
-			boolean still = true;
-
-			createBackground(still);
+			createBackground();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -57,40 +55,9 @@ public class Main {
 		GlobalScreen.registerNativeHook();
 	}
 
-	public static void createBackground(boolean still) throws Exception {
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice[] screens = ge.getScreenDevices();
-
-        Rectangle rect = new Rectangle();
-        
-        int x = 0;
-        int y = 0;
-        
-        for (GraphicsDevice screen : screens) {
-            Rectangle screenBounds = screen.getDefaultConfiguration().getBounds();
-
-            if (rect.x > screenBounds.x) {
-                rect.x = screenBounds.x;
-            }
-            
-            if (rect.y > screenBounds.y) {
-                rect.y = screenBounds.y;
-            }
-
-            if (x < (screenBounds.x + screenBounds.width)) {
-                x = screenBounds.x + screenBounds.width;
-            }
-            
-            if (y < (screenBounds.y + screenBounds.height)) {
-                y = screenBounds.y + screenBounds.height;
-            }
-            
-            rect.width = x - rect.x;
-            rect.height = y - rect.y;
-        }
-        
-        Robot robot = new Robot();
-        BufferedImage screenShot = still ? robot.createScreenCapture(rect) : null;
+	public static void createBackground() throws Exception {
+		Rectangle rect = ScreenshotHelper.getWholeDesktop();
+		BufferedImage screenShot = ScreenshotHelper.capture(rect);
 		
 		RegionCapture frame = new RegionCapture(rect, screenShot);
 		frame.setVisible(true);

@@ -24,7 +24,7 @@ public class GlobalPopupMenu {
 	    mntmRegion.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		try {
-					Main.createBackground(true);
+					Main.createBackground();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
