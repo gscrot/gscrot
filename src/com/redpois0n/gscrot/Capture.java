@@ -32,12 +32,15 @@ public class Capture extends Thread {
 		this.image = image;
 	}
 	
+	/**
+	 * Called after screenshot is taken
+	 */
 	@Override
 	public void run() {
 		MainFrame.INSTANCE.add(this);
 		
 		for (AfterCaptureAction aca : AfterCaptureAction.actions) {
-			
+			aca.process(image);
 		}
 	}
 	
