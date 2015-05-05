@@ -26,9 +26,7 @@ public class Config {
 			if (!line.startsWith("#") && line.contains("=")) {
 				String k = line.substring(0, line.indexOf("="));
 				String v = line.substring(line.indexOf("=") + 1, line.length());
-				
-				System.out.println(k + ", " + v);
-				
+								
 				CONFIG.put(k, v);
 			}
 		}
