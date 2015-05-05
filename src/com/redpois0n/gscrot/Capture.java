@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.gscrot;
 
 import java.awt.image.BufferedImage;
 

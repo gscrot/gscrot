@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot.ui;
+package com.redpois0n.gscrot.ui;
 
 import java.awt.Component;
 
@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import com.redpois0n.guiscrot.Capture;
+import com.redpois0n.gscrot.Capture;
 
 @SuppressWarnings("serial")
 public class StatusTable extends JTable {

@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.gscrot;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -18,8 +18,8 @@ import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
 
-import com.redpois0n.guiscrot.ui.RegionCapture;
-import com.redpois0n.guiscrot.ui.MainFrame;
+import com.redpois0n.gscrot.ui.MainFrame;
+import com.redpois0n.gscrot.ui.RegionCapture;
 
 public class Main {
 

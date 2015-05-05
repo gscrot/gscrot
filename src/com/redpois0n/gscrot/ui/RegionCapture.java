@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot.ui;
+package com.redpois0n.gscrot.ui;
 
 import iconlib.IconUtils;
 
@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
-import com.redpois0n.guiscrot.RenderUtils;
+import com.redpois0n.gscrot.RenderUtils;
 
 @SuppressWarnings("serial")
 public class RegionCapture extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {

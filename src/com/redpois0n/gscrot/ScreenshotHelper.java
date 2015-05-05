@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.gscrot;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
-import com.redpois0n.guiscrot.Capture.Type;
-import com.redpois0n.guiscrot.ui.MainFrame;
+import com.redpois0n.gscrot.Capture.Type;
+import com.redpois0n.gscrot.ui.MainFrame;
 
 public class ScreenshotHelper {
 	

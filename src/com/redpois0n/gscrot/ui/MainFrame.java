@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot.ui;
+package com.redpois0n.gscrot.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 
-import com.redpois0n.guiscrot.Capture;
+import com.redpois0n.gscrot.Capture;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {

@@ -1,4 +1,4 @@
-package guiscrot.api;
+package gscrot.api;
 
 public abstract class Plugin {
 	

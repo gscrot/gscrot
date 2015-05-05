@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot.ui;
+package com.redpois0n.gscrot.ui;
 
 import iconlib.IconUtils;
 
@@ -10,8 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import com.redpois0n.guiscrot.Main;
-import com.redpois0n.guiscrot.ScreenshotHelper;
+import com.redpois0n.gscrot.Main;
+import com.redpois0n.gscrot.ScreenshotHelper;
 
 public class GlobalPopupMenu {
 	

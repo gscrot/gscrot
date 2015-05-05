@@ -1,4 +1,4 @@
-package com.redpois0n.guiscrot;
+package com.redpois0n.gscrot;
 
 import iconlib.IconUtils;
 
@@ -12,8 +12,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
-import com.redpois0n.guiscrot.ui.GlobalPopupMenu;
-import com.redpois0n.guiscrot.ui.MainFrame;
+import com.redpois0n.gscrot.ui.GlobalPopupMenu;
+import com.redpois0n.gscrot.ui.MainFrame;
 
 public class TrayIconHelper {
 
