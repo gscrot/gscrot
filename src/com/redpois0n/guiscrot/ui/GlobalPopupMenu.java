@@ -20,7 +20,7 @@ public class GlobalPopupMenu {
 	    JMenu mnCapture = new JMenu("Capture");
 	    mnCapture.setIcon(IconUtils.getIcon("camera"));
 	    
-	    JMenuItem mntmRegion = new JMenuItem("Region");
+	    JMenuItem mntmRegion = new JMenuItem("Region", IconUtils.getIcon("region-select"));
 	    mntmRegion.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		try {
