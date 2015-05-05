@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
+import com.redpois0n.guiscrot.ui.MainFrame;
+
 public class ScreenshotHelper {
 	
 	/**
@@ -17,15 +19,12 @@ public class ScreenshotHelper {
 	 * @throws Exception
 	 */
 	public static Rectangle getWholeDesktop() throws Exception {
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice[] screens = ge.getScreenDevices();
-
         Rectangle rect = new Rectangle();
         
         int x = 0;
         int y = 0;
         
-        for (GraphicsDevice screen : screens) {
+        for (GraphicsDevice screen : getScreens()) {
             Rectangle screenBounds = screen.getDefaultConfiguration().getBounds();
 
             if (rect.x > screenBounds.x) {
@@ -49,6 +48,21 @@ public class ScreenshotHelper {
         }
         
         return rect;
+	}
+	
+	public static void captureScreen(GraphicsDevice screen) {
+		try {
+			BufferedImage image = ScreenshotHelper.getScreen(screen);
+			Capture p = new Capture(image);
+			MainFrame.INSTANCE.add(p);
+			p.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static BufferedImage getScreen(GraphicsDevice screen) throws Exception {
+		return capture(screen.getDefaultConfiguration().getBounds());
 	}
 	
 	public static BufferedImage capture(Rectangle rect) throws Exception {
