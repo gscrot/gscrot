@@ -29,6 +29,9 @@ public class Main {
 			}
 			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			
+			new MainFrame().setVisible(true);
+			
 			registerNativeHook();
 
 			boolean still = true;
