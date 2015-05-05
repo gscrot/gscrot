@@ -12,6 +12,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+
+import com.redpois0n.guiscrot.Capture;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -19,7 +23,8 @@ public class MainFrame extends JFrame {
 	public static final MainFrame INSTANCE = new MainFrame();
 	
 	private MenuPanel menuPanel;
-
+	private StatusTable table;
+	
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,6 +67,19 @@ public class MainFrame extends JFrame {
 				}
 			}
 		}
+		
+		JScrollPane scrollPaneTable = new JScrollPane();
+		table = new StatusTable();
+		scrollPaneTable.setViewportView(table);
+		
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setLeftComponent(scrollPaneTable);
+		add(splitPane, BorderLayout.CENTER);
+		
+	}
+
+	public void add(Capture p) {
+		table.add(p);
 	}
 
 }
