@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class RendererUtils {
+public class RenderUtils {
 
 	/**
 	 * Draws moving rectangle used for cross and borders in cover

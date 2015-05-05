@@ -137,15 +137,15 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			g.setFont(new Font("Arial", Font.BOLD, 16));
 
-			RendererUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
+			RenderUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
 					
 			boolean selected = x2 - x != 0 && y2 - y != 0;
 			
 			if (selected) {
 				g.setColor(Color.white);
 				g.drawRect(x, y, tx - x, ty - y);
-				RendererUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
-				RendererUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
+				RenderUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
+				RenderUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
 			}
 			
 			// Reset all values to global
@@ -160,8 +160,8 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			// Cross over screen(s)
 			g.setColor(Color.white);
-			RendererUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
-			RendererUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
+			RenderUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
+			RenderUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
 
 			// Cursor
 			g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
@@ -174,7 +174,7 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 
 			pg.drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
 
-			preview = RendererUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
+			preview = RenderUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
 
 			pg = preview.createGraphics();
 
@@ -194,13 +194,13 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			// south
 			pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
 
-			RendererUtils.grid(preview, PREVIEW_SCALE);
+			RenderUtils.grid(preview, PREVIEW_SCALE);
 
 			// dot in middle off crosshair
 			pg.setColor(Color.black);
 			pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);
 
-			preview = RendererUtils.createCircle(preview);
+			preview = RenderUtils.createCircle(preview);
 
 			// draw preview
 			if (isInsideSelection(x2 + 1, y2 + 1)) {
