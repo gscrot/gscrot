@@ -243,12 +243,11 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		int width = x2 - x;
 		int height = y2 - y;
 		
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = image.createGraphics();
+		BufferedImage part = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = part.createGraphics();
 		g.drawImage(image, 0, 0, width, height, x, y, x2, y2, null);
-		g.dispose();
 		
-		return image;
+		return part;
 	}
 
 	/**
