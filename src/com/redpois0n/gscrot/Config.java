@@ -14,7 +14,7 @@ public class Config {
 	
 	public static final Map<String, String> CONFIG = new HashMap<String, String>();
 	public static final File CONFIG_FILE = new File(".gscrot");
-	
+		
 	public static void load() throws Exception {
 		CONFIG.clear();
 		
@@ -25,12 +25,16 @@ public class Config {
 		while ((line = reader.readLine()) != null) {
 			if (!line.startsWith("#") && line.contains("=")) {
 				String k = line.substring(0, line.indexOf("="));
-				String v = line.substring(line.indexOf("="), line.length());
+				String v = line.substring(line.indexOf("=") + 1, line.length());
 				
 				System.out.println(k + ", " + v);
 				
 				CONFIG.put(k, v);
 			}
+		}
+		
+		if (CONFIG.size() == 0) {
+			loadDefaults();
 		}
 		
 		reader.close();
@@ -48,6 +52,10 @@ public class Config {
 		}
 		
 		writer.close();
+	}
+	
+	public static void loadDefaults() {
+		CONFIG.put("save-dir", System.getProperty("java.io.tmpdir"));
 	}
 
 }
