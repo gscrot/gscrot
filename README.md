@@ -2,7 +2,7 @@
 
 Cross-platform screenshot capture tool, inspired much by [ShareX](https://github.com/ShareX/ShareX) which sadly is not cross-platform
 
-## Requirements
+## Dependencies
 
 - [pluginlib](https://github.com/redpois0n/pluginlib)
 - [iconlib](https://github.com/redpois0n/iconlib)
