@@ -18,7 +18,7 @@ import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
 
-import com.redpois0n.guiscrot.ui.CoverFrame;
+import com.redpois0n.guiscrot.ui.RegionCapture;
 import com.redpois0n.guiscrot.ui.MainFrame;
 
 public class Main {
@@ -92,7 +92,7 @@ public class Main {
         Robot robot = new Robot();
         BufferedImage screenShot = still ? robot.createScreenCapture(rect) : null;
 		
-		CoverFrame frame = new CoverFrame(rect, screenShot);
+		RegionCapture frame = new RegionCapture(rect, screenShot);
 		frame.setVisible(true);
 	}
 }

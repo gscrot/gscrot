@@ -22,7 +22,7 @@ import javax.swing.event.MouseInputListener;
 import com.redpois0n.guiscrot.RenderUtils;
 
 @SuppressWarnings("serial")
-public class CoverFrame extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
+public class RegionCapture extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
 	
 	public static final int PREVIEW_SIZE = 150;
 	public static final float PREVIEW_SCALEF = 8F;
@@ -44,11 +44,11 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 	private RepaintThread thread;
 	
 
-	public CoverFrame(Rectangle rect) {
+	public RegionCapture(Rectangle rect) {
 		this(rect, null);
 	}
 	
-	public CoverFrame(Rectangle rect, Image image) {
+	public RegionCapture(Rectangle rect, Image image) {
 		this.rect = rect;
 		this.image = image;
 		setUndecorated(true);
@@ -104,10 +104,10 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			// Get values in "order" to not fuck up rectangles
 			
-			int x = Math.min(CoverFrame.this.x, CoverFrame.this.x2);
-			int y = Math.min(CoverFrame.this.y, CoverFrame.this.y2);
-			int x2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
-			int y2 = Math.max(CoverFrame.this.y, CoverFrame.this.y2);
+			int x = Math.min(RegionCapture.this.x, RegionCapture.this.x2);
+			int y = Math.min(RegionCapture.this.y, RegionCapture.this.y2);
+			int x2 = Math.max(RegionCapture.this.x, RegionCapture.this.x2);
+			int y2 = Math.max(RegionCapture.this.y, RegionCapture.this.y2);
 			
 			// If nothing is selected, default to x and y
 			int tx = x2 == 0 ? x : x2;
@@ -152,10 +152,10 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 			
 			// Reset all values to global
 			
-			x = CoverFrame.this.x;
-			y = CoverFrame.this.y;
-			x2 = CoverFrame.this.x2;
-			y2 = CoverFrame.this.y2;
+			x = RegionCapture.this.x;
+			y = RegionCapture.this.y;
+			x2 = RegionCapture.this.x2;
+			y2 = RegionCapture.this.y2;
 			
 			tx = x2 == 0 ? x : x2;
 			ty = y2 == 0 ? y : y2;
@@ -214,10 +214,10 @@ public class CoverFrame extends JFrame implements KeyListener, MouseMotionListen
 	}
 	
 	private boolean isInsideSelection(int x, int y) {
-		int px = Math.min(CoverFrame.this.x, CoverFrame.this.x2);
-		int py = Math.min(CoverFrame.this.y, CoverFrame.this.y2);
-		int px2 = Math.max(CoverFrame.this.x, CoverFrame.this.x2);
-		int py2 = Math.max(CoverFrame.this.y, CoverFrame.this.y2);
+		int px = Math.min(RegionCapture.this.x, RegionCapture.this.x2);
+		int py = Math.min(RegionCapture.this.y, RegionCapture.this.y2);
+		int px2 = Math.max(RegionCapture.this.x, RegionCapture.this.x2);
+		int py2 = Math.max(RegionCapture.this.y, RegionCapture.this.y2);
 		
 		return x >= px && y >= py && x <= px2 && y <= py2;
 	}
