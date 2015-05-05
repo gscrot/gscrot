@@ -30,7 +30,7 @@ public class Main {
 			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			
-			new MainFrame().setVisible(true);
+			MainFrame.INSTANCE.setVisible(true);
 			
 			registerNativeHook();
 

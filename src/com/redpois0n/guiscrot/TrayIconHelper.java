@@ -10,6 +10,8 @@ import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 public class TrayIconHelper {
 
 	public static void initialize() throws Exception {		
@@ -17,10 +19,8 @@ public class TrayIconHelper {
 		    SystemTray tray = SystemTray.getSystemTray();
 
 		    Image image = IconUtils.getIcon("icon").getImage();
-
-		    PopupMenu popup = new PopupMenu();
 		
-		    TrayIcon icon = new TrayIcon(image, "guiscrot", popup);
+		    TrayIcon icon = new TrayIcon(image, "guiscrot");
 		    icon.addMouseListener(new MouseAdapter() {
 		    	public void mouseClicked(MouseEvent e)  {
 		    		if (e.getClickCount() == 2 && !e.isConsumed()) {
@@ -31,6 +31,8 @@ public class TrayIconHelper {
 						} else {
 							frame.setState(Frame.ICONIFIED);
 						}
+					} else if (SwingUtilities.isRightMouseButton(e)) {
+						 GlobalPopupMenu.getPopupMenu().show(null, e.getXOnScreen(), e.getYOnScreen());
 					}
 		    	}
 		    });
