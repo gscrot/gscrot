@@ -1,5 +1,6 @@
 package com.redpois0n.gscrot.ui;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -23,6 +24,8 @@ public class StatusTable extends JTable {
 		setFillsViewportHeight(true);
 		setModel(model);
 		setDefaultRenderer(Object.class, new Renderer());
+		setGridColor(Color.white);
+		setRowHeight(25);
 	}
 
 	public void add(Capture p) {
