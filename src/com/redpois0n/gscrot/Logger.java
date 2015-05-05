@@ -24,4 +24,12 @@ public class Logger {
 		
 		return time;
 	}
+	
+	/**
+	 * getTimeString() but replaces : with - which is invalid in path names (at least on Windows)
+	 * @return
+	 */
+	public static String getTimeFileString() {
+		return getTimeString().replace(":", "-");
+	}
 }
