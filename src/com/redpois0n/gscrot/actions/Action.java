@@ -11,7 +11,11 @@ public abstract class Action {
 	private static final List<Action> ACTIONS = new ArrayList<Action>();
 	
 	static {		
-		ACTIONS.add(new SaveAction(Config.get("save-dir")));
+		try {
+			ACTIONS.add(new SaveAction(Config.get("save-dir")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static final List<Action> getAllActions() {
