@@ -28,6 +28,16 @@ public abstract class CaptureUploader {
 		UPLOADERS.remove(a);
 	}
 	
+	private final String name;
+
+	public CaptureUploader(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
 	/**
 	 * Called each time a new screenshot is taken
 	 * @param image
