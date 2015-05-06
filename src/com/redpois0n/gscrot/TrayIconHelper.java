@@ -4,7 +4,6 @@ import iconlib.IconUtils;
 
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;

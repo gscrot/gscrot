@@ -14,8 +14,20 @@ public abstract class Action {
 		ACTIONS.add(new SaveAction(Config.get("save-dir")));
 	}
 	
-	public static final List<Action> getActions() {
+	public static final List<Action> getAllActions() {
 		return ACTIONS;
+	}
+	
+	public static final List<Action> getActions(Event event) {
+		List<Action> list = new ArrayList<Action>();
+		
+		for (Action action : ACTIONS) {
+			if (action.getEvent() == event) {
+				list.add(action);
+			}
+		}
+		
+		return list;
 	}
 	
 	/**
@@ -32,6 +44,16 @@ public abstract class Action {
 	 */
 	public static final void removeAction(Action a) {
 		ACTIONS.remove(a);
+	}
+	
+	private final Event event;
+	
+	public Action(Event event) {
+		this.event = event;
+	}
+	
+	public Event getEvent() {
+		return this.event;
 	}
 	
 	/**

@@ -16,6 +16,7 @@ public class SaveAction extends Action {
 	}
 	
 	public SaveAction(File dir) {
+		super(Event.AFTER_CAPTURE);
 		this.dir = dir;
 	}
 
