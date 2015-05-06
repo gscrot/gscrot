@@ -92,7 +92,7 @@ public class MainFrame extends JFrame {
 	
 	@Override
 	public void setVisible(boolean b) {
-		super.setVisible(true);
+		super.setVisible(b);
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
