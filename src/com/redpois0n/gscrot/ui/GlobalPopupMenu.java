@@ -6,10 +6,13 @@ import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
 
+import com.redpois0n.gscrot.CaptureUploader;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
 
@@ -58,6 +61,30 @@ public class GlobalPopupMenu {
 	    
 	    popup.add(mnCapture);
 	    
+	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+
+	    // Image uploaders
+	    JMenu mnImageUploaders = new JMenu("Image Uploaders");
+	    mnImageUploaders.setIcon(IconUtils.getIcon(""));
+	    	    
+	    CaptureUploader current = CaptureUploader.getSelected();
+	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
+	    	JCheckBoxMenuItem mntmUploader = new JCheckBoxMenuItem(uploader.getName(), IconUtils.getIcon(""));
+	    	
+	    	mntmUploader.setSelected(uploader == current);
+	    	
+		    mntmRegion.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		
+		    	}
+		    });
+		    mnImageUploaders.add(mntmUploader);
+	    }
+	    
+	    popup.add(mnImageUploaders);
+	    
+	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+
 	    // Exit item
 	    JMenuItem mntmExit = new JMenuItem("Exit", IconUtils.getIcon("cross"));
 	    mntmExit.addActionListener(new ActionListener() {
