@@ -1,10 +1,15 @@
 package com.redpois0n.gscrot.ui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+
+import com.redpois0n.gscrot.util.ImageUtils;
 
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
@@ -14,7 +19,8 @@ public class ImagePanel extends JPanel {
 	private BufferedImage image;
 
 	public ImagePanel() {
-		
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addMouseListener(new ClickListener());
 	}
 	
 	@Override
@@ -52,5 +58,19 @@ public class ImagePanel extends JPanel {
 	public void setImage(BufferedImage image) {
 		this.image = image;
 		repaint();
+	}
+	
+	private class ClickListener extends MouseAdapter {
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount() == 2) {
+				try {
+					ImageUtils.open(image);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
 	}
 }
