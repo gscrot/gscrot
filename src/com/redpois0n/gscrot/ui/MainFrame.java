@@ -13,6 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.SwingUtilities;
 
 import com.redpois0n.gscrot.Capture;
 
@@ -24,10 +25,12 @@ public class MainFrame extends JFrame {
 	private MenuPanel menuPanel;
 	private StatusTable table;
 	private ImagePanel imagePanel;
+	private JSplitPane splitPane;
 	
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(0, 0, 750, 400);
+		setLocationRelativeTo(null);
 		setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane sp = new JScrollPane();
@@ -77,15 +80,25 @@ public class MainFrame extends JFrame {
 		imagePanel = new ImagePanel();
 		scrollPaneImage.setViewportView(imagePanel);
 		
-		JSplitPane splitPane = new JSplitPane();
+		splitPane = new JSplitPane();
 		splitPane.setLeftComponent(scrollPaneTable);
 		splitPane.setRightComponent(scrollPaneImage);
 		add(splitPane, BorderLayout.CENTER);
-		
 	}
 
 	public void add(Capture p) {
 		table.add(p);
+	}
+	
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(true);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				splitPane.setDividerLocation(splitPane.getWidth() / 2);
+			}
+		});
 	}
 	
 	private class CaptureClickListener extends MouseAdapter {
