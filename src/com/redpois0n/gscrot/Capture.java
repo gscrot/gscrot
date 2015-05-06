@@ -39,7 +39,7 @@ public class Capture extends Thread {
 	public void run() {
 		MainFrame.INSTANCE.add(this);
 		
-		for (AfterCaptureAction aca : AfterCaptureAction.actions) {
+		for (AfterCaptureAction aca : AfterCaptureAction.getActions()) {
 			aca.process(image);
 		}
 	}
