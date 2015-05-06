@@ -2,6 +2,13 @@
 
 Cross-platform screenshot capture tool, inspired much by [ShareX](https://github.com/ShareX/ShareX) which sadly is not cross-platform
 
+## Major features
+
+- Capture methods
+	- Region
+	- Current Monitor
+	- Pick Monitor
+
 ## Dependencies
 
 - [JNativeHook](https://github.com/kwhat/jnativehook)
