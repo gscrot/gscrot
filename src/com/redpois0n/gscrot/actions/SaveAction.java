@@ -25,7 +25,6 @@ public class SaveAction extends AfterCaptureAction {
 		Logger.log("Saving image to  " + file);
 
 		try {
-			ImageIO.write(image, "png", new File("test.png"));
 			ImageIO.write(image, "png", file);
 		} catch (Exception e) {
 			e.printStackTrace();
