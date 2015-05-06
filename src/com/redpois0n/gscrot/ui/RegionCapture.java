@@ -21,6 +21,7 @@ import javax.swing.event.MouseInputListener;
 
 import com.redpois0n.gscrot.Capture;
 import com.redpois0n.gscrot.RenderUtils;
+import com.redpois0n.gscrot.util.ImageUtils;
 
 @SuppressWarnings("serial")
 public class RegionCapture extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {
@@ -57,6 +58,8 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		
+		setCursor(ImageUtils.createTransparentCursor());
 		
 		CoverPanel cp = new CoverPanel();
 		cp.addKeyListener(this);
@@ -245,7 +248,7 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		
 		BufferedImage part = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = part.createGraphics();
-		g.drawImage(image, 0, 0, width, height, x, y, x2, y2, null);
+		g.drawImage(image, 0, 0, width, height, x, y, x2 + 1, y2 + 1, null);
 		
 		return part;
 	}
