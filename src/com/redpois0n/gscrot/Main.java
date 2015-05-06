@@ -1,5 +1,7 @@
 package com.redpois0n.gscrot;
 
+import gscrot.api.PluginLoader;
+
 import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.image.BufferedImage;
@@ -18,6 +20,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+		
+		try {
+			PluginLoader.loadPlugins();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		try {
 			Config.load();
