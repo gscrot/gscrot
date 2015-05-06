@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -68,6 +69,8 @@ public class MainFrame extends JFrame {
 				for (ActionListener l : mi.getActionListeners()) {
 					btn.addActionListener(l);
 				}
+			} else if (c instanceof JComponent) {
+				menuPanel.addComponent((JComponent) c);
 			}
 		}
 		

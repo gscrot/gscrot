@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
@@ -23,5 +24,11 @@ public class MenuPanel extends JPanel {
 		bar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		add(bar);
+	}
+
+	public void addComponent(JComponent c) {
+		c.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		add(c);
 	}
 }
