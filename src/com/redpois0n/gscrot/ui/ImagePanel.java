@@ -40,12 +40,7 @@ public class ImagePanel extends JPanel {
 			int imageWidth = image.getWidth();
 			int imageHeight = image.getHeight();
 			
-			while (imageWidth > getWidth()) {
-				imageWidth /= 2;
-				imageHeight /= 2;
-			}
-			
-			while (imageHeight > getHeight()) {
+			while (imageWidth > getWidth() || imageHeight > getHeight()) {
 				imageWidth /= 2;
 				imageHeight /= 2;
 			}
