@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 import com.redpois0n.gscrot.Logger;
 
-public class SaveAction extends AfterCaptureAction {
+public class SaveAction extends Action {
 	
 	private File dir;
 

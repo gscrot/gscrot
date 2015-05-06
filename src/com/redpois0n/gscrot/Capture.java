@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import com.redpois0n.gscrot.actions.AfterCaptureAction;
+import com.redpois0n.gscrot.actions.Action;
 import com.redpois0n.gscrot.ui.MainFrame;
 
 public class Capture extends Thread {
@@ -74,7 +74,7 @@ public class Capture extends Thread {
 	public void run() {
 		MainFrame.INSTANCE.add(this);
 		
-		for (AfterCaptureAction aca : AfterCaptureAction.getActions()) {
+		for (Action aca : Action.getActions()) {
 			aca.process(image);
 		}
 		

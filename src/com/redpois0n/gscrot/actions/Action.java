@@ -6,15 +6,15 @@ import java.util.List;
 
 import com.redpois0n.gscrot.Config;
 
-public abstract class AfterCaptureAction {
+public abstract class Action {
 	
-	private static final List<AfterCaptureAction> ACTIONS = new ArrayList<AfterCaptureAction>();
+	private static final List<Action> ACTIONS = new ArrayList<Action>();
 	
 	static {		
 		ACTIONS.add(new SaveAction(Config.get("save-dir")));
 	}
 	
-	public static final List<AfterCaptureAction> getActions() {
+	public static final List<Action> getActions() {
 		return ACTIONS;
 	}
 	
@@ -22,7 +22,7 @@ public abstract class AfterCaptureAction {
 	 * Add global action to be called after each screenshot taken
 	 * @return
 	 */
-	public static final void addAction(AfterCaptureAction a) {
+	public static final void addAction(Action a) {
 		ACTIONS.add(a);
 	}
 	
@@ -30,7 +30,7 @@ public abstract class AfterCaptureAction {
 	 * Remove global action
 	 * @param a
 	 */
-	public static final void removeAction(AfterCaptureAction a) {
+	public static final void removeAction(Action a) {
 		ACTIONS.remove(a);
 	}
 	
