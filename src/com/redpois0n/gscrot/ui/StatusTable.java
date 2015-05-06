@@ -51,8 +51,11 @@ public class StatusTable extends JTable {
 			
 			String colname = table.getColumnName(column);
 			
+			label.setIcon(null);
+			
 			if (colname.equals(COLUMN_TYPE)) {
 				label.setText(capture.getType().toString());
+				label.setIcon(capture.getStatus().getIcon());
 			}
 			
 			return label;
