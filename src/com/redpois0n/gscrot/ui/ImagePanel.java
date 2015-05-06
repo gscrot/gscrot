@@ -37,7 +37,20 @@ public class ImagePanel extends JPanel {
 		}
 		
 		if (image != null) {
-			g.drawImage(image, getWidth() / 2 - image.getWidth() / 2, getHeight() / 2 - image.getHeight() / 2, image.getWidth(), image.getHeight(), null);
+			int imageWidth = image.getWidth();
+			int imageHeight = image.getHeight();
+			
+			while (imageWidth > getWidth()) {
+				imageWidth /= 2;
+				imageHeight /= 2;
+			}
+			
+			while (imageHeight > getHeight()) {
+				imageWidth /= 2;
+				imageHeight /= 2;
+			}
+			
+			g.drawImage(image, width / 2 - imageWidth / 2, height / 2 - imageHeight / 2, imageWidth, imageHeight, null);
 		}
 	}
 	
