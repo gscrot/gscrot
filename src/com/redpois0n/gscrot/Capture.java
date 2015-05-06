@@ -74,9 +74,12 @@ public class Capture extends Thread {
 	public void run() {
 		MainFrame.INSTANCE.add(this);
 		
-		for (Action aca : Action.getActions(Event.AFTER_CAPTURE)) {
-			aca.process(image);
+		CaptureUploader uploader = CaptureUploader.getSelected();
+		
+		if (uploader != null) {
+			uploader.process(image);
 		}
+		
 		
 		setStatus(Status.COMPLETE);
 	}
