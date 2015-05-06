@@ -28,8 +28,12 @@ public class StatusTable extends JTable {
 		setRowHeight(25);
 	}
 
+	/**
+	 * Adds capture to top
+	 * @param p
+	 */
 	public void add(Capture p) {
-		model.addRow(new Object[] { p });
+		model.insertRow(0, new Object[] { p });
 	}
 	
 	private class Renderer extends DefaultTableCellRenderer {
