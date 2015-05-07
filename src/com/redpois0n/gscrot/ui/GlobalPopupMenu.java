@@ -15,6 +15,7 @@ import javax.swing.JSeparator;
 import com.redpois0n.gscrot.CaptureUploader;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
+import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 
 public class GlobalPopupMenu {
 	
@@ -69,15 +70,10 @@ public class GlobalPopupMenu {
 	    	    
 	    CaptureUploader current = CaptureUploader.getSelected();
 	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
-	    	JCheckBoxMenuItem mntmUploader = new JCheckBoxMenuItem(uploader.getName(), IconUtils.getIcon(""));
+	    	CaptureUploaderCheckBoxMenuItem mntmUploader = new CaptureUploaderCheckBoxMenuItem(uploader);
 	    	
 	    	mntmUploader.setSelected(uploader == current);
-	    	
-		    mntmRegion.addActionListener(new ActionListener() {
-		    	public void actionPerformed(ActionEvent e) {
-		    		
-		    	}
-		    });
+
 		    mnImageUploaders.add(mntmUploader);
 	    }
 	    
