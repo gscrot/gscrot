@@ -8,6 +8,9 @@ Cross-platform screenshot capture tool, inspired much by [ShareX](https://github
 	- Region
 	- Current Monitor
 	- Pick Monitor
+- Simple API to create modules
+	- Capture uploader plugins
+	- Uploader example [gscrot-imgur](https://github.com/gscrot/gscrot-imgur)
 
 ## Dependencies
 
