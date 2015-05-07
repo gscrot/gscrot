@@ -6,7 +6,6 @@ import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -71,6 +70,7 @@ public class GlobalPopupMenu {
 	    CaptureUploader current = CaptureUploader.getSelected();
 	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
 	    	CaptureUploaderCheckBoxMenuItem mntmUploader = new CaptureUploaderCheckBoxMenuItem(uploader);
+	    	mntmUploader.setIcon(uploader.getIcon());
 	    	
 	    	mntmUploader.setSelected(uploader == current);
 

@@ -6,8 +6,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
 
-import com.redpois0n.gscrot.actions.Action;
-import com.redpois0n.gscrot.actions.Event;
 import com.redpois0n.gscrot.ui.MainFrame;
 
 public class Capture extends Thread {

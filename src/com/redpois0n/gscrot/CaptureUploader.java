@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 public abstract class CaptureUploader {
 	
 	private static final List<CaptureUploader> UPLOADERS = new ArrayList<CaptureUploader>();
@@ -42,13 +44,23 @@ public abstract class CaptureUploader {
 	}
 	
 	private final String name;
-
+	private final ImageIcon icon;
+	
 	public CaptureUploader(String name) {
+		this(name, null);
+	}
+	
+	public CaptureUploader(String name, ImageIcon icon) {
 		this.name = name;
+		this.icon = icon;
 	}
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public ImageIcon getIcon() {
+		return this.icon;
 	}
 	
 	/**
