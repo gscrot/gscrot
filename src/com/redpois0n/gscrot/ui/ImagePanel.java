@@ -64,7 +64,7 @@ public class ImagePanel extends JPanel {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (e.getClickCount() == 2) {
+			if (e.getClickCount() == 2 && image != null) {
 				try {
 					ImageUtils.open(image);
 				} catch (Exception ex) {
