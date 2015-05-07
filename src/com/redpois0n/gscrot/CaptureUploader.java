@@ -8,8 +8,21 @@ public abstract class CaptureUploader {
 	
 	private static final List<CaptureUploader> UPLOADERS = new ArrayList<CaptureUploader>();
 	
+	/**
+	 * Gets selected uploader (From top of the list)
+	 * @return
+	 */
 	public static final CaptureUploader getSelected() {
 		return UPLOADERS.get(0);
+	}
+
+	/**
+	 * Sets selected uploader (adds it to top of list)
+	 * @param uploader
+	 */
+	public static void setSelected(CaptureUploader uploader) {
+		UPLOADERS.remove(uploader);
+		UPLOADERS.add(0, uploader);
 	}
 	
 	public static final List<CaptureUploader> getAllUploaders() {
