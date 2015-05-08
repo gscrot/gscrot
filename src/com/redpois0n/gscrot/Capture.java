@@ -90,7 +90,12 @@ public class Capture extends Thread {
 		CaptureUploader uploader = CaptureUploader.getSelected();
 
 		if (uploader != null) {
-			uploader.process(this);
+			try {
+				uploader.process(this);
+			} catch (Exception e) {
+				// TODO
+				e.printStackTrace();
+			}
 		}
 		
 		
