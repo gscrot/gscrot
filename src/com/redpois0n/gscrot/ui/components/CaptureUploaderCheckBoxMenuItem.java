@@ -16,13 +16,13 @@ public class CaptureUploaderCheckBoxMenuItem extends JCheckBoxMenuItem implement
 		this.uploader = uploader;
 		
 		setText(uploader.getName());
+		
+		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (isSelected()) {
-			CaptureUploader.setSelected(uploader);
-		}
+		CaptureUploader.setSelected(uploader);
 	}
 
 }
