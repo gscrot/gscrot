@@ -4,7 +4,9 @@ import iconlib.IconUtils;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 
 import com.redpois0n.gscrot.ui.MainFrame;
@@ -57,12 +59,18 @@ public class Capture extends Thread {
 	}
 	
 	private final Type type;
+	private final Format format;
 	private final BufferedImage image;
 	
 	private Status status = Status.STARTING;
 	
 	public Capture(Type type, BufferedImage image) {
+		this(type, Format.PNG, image);
+	}
+	
+	public Capture(Type type, Format format, BufferedImage image) {
 		this.type = type;
+		this.format = format;
 		this.image = image;
 	}
 	
@@ -82,7 +90,7 @@ public class Capture extends Thread {
 		CaptureUploader uploader = CaptureUploader.getSelected();
 
 		if (uploader != null) {
-			uploader.process(image);
+			uploader.process(this);
 		}
 		
 		
@@ -97,9 +105,24 @@ public class Capture extends Thread {
 		return image;
 	}
 	
+	/**
+	 * Returns this capture as a byte array
+	 * @return
+	 * @throws Exception
+	 */
+	public byte[] getBinary() throws Exception {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(image, format.toString(), baos);
+		return baos.toByteArray();
+	}
+	
 	public void setStatus(Status status) {
 		this.status = status;
 		MainFrame.INSTANCE.repaint();
+	}
+	
+	public Format getFormat() {
+		return this.format;
 	}
 
 	public Status getStatus() {
