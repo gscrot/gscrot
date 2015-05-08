@@ -11,7 +11,7 @@ Cross-platform screenshot capture tool, inspired much by [ShareX](https://github
 - Simple API to create modules
 	- Capture uploader plugins
 	- Uploader example [gscrot-imgur](https://github.com/gscrot/gscrot-imgur)
-
+	- Image Processor plugins, add timestamps and more to image before processing
 ## Dependencies
 
 - [JNativeHook](https://github.com/kwhat/jnativehook)
