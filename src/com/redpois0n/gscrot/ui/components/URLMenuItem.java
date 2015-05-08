@@ -19,8 +19,17 @@ public class URLMenuItem extends JMenuItem implements ActionListener {
 	
 	public URLMenuItem(String text, ImageIcon icon, String url) {
 		super(text, icon);
-		this.url = url;
+		setURL(url);
 		addActionListener(this);
+	}
+	
+	public void setURL(String url) {
+		this.url = url;
+		setEnabled(url != null);
+	}
+	
+	public String getURL() {
+		return this.url;
 	}
 
 	@Override
