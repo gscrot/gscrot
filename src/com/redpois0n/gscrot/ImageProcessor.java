@@ -8,7 +8,7 @@ public abstract class ImageProcessor {
 	
 	private static final List<ImageProcessor> UPLOADERS = new ArrayList<ImageProcessor>();
 	
-	public static final List<ImageProcessor> getAllUploaders() {
+	public static final List<ImageProcessor> getAllProcessors() {
 		return UPLOADERS;
 	}
 

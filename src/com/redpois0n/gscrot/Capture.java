@@ -2,6 +2,7 @@ package com.redpois0n.gscrot;
 
 import iconlib.IconUtils;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
@@ -71,6 +72,12 @@ public class Capture extends Thread {
 	@Override
 	public void run() {
 		MainFrame.INSTANCE.add(this);
+		
+		Graphics2D g = image.createGraphics();
+		
+		for (ImageProcessor processor : ImageProcessor.getAllProcessors()) {
+			processor.process(g);
+		}
 		
 		CaptureUploader uploader = CaptureUploader.getSelected();
 
