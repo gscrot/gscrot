@@ -15,12 +15,14 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import com.redpois0n.gscrot.Capture;
 import com.redpois0n.gscrot.util.Icons;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements PopupMenuListener {
 
 	public static final MainFrame INSTANCE = new MainFrame();
 	
@@ -28,13 +30,14 @@ public class MainFrame extends JFrame {
 	private StatusTable table;
 	private ImagePanel imagePanel;
 	private JSplitPane splitPane;
+	private JPopupMenu popupMenu;
 	
 	public MainFrame() {
 		setIconImages(Icons.getIcons());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(0, 0, 750, 400);
 		setLocationRelativeTo(null);
-		setLayout(new BorderLayout(0, 0));
+		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane sp = new JScrollPane();
 		menuPanel = new MenuPanel();
@@ -81,6 +84,10 @@ public class MainFrame extends JFrame {
 		table.addMouseListener(new CaptureClickListener());
 		scrollPaneTable.setViewportView(table);
 		
+		popupMenu = new JPopupMenu();
+		popupMenu.addPopupMenuListener(this);
+		addPopup(table, popupMenu);
+		
 		JScrollPane scrollPaneImage = new JScrollPane();
 		imagePanel = new ImagePanel();
 		scrollPaneImage.setViewportView(imagePanel);
@@ -89,6 +96,8 @@ public class MainFrame extends JFrame {
 		splitPane.setLeftComponent(scrollPaneTable);
 		splitPane.setRightComponent(scrollPaneImage);
 		add(splitPane, BorderLayout.CENTER);
+		
+		
 	}
 
 	public void add(Capture p) {
@@ -106,25 +115,70 @@ public class MainFrame extends JFrame {
 		});
 	}
 	
+	public Capture getSelectedCapture() {
+		int row = table.getSelectedRow();
+
+		Capture capture = null;
+		
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			if (table.getValueAt(row, i) instanceof Capture) {
+				capture = (Capture) table.getValueAt(row, i);
+				break;
+			}
+		}
+		
+		return capture;
+	}
+	
 	private class CaptureClickListener extends MouseAdapter {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			int row = table.getSelectedRow();
+			Capture capture = getSelectedCapture();
 			
-			if (row != -1) {
-				Capture capture = null;
-				
-				for (int i = 0; i < table.getColumnCount(); i++) {
-					if (table.getValueAt(row, i) instanceof Capture) {
-						capture = (Capture) table.getValueAt(row, i);
-						break;
-					}
-				}
-				
+			if (capture != null) {				
 				imagePanel.setImage(capture.getImage());
 			}
 		}
 	}
 
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+
+	@Override
+	public void popupMenuCanceled(PopupMenuEvent e) {
+		
+	}
+
+	@Override
+	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+		
+	}
+
+	@Override
+	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+		Capture capture = getSelectedCapture();
+		
+		if (capture != null && capture.getResponse() != null) {				
+			popupMenu.removeAll();
+			popupMenu.add(new JMenuItem(capture.getResponse().getUrl()));
+			popupMenu.add(new JMenuItem(capture.getResponse().getRemoveUrl()));
+
+		}
+	}
 }
