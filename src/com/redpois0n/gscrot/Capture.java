@@ -73,7 +73,7 @@ public class Capture extends Thread {
 		MainFrame.INSTANCE.add(this);
 		
 		CaptureUploader uploader = CaptureUploader.getSelected();
-		
+
 		if (uploader != null) {
 			uploader.process(image);
 		}

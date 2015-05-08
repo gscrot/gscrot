@@ -17,6 +17,7 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
 import com.redpois0n.gscrot.Capture;
+import com.redpois0n.gscrot.util.Icons;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
 	private JSplitPane splitPane;
 	
 	public MainFrame() {
+		setIconImages(Icons.getIcons());
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(0, 0, 750, 400);
 		setLocationRelativeTo(null);
