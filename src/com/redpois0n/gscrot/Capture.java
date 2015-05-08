@@ -64,6 +64,8 @@ public class Capture extends Thread {
 	
 	private Status status = Status.STARTING;
 	
+	private UploadResponse response;
+	
 	public Capture(Type type, BufferedImage image) {
 		this(type, Format.PNG, image);
 	}
@@ -91,7 +93,7 @@ public class Capture extends Thread {
 
 		if (uploader != null) {
 			try {
-				uploader.process(this);
+				this.response = uploader.process(this);
 			} catch (Exception e) {
 				// TODO
 				e.printStackTrace();
@@ -124,6 +126,10 @@ public class Capture extends Thread {
 	public void setStatus(Status status) {
 		this.status = status;
 		MainFrame.INSTANCE.repaint();
+	}
+	
+	public UploadResponse getResponse() {
+		return this.response;
 	}
 	
 	public Format getFormat() {
