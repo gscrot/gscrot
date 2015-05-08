@@ -19,6 +19,8 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import com.redpois0n.gscrot.Capture;
+import com.redpois0n.gscrot.UploadResponse;
+import com.redpois0n.gscrot.ui.components.URLMenuItem;
 import com.redpois0n.gscrot.util.Icons;
 
 @SuppressWarnings("serial")
@@ -174,11 +176,18 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		Capture capture = getSelectedCapture();
 		
-		if (capture != null && capture.getResponse() != null) {				
+		if (capture != null && capture.getResponse() != null) {			
+			UploadResponse r = capture.getResponse();
+			
 			popupMenu.removeAll();
-			popupMenu.add(new JMenuItem(capture.getResponse().getUrl()));
-			popupMenu.add(new JMenuItem(capture.getResponse().getRemoveUrl()));
-
+			
+			if (r.getUrl() != null) {
+				popupMenu.add(new URLMenuItem("Open link", r.getUrl()));
+			}
+			
+			if (r.getUrl() != null) {
+				popupMenu.add(new URLMenuItem("Open removal link", r.getRemoveUrl()));
+			}
 		}
 	}
 }

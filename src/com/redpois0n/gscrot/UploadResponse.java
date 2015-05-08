@@ -2,6 +2,7 @@ package com.redpois0n.gscrot;
 
 public class UploadResponse {
 
+	private String raw;
 	private String url;
 	private String removeUrl;
 	
@@ -12,6 +13,14 @@ public class UploadResponse {
 	public UploadResponse(String url, String removeUrl) {
 		this.url = url;
 		this.removeUrl = removeUrl;
+	}
+	
+	public String getRaw() {
+		return raw;
+	}
+	
+	public void setRaw(String raw) {
+		this.raw = raw;
 	}
 
 	public String getUrl() {
