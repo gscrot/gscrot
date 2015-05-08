@@ -6,6 +6,7 @@ import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -64,6 +65,8 @@ public class GlobalPopupMenu {
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 
 	    // Image uploaders
+	    ButtonGroup group = new ButtonGroup();
+	    
 	    JMenu mnImageUploaders = new JMenu("Image Uploaders");
 	    mnImageUploaders.setIcon(IconUtils.getIcon(""));
 	    	    
@@ -75,6 +78,8 @@ public class GlobalPopupMenu {
 	    	mntmUploader.setSelected(uploader == current);
 
 		    mnImageUploaders.add(mntmUploader);
+		    
+		    group.add(mntmUploader);
 	    }
 	    
 	    popup.add(mnImageUploaders);
