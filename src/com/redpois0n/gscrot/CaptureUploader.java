@@ -1,6 +1,5 @@
 package com.redpois0n.gscrot;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +66,6 @@ public abstract class CaptureUploader {
 	 * Called each time a new screenshot is taken
 	 * @param image
 	 */
-	public abstract void process(BufferedImage image);
+	public abstract UploadResponse process(Capture capture);
 
 }
