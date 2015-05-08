@@ -1,7 +1,5 @@
 package com.redpois0n.gscrot;
 
-import gscrot.api.PluginLoader;
-
 import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.image.BufferedImage;
@@ -12,6 +10,8 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
+
+import pluginlib.PluginLoader;
 
 import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.ui.RegionCapture;
