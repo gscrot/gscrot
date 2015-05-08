@@ -1,5 +1,7 @@
 package com.redpois0n.gscrot;
 
+import gscrot.api.Plugin;
+
 import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.image.BufferedImage;
@@ -17,12 +19,15 @@ import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.ui.RegionCapture;
 
 public class Main {
+	
+	private static PluginLoader<Plugin> loader;
 
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
 		
 		try {
-			PluginLoader.loadPlugins();
+			loader = new PluginLoader<Plugin>();
+			loader.loadPlugins();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
