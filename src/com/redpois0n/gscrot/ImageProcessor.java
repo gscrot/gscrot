@@ -23,6 +23,16 @@ public abstract class ImageProcessor {
 	public static final void removeProcessor(ImageProcessor a) {
 		UPLOADERS.remove(a);
 	}
+	
+	private final String name;
+	
+	public ImageProcessor(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
 
 	/**
 	 * Called when an image is taken before passed to uploader

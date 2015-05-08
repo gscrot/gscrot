@@ -13,9 +13,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
 import com.redpois0n.gscrot.CaptureUploader;
+import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
+import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 
 public class GlobalPopupMenu {
 	
@@ -70,12 +72,12 @@ public class GlobalPopupMenu {
 	    JMenu mnImageUploaders = new JMenu("Image Uploaders");
 	    mnImageUploaders.setIcon(IconUtils.getIcon(""));
 	    	    
-	    CaptureUploader current = CaptureUploader.getSelected();
+	    CaptureUploader selectedUploader = CaptureUploader.getSelected();
 	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
 	    	CaptureUploaderCheckBoxMenuItem mntmUploader = new CaptureUploaderCheckBoxMenuItem(uploader);
 	    	mntmUploader.setIcon(uploader.getIcon());
 	    	
-	    	mntmUploader.setSelected(uploader == current);
+	    	mntmUploader.setSelected(uploader == selectedUploader);
 
 		    mnImageUploaders.add(mntmUploader);
 		    
@@ -86,6 +88,21 @@ public class GlobalPopupMenu {
 	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 
+	    // Image processors
+	    	    
+	    JMenu mnImageProcessors = new JMenu("Image Processors");
+	    mnImageProcessors.setIcon(IconUtils.getIcon(""));
+	    	    
+	    for (ImageProcessor processor: ImageProcessor.getAllProcessors()) {
+	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
+	    	
+		    mnImageUploaders.add(mntmProcessor);
+	    }
+	    
+	    popup.add(mnImageProcessors);
+	    
+	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	    
 	    // Exit item
 	    JMenuItem mntmExit = new JMenuItem("Exit", IconUtils.getIcon("cross"));
 	    mntmExit.addActionListener(new ActionListener() {
