@@ -19,6 +19,7 @@ import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
+import com.redpois0n.gscrot.ui.settings.FrameSettings;
 
 public class GlobalPopupMenu {
 	
@@ -99,6 +100,23 @@ public class GlobalPopupMenu {
 	    }
 	    
 	    popup.add(mnImageProcessors);
+	    
+	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	    
+	    // Settings item
+	    JMenu mnSettings = new JMenu("Settings");
+	    mnSettings.setIcon(IconUtils.getIcon("settings"));
+
+	    JMenuItem mntmApplicationSettings = new JMenuItem("Application Settings", IconUtils.getIcon("settings"));
+	    mntmApplicationSettings.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameSettings().setVisible(true);
+			} 	
+	    });
+	    mnSettings.add(mntmApplicationSettings);
+	    
+	    popup.add(mnSettings);
 	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 	    
