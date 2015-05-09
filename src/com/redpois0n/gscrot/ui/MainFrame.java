@@ -13,6 +13,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
@@ -76,6 +77,8 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 				for (ActionListener l : mi.getActionListeners()) {
 					btn.addActionListener(l);
 				}
+			} else if (c instanceof JSeparator) {
+				menuPanel.addSeparator();
 			} else if (c instanceof JComponent) {
 				menuPanel.addComponent((JComponent) c);
 			}
