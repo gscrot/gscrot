@@ -5,6 +5,8 @@ import iconlib.IconUtils;
 import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -22,6 +24,8 @@ import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
 
 public class GlobalPopupMenu {
+	
+	public static final List<JMenuItem> SETTINGS_ITEMS = new ArrayList<JMenuItem>();
 	
 	public static JPopupMenu getPopupMenu() {
 	    JPopupMenu popup = new JPopupMenu();
@@ -114,6 +118,13 @@ public class GlobalPopupMenu {
 				new FrameSettings().setVisible(true);
 			} 	
 	    });
+	    
+	    if (SETTINGS_ITEMS.size() > 0) {
+	    	for (JMenuItem item : SETTINGS_ITEMS) {
+	    		mnSettings.add(item);
+	    	}
+	    }
+	    
 	    mnSettings.add(mntmApplicationSettings);
 	    
 	    popup.add(mnSettings);
