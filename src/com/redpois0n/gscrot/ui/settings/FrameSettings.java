@@ -27,10 +27,9 @@ public class FrameSettings extends JFrame {
 		
 		panel = new JPanel();
 		panel.setBorder(BorderFactory.createLineBorder(Color.gray.brighter()));
-		add(panel, BorderLayout.WEST);
+		add(panel, BorderLayout.CENTER);
 		
 		JTree tree = new JTree();
-		tree.setShowsRootHandles(true);
 		tree.setRootVisible(false);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent arg0) {
@@ -48,10 +47,14 @@ public class FrameSettings extends JFrame {
 			}
 		});
 		tree.setBorder(BorderFactory.createLineBorder(Color.gray.brighter()));
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Settings");
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Settings") {
+			{
+				addNodes(this);
+			}
+		};
 		tree.setModel(new DefaultTreeModel(root));
 		
-		addNodes(root);
+		add(tree, BorderLayout.WEST);
 	}
 	
 	public boolean isPanel(String str) {
