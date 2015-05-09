@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 public abstract class ImageProcessor {
 	
 	private static final List<ImageProcessor> UPLOADERS = new ArrayList<ImageProcessor>();
@@ -25,13 +27,19 @@ public abstract class ImageProcessor {
 	}
 	
 	private final String name;
+	private final ImageIcon icon;
 	
-	public ImageProcessor(String name) {
+	public ImageProcessor(String name, ImageIcon icon) {
 		this.name = name;
+		this.icon = icon;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public ImageIcon getIcon() {
+		return icon;
 	}
 
 	/**
