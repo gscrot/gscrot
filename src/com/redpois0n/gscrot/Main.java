@@ -26,6 +26,12 @@ public class Main {
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
 		
 		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
 			loader = new PluginLoader<Plugin>();
 			loader.loadPlugins();
 		} catch (Exception e) {
@@ -46,9 +52,7 @@ public class Main {
 			} else {
 				TrayIconHelper.initialize();
 			}
-			
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			
+						
 			MainFrame.INSTANCE.setVisible(true);
 			
 			registerNativeHook();
