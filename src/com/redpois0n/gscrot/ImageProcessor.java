@@ -9,9 +9,22 @@ import javax.swing.ImageIcon;
 public abstract class ImageProcessor {
 	
 	private static final List<ImageProcessor> UPLOADERS = new ArrayList<ImageProcessor>();
+	private static final List<ImageProcessor> ENABLED = new ArrayList<ImageProcessor>();
+	
+	public static final List<ImageProcessor> getEnabled() {
+		return ENABLED;
+	}
 	
 	public static final List<ImageProcessor> getAllProcessors() {
 		return UPLOADERS;
+	}
+	
+	public static final void enable(ImageProcessor a) {
+		ENABLED.add(a);
+	}
+	
+	public static final void disable(ImageProcessor a) {
+		ENABLED.remove(a);
 	}
 
 	public static final void addProcessor(ImageProcessor a) {

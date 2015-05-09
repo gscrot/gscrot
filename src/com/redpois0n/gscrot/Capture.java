@@ -85,7 +85,7 @@ public class Capture extends Thread {
 		
 		Graphics2D g = image.createGraphics();
 		
-		for (ImageProcessor processor : ImageProcessor.getAllProcessors()) {
+		for (ImageProcessor processor : ImageProcessor.getEnabled()) {
 			processor.process(g);
 		}
 		

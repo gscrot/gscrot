@@ -20,7 +20,11 @@ public class ImageProcessorCheckBoxMenuItem extends JCheckBoxMenuItem implements
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if (isSelected()) {
+			ImageProcessor.enable(processor);
+		} else {
+			ImageProcessor.disable(processor);
+		}
 	}
 
 }
