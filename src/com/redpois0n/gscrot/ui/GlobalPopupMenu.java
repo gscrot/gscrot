@@ -71,7 +71,7 @@ public class GlobalPopupMenu {
 	    ButtonGroup group = new ButtonGroup();
 	    
 	    JMenu mnImageUploaders = new JMenu("Image Uploaders");
-	    mnImageUploaders.setIcon(IconUtils.getIcon(""));
+	    mnImageUploaders.setIcon(IconUtils.getIcon("drive-upload"));
 	    	    
 	    CaptureUploader selectedUploader = CaptureUploader.getSelected();
 	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
@@ -87,17 +87,15 @@ public class GlobalPopupMenu {
 	    
 	    popup.add(mnImageUploaders);
 	    
-	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
-
 	    // Image processors
 	    	    
 	    JMenu mnImageProcessors = new JMenu("Image Processors");
-	    mnImageProcessors.setIcon(IconUtils.getIcon(""));
+	    mnImageProcessors.setIcon(IconUtils.getIcon("image-processor"));
 	    	    
 	    for (ImageProcessor processor: ImageProcessor.getAllProcessors()) {
 	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
-	    	
-		    mnImageUploaders.add(mntmProcessor);
+	    	mntmProcessor.setIcon(processor.getIcon());
+	    	mnImageProcessors.add(mntmProcessor);
 	    }
 	    
 	    popup.add(mnImageProcessors);
