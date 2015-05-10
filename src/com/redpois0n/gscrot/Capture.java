@@ -62,7 +62,7 @@ public class Capture extends Thread {
 	private final Format format;
 	private final BufferedImage image;
 	
-	private Status status = Status.STARTING;
+	private Status status;
 	
 	private UploadResponse response;
 	
@@ -81,6 +81,7 @@ public class Capture extends Thread {
 	 */
 	@Override
 	public void run() {
+		setStatus(Status.STARTING);
 		MainFrame.INSTANCE.add(this);
 		
 		Graphics2D g = image.createGraphics();
@@ -126,6 +127,12 @@ public class Capture extends Thread {
 	public void setStatus(Status status) {
 		this.status = status;
 		MainFrame.INSTANCE.repaint();
+		
+		if (status == Status.COMPLETE) {
+			MainFrame.INSTANCE.setTitle(null);
+		} else {
+			MainFrame.INSTANCE.setTitle(status.toString());
+		}
 	}
 	
 	public UploadResponse getResponse() {

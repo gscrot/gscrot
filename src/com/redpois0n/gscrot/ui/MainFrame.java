@@ -21,6 +21,7 @@ import javax.swing.event.PopupMenuListener;
 
 import com.redpois0n.gscrot.Capture;
 import com.redpois0n.gscrot.UploadResponse;
+import com.redpois0n.gscrot.Version;
 import com.redpois0n.gscrot.ui.components.URLMenuItem;
 import com.redpois0n.gscrot.util.Icons;
 
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		setBounds(0, 0, 750, 400);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		setTitle(null);
 		
 		JScrollPane sp = new JScrollPane();
 		menuPanel = new MenuPanel();
@@ -118,6 +120,17 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 				splitPane.setDividerLocation(splitPane.getWidth() / 2);
 			}
 		});
+	}
+	
+	@Override
+	public void setTitle(String s) {
+		String title = "gscrot " + Version.getVersion();
+		
+		if (s != null && s.length() > 0) {
+			title += " - " + s;
+		}
+		
+		super.setTitle(title);
 	}
 	
 	public Capture getSelectedCapture() {
