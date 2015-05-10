@@ -119,14 +119,15 @@ public class GlobalPopupMenu {
 			} 	
 	    });
 	    
+	    mnSettings.add(mntmApplicationSettings);
+	    
 	    if (SETTINGS_ITEMS.size() > 0) {
+	    	mnSettings.addSeparator();
 	    	for (JMenuItem item : SETTINGS_ITEMS) {
 	    		mnSettings.add(item);
 	    	}
 	    }
-	    
-	    mnSettings.add(mntmApplicationSettings);
-	    
+	    	    
 	    popup.add(mnSettings);
 	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
