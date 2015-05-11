@@ -28,7 +28,7 @@ public class TrayIconHelper {
 		if (SystemTray.isSupported()) {
 		    SystemTray tray = SystemTray.getSystemTray();
 
-		    Image image = IconUtils.getIcon("icon").getImage();
+		    Image image = IconUtils.getIcon("icon-16x16").getImage();
 		
 		    TrayIcon icon = new TrayIcon(image, "guiscrot");
 		    icon.addMouseListener(new MouseAdapter() {
