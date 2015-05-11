@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 
 import statusicon.StatusIcon;
+import statusicon.StatusIcon.Mode;
 
 import com.redpois0n.gscrot.ui.GlobalPopupMenu;
 import com.redpois0n.gscrot.ui.MainFrame;
@@ -30,7 +31,7 @@ public class TrayIconHelper {
 
 		    Image image = IconUtils.getIcon("icon-16x16").getImage();
 		
-		    TrayIcon icon = new TrayIcon(image, "guiscrot");
+		    TrayIcon icon = new TrayIcon(image, "gscrot");
 		    icon.addMouseListener(new MouseAdapter() {
 		    	public void mouseClicked(MouseEvent e)  {
 		    		if (e.getClickCount() == 2 && !e.isConsumed()) {
@@ -47,7 +48,11 @@ public class TrayIconHelper {
 		    	}
 		    });
 		    
-		    statusIcon = new StatusIcon(icon);
+		    statusIcon = new StatusIcon(Mode.IMAGES, icon);
+		    
+		    for (int i = 1; i <= 8; i++) {
+		    	statusIcon.getIcons().add(IconUtils.getIcon("load" + i).getImage());
+		    }
 		    
 		    tray.add(icon);
 		}
