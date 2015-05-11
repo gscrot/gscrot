@@ -11,10 +11,18 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
+import statusicon.StatusIcon;
+
 import com.redpois0n.gscrot.ui.GlobalPopupMenu;
 import com.redpois0n.gscrot.ui.MainFrame;
 
 public class TrayIconHelper {
+	
+	private static StatusIcon statusIcon;
+	
+	public static StatusIcon setStatusIcon() {
+		return statusIcon;
+	}
 
 	public static void initialize() throws Exception {		
 		if (SystemTray.isSupported()) {
@@ -38,6 +46,8 @@ public class TrayIconHelper {
 					}
 		    	}
 		    });
+		    
+		    statusIcon = new StatusIcon(icon);
 		    
 		    tray.add(icon);
 		}
