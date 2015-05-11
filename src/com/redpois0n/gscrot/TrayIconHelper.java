@@ -20,7 +20,7 @@ public class TrayIconHelper {
 	
 	private static StatusIcon statusIcon;
 	
-	public static StatusIcon setStatusIcon() {
+	public static StatusIcon getStatusIcon() {
 		return statusIcon;
 	}
 
