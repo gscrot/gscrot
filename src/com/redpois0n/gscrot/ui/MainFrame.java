@@ -194,17 +194,19 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		Capture capture = getSelectedCapture();
 		
-		if (capture != null && capture.getResponse() != null) {			
+		if (capture != null) {			
 			UploadResponse r = capture.getResponse();
 			
 			popupMenu.removeAll();
 			
-			if (r.getUrl() != null) {
-				popupMenu.add(new URLMenuItem("Open link", r.getUrl()));
-			}
-			
-			if (r.getUrl() != null) {
-				popupMenu.add(new URLMenuItem("Open removal link", r.getRemoveUrl()));
+			if (capture.getResponse() != null) {
+				if (r.getUrl() != null) {
+					popupMenu.add(new URLMenuItem("Open link", r.getUrl()));
+				}
+				
+				if (r.getUrl() != null) {
+					popupMenu.add(new URLMenuItem("Open removal link", r.getRemoveUrl()));
+				}
 			}
 		}
 	}
