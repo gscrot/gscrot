@@ -13,12 +13,16 @@ import com.redpois0n.gscrot.Capture;
 @SuppressWarnings("serial")
 public class CaptureTable extends JTable {
 	
+	public static final String COLUMN_FILENAME = "Filename";
+	public static final String COLUMN_STATUS = "Status";
 	public static final String COLUMN_TYPE = "Type";
 	
 	private DefaultTableModel model;
 	
 	public CaptureTable() {
 		model = new DefaultTableModel();
+		model.addColumn(COLUMN_FILENAME);
+		model.addColumn(COLUMN_STATUS);
 		model.addColumn(COLUMN_TYPE);
 		
 		setFillsViewportHeight(true);
@@ -53,9 +57,13 @@ public class CaptureTable extends JTable {
 			
 			label.setIcon(null);
 			
-			if (colname.equals(COLUMN_TYPE)) {
-				label.setText(capture.getType().toString());
+			if (colname.equals(COLUMN_FILENAME)) {
+				label.setText("");
 				label.setIcon(capture.getStatus().getIcon());
+			} else if (colname.equals(COLUMN_STATUS)) {
+				label.setText(capture.getStatus().toString());
+			} else if (colname.equals(COLUMN_TYPE)) {
+				label.setText(capture.getType().toString());
 			}
 			
 			return label;
