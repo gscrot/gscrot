@@ -28,6 +28,7 @@ _at 287c3ee22222048349ffd543da4e244ed08c33b9_
 - [pluginlib](https://github.com/redpois0n/pluginlib)
 - [iconlib](https://github.com/redpois0n/iconlib)
 - [statusicon](https://github.com/redpois0n/statusicon)
+- [graphslib](https://github.com/redpois0n/graphslib)
 
 ## How to build
 
