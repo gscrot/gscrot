@@ -38,7 +38,8 @@ public class Capture extends Thread {
 	
 	public static enum Status {
 		STARTING("Starting", "up-button"),
-		COMPLETE("Complete", "tick-button");
+		COMPLETE("Complete", "tick-button"),
+		ERROR("Error", "cross");
 		
 		private final String textual;
 		private final String icon;
@@ -96,8 +97,10 @@ public class Capture extends Thread {
 			try {
 				this.response = uploader.process(this);
 			} catch (Exception e) {
-				// TODO
 				e.printStackTrace();
+				
+				setStatus(Status.ERROR);
+				return;
 			}
 		}
 		
