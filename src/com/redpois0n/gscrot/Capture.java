@@ -75,7 +75,7 @@ public class Capture extends Thread {
 	}
 	
 	public Capture(Type type, BufferedImage image) {
-		this(type, Format.PNG, image, NameFormatter.format("test %y %m %d %h %min %s"));
+		this(type, Format.PNG, image, NameFormatter.format(Config.get("filename", "image")));
 	}
 	
 	public Capture(Type type, Format format, BufferedImage image, String filename) {
