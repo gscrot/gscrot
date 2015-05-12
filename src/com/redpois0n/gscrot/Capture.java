@@ -82,6 +82,7 @@ public class Capture extends Thread {
 	 */
 	@Override
 	public void run() {
+		TrayIconHelper.getStatusIcon().setIndeterminate(true);
 		setStatus(Status.STARTING);
 		MainFrame.INSTANCE.add(this);
 		
@@ -102,7 +103,9 @@ public class Capture extends Thread {
 			
 			setStatus(Status.ERROR);
 			return;
-		}		
+		} finally {
+			TrayIconHelper.getStatusIcon().setIndeterminate(false);
+		}
 		
 		setStatus(Status.COMPLETE);
 	}
