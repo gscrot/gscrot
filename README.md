@@ -13,6 +13,7 @@ Cross-platform screenshot capture tool, inspired much by [ShareX](https://github
 	- Uploader example [gscrot-imgur](https://github.com/gscrot/gscrot-imgur)
 	- Image Processor plugins, add timestamps and more to image before processing
 	- Image Processor example [gscrot-watermark](https://github.com/gscrot/gscrot-watermark)
+
 ## Dependencies
 
 - [JNativeHook](https://github.com/kwhat/jnativehook)
