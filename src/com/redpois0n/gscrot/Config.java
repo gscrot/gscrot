@@ -15,8 +15,18 @@ public class Config {
 	public static final Map<String, String> CONFIG = new HashMap<String, String>();
 	public static final File CONFIG_FILE = new File(".gscrot");
 		
-	public static String get(String s) {
-		return CONFIG.get(s);
+	/**
+	 * Gets value from configuration
+	 * @param k
+	 * @param def default value if nothing is found in config
+	 * @return
+	 */
+	public static String get(String k, String def) {
+		if (CONFIG.containsKey(k)) {
+			return CONFIG.get(k);
+		} else {
+			return def;
+		}
 	}
 	
 	public static void load() throws Exception {

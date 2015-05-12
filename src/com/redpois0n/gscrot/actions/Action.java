@@ -12,7 +12,7 @@ public abstract class Action {
 	
 	static {		
 		try {
-			ACTIONS.add(new SaveAction(Config.get("save-dir")));
+			ACTIONS.add(new SaveAction(Config.get("save-dir", System.getProperty("java.io.tmpdir"))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
