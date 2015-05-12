@@ -45,10 +45,6 @@ public class Config {
 			}
 		}
 		
-		if (CONFIG.size() == 0) {
-			loadDefaults();
-		}
-		
 		reader.close();
 	}
 	
@@ -64,10 +60,6 @@ public class Config {
 		}
 		
 		writer.close();
-	}
-	
-	public static void loadDefaults() {
-		CONFIG.put("save-dir", System.getProperty("java.io.tmpdir"));
 	}
 
 }
