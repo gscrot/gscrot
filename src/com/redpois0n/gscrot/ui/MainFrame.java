@@ -138,10 +138,12 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 
 		Capture capture = null;
 		
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			if (table.getValueAt(row, i) instanceof Capture) {
-				capture = (Capture) table.getValueAt(row, i);
-				break;
+		if (row != -1) {
+			for (int i = 0; i < table.getColumnCount(); i++) {
+				if (table.getValueAt(row, i) instanceof Capture) {
+					capture = (Capture) table.getValueAt(row, i);
+					break;
+				}
 			}
 		}
 		
