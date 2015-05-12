@@ -16,6 +16,7 @@ public class CaptureTable extends JTable {
 	public static final String COLUMN_FILENAME = "Filename";
 	public static final String COLUMN_STATUS = "Status";
 	public static final String COLUMN_TYPE = "Type";
+	public static final String COLUMN_URL = "URL";
 	
 	private DefaultTableModel model;
 	
@@ -28,6 +29,7 @@ public class CaptureTable extends JTable {
 		model.addColumn(COLUMN_FILENAME);
 		model.addColumn(COLUMN_STATUS);
 		model.addColumn(COLUMN_TYPE);
+		model.addColumn(COLUMN_URL);
 		
 		setFillsViewportHeight(true);
 		setModel(model);
@@ -68,6 +70,8 @@ public class CaptureTable extends JTable {
 				label.setText(capture.getStatus().toString());
 			} else if (colname.equals(COLUMN_TYPE)) {
 				label.setText(capture.getType().toString());
+			} else if (colname.equals(COLUMN_URL) && capture.getResponse() != null) {
+				label.setText(capture.getResponse().getUrl());
 			}
 			
 			return label;

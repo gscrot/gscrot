@@ -199,7 +199,7 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 			
 			popupMenu.removeAll();
 			
-			if (capture.getResponse() != null) {
+			if (r != null) {
 				if (r.getUrl() != null) {
 					popupMenu.add(new URLMenuItem("Open link", r.getUrl()));
 				}
