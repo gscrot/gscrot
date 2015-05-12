@@ -46,6 +46,22 @@ public class GlobalPopupMenu {
 	    });
 	    mnCapture.add(mntmRegion);
 	    
+	    // All monitors
+	    JMenuItem mntmAllMonitors = new JMenuItem("All Monitors");
+	    mntmAllMonitors.setIcon(IconUtils.getIcon("monitor-all"));
+	    
+	    mntmAllMonitors.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			try {
+					ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+    		}
+    	});
+	    
+	    mnCapture.add(mntmAllMonitors);
+	    
 	    // Monitor item
 	    JMenu mntmMonitor = new JMenu("Monitor");
 	    mntmMonitor.setIcon(IconUtils.getIcon("monitor"));
