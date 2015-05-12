@@ -58,7 +58,7 @@ public class CaptureTable extends JTable {
 			label.setIcon(null);
 			
 			if (colname.equals(COLUMN_FILENAME)) {
-				label.setText("");
+				label.setText(capture.getFilename());
 				label.setIcon(capture.getStatus().getIcon());
 			} else if (colname.equals(COLUMN_STATUS)) {
 				label.setText(capture.getStatus().toString());

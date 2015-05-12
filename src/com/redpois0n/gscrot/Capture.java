@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 
 import com.redpois0n.gscrot.ui.MainFrame;
+import com.redpois0n.gscrot.util.NameFormatter;
 
 public class Capture extends Thread {
 	
@@ -63,18 +64,25 @@ public class Capture extends Thread {
 	private final Format format;
 	private final BufferedImage image;
 	
+	private String filename;
+	
 	private Status status;
 	
 	private UploadResponse response;
 	
-	public Capture(Type type, BufferedImage image) {
-		this(type, Format.PNG, image);
+	public Capture(Type type, BufferedImage image, String filename) {
+		this(type, Format.PNG, image, filename);
 	}
 	
-	public Capture(Type type, Format format, BufferedImage image) {
+	public Capture(Type type, BufferedImage image) {
+		this(type, Format.PNG, image, NameFormatter.format("test %y %m %d %h %min %s"));
+	}
+	
+	public Capture(Type type, Format format, BufferedImage image, String filename) {
 		this.type = type;
 		this.format = format;
 		this.image = image;
+		this.filename = filename + "." + format.toString();
 	}
 	
 	/**
@@ -149,6 +157,10 @@ public class Capture extends Thread {
 	}
 
 	public Status getStatus() {
-		return status;
+		return this.status;
+	}
+	
+	public String getFilename() {
+		return this.filename;
 	}
 }
