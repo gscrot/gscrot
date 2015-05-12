@@ -85,25 +85,24 @@ public class Capture extends Thread {
 		setStatus(Status.STARTING);
 		MainFrame.INSTANCE.add(this);
 		
-		Graphics2D g = image.createGraphics();
-		
-		for (ImageProcessor processor : ImageProcessor.getEnabled()) {
-			processor.process(g);
-		}
-		
-		CaptureUploader uploader = CaptureUploader.getSelected();
-
-		if (uploader != null) {
-			try {
-				this.response = uploader.process(this);
-			} catch (Exception e) {
-				e.printStackTrace();
-				
-				setStatus(Status.ERROR);
-				return;
+		try {
+			Graphics2D g = image.createGraphics();
+			
+			for (ImageProcessor processor : ImageProcessor.getEnabled()) {
+				processor.process(g);
 			}
-		}
-		
+			
+			CaptureUploader uploader = CaptureUploader.getSelected();
+
+			if (uploader != null) {
+				this.response = uploader.process(this);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			setStatus(Status.ERROR);
+			return;
+		}		
 		
 		setStatus(Status.COMPLETE);
 	}
