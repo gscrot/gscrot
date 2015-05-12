@@ -23,4 +23,13 @@ public enum Format {
 		return this.mime;
 	}
 
+	public static Format getFromString(String s) {
+		for (Format format : Format.values()) {
+			if (format.toString().equalsIgnoreCase(s)) {
+				return format;
+			}
+		}
+		
+		return null;
+	}
 }
