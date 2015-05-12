@@ -68,6 +68,14 @@ public class GlobalPopupMenu {
 	    
 	    GraphicsDevice[] devices = ScreenshotHelper.getScreens();
 	    
+	    JMenuItem mntmPickMonitor = new JMenuItem("Pick Monitor...", IconUtils.getIcon("monitor"));
+	    mntmPickMonitor.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			new MonitorPicker().setVisible(true);
+    		}
+    	});
+	    mntmMonitor.add(mntmPickMonitor);
+	    
 	    for (int i = 0; i < devices.length; i++) {
 	    	final GraphicsDevice device = devices[i];
 	    	
