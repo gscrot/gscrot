@@ -20,7 +20,11 @@ public class CaptureTable extends JTable {
 	private DefaultTableModel model;
 	
 	public CaptureTable() {
-		model = new DefaultTableModel();
+		model = new DefaultTableModel() {
+			public boolean isCellEditable(int paramInt1, int paramInt2) {
+				return false;
+			}
+		};
 		model.addColumn(COLUMN_FILENAME);
 		model.addColumn(COLUMN_STATUS);
 		model.addColumn(COLUMN_TYPE);
