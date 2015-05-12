@@ -11,13 +11,13 @@ import javax.swing.table.DefaultTableModel;
 import com.redpois0n.gscrot.Capture;
 
 @SuppressWarnings("serial")
-public class StatusTable extends JTable {
+public class CaptureTable extends JTable {
 	
 	public static final String COLUMN_TYPE = "Type";
 	
 	private DefaultTableModel model;
 	
-	public StatusTable() {
+	public CaptureTable() {
 		model = new DefaultTableModel();
 		model.addColumn(COLUMN_TYPE);
 		

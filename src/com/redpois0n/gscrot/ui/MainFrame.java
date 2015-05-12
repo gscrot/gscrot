@@ -31,7 +31,7 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 	public static final MainFrame INSTANCE = new MainFrame();
 	
 	private MenuPanel menuPanel;
-	private StatusTable table;
+	private CaptureTable table;
 	private ImagePanel imagePanel;
 	private JSplitPane splitPane;
 	private JPopupMenu popupMenu;
@@ -87,7 +87,7 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		}
 		
 		JScrollPane scrollPaneTable = new JScrollPane();
-		table = new StatusTable();
+		table = new CaptureTable();
 		table.addMouseListener(new CaptureClickListener());
 		scrollPaneTable.setViewportView(table);
 		
