@@ -116,7 +116,7 @@ public class Capture extends Thread {
 		}
 		
 		if (Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true")) {
-			ClipboardHelper.set(response.getUrl());
+			ClipboardHelper.setString(response.getUrl());
 		}
 		
 		setStatus(Status.COMPLETE);

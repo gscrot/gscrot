@@ -10,7 +10,7 @@ public class ClipboardHelper {
 		return Toolkit.getDefaultToolkit().getSystemClipboard();
 	}
 	
-	public static void set(String s) {
+	public static void setString(String s) {
 		StringSelection selection = new StringSelection(s);
 	    getClipboard().setContents(selection, selection);
 	}
