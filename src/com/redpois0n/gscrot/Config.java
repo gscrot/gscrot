@@ -29,6 +29,15 @@ public class Config {
 		}
 	}
 	
+	/**
+	 * Sets value in configuration
+	 * @param k
+	 * @param v
+	 */
+	public static void put(String k, String v) {
+		CONFIG.put(k, v);
+	}
+	
 	public static void load() throws Exception {
 		CONFIG.clear();
 		

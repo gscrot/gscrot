@@ -10,12 +10,14 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
 import com.redpois0n.gscrot.CaptureUploader;
+import com.redpois0n.gscrot.Config;
 import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
@@ -134,8 +136,18 @@ public class GlobalPopupMenu {
 	    JMenu mnAfterCapture = new JMenu("After Capture");
 	    mnAfterCapture.setIcon(IconUtils.getIcon(""));
 	    
-	    popup.add(mnAfterCapture);
+	    JCheckBoxMenuItem mntmURLClipboard = new JCheckBoxMenuItem("Copy URL to clipboard");
+	    mntmURLClipboard.setSelected(Config.get("copy-url-to-clipboard", "true").equalsIgnoreCase("true"));
+	    mntmURLClipboard.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		boolean b = ((JCheckBoxMenuItem) e.getSource()).isSelected();
+	    		
+	    		Config.put("copy-url-to-clipboard", b + "");
+	    	}
+	    });
+	    mnAfterCapture.add(mntmURLClipboard);
 	    
+	    popup.add(mnAfterCapture);
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 	    
 	    // Settings item
