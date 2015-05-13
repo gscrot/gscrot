@@ -29,6 +29,11 @@ _at 287c3ee22222048349ffd543da4e244ed08c33b9_
 - [iconlib](https://github.com/redpois0n/iconlib)
 - [statusicon](https://github.com/redpois0n/statusicon)
 - [graphslib](https://github.com/redpois0n/graphslib)
+- [jna](https://github.com/twall/jna)
+
+## Notes
+
+Getting active windows is only available on Windows using JNA
 
 ## How to build
 
