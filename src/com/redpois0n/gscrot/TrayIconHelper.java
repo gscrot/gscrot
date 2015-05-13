@@ -24,6 +24,12 @@ public class TrayIconHelper {
 	public static StatusIcon getStatusIcon() {
 		return statusIcon;
 	}
+	
+	public static void setIndeterminate(boolean b) {
+		if (statusIcon != null) {
+			statusIcon.setIndeterminate(b);
+		}
+	}
 
 	public static void initialize() throws Exception {		
 		if (SystemTray.isSupported()) {
