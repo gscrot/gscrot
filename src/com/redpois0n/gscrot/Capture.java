@@ -3,6 +3,7 @@ package com.redpois0n.gscrot;
 import iconlib.IconUtils;
 
 import java.awt.Graphics2D;
+import java.awt.TrayIcon.MessageType;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
@@ -110,6 +111,7 @@ public class Capture extends Thread {
 			e.printStackTrace();
 			
 			setStatus(Status.ERROR);
+			TrayIconHelper.showMessage("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage(), MessageType.ERROR);
 			return;
 		} finally {
 			TrayIconHelper.setIndeterminate(false);
@@ -117,6 +119,7 @@ public class Capture extends Thread {
 		
 		if (Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true")) {
 			ClipboardHelper.setString(response.getUrl());
+			TrayIconHelper.showMessage("URL copied to clipboard", MessageType.INFO);
 		}
 		
 		setStatus(Status.COMPLETE);
