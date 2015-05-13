@@ -6,6 +6,7 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +21,7 @@ import com.redpois0n.gscrot.ui.MainFrame;
 public class TrayIconHelper {
 	
 	private static StatusIcon statusIcon;
+	private static TrayIcon icon;
 	
 	public static StatusIcon getStatusIcon() {
 		return statusIcon;
@@ -37,7 +39,7 @@ public class TrayIconHelper {
 
 		    Image image = IconUtils.getIcon("icon-16x16").getImage();
 		
-		    TrayIcon icon = new TrayIcon(image, "gscrot");
+		    icon = new TrayIcon(image, "gscrot");
 		    icon.addMouseListener(new MouseAdapter() {
 		    	public void mouseClicked(MouseEvent e)  {
 		    		if (e.getClickCount() == 2 && !e.isConsumed()) {
@@ -63,5 +65,10 @@ public class TrayIconHelper {
 		    tray.add(icon);
 		}
 	}
-	
+
+	public static void showMessage(String title, MessageType type) {
+		if (icon != null) {
+			icon.displayMessage("gscrot", title, type);
+		}
+	}
 }
