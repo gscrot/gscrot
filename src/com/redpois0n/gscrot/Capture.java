@@ -115,6 +115,10 @@ public class Capture extends Thread {
 			TrayIconHelper.setIndeterminate(false);
 		}
 		
+		if (Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true")) {
+			ClipboardHelper.set(response.getUrl());
+		}
+		
 		setStatus(Status.COMPLETE);
 	}
 	

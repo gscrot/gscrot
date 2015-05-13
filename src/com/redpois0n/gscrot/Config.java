@@ -14,6 +14,8 @@ public class Config {
 	
 	public static final Map<String, String> CONFIG = new HashMap<String, String>();
 	public static final File CONFIG_FILE = new File(".gscrot");
+	
+	public static final String KEY_COPY_URL_TO_CLIPBOARD = "copy-url-to-clipboard";
 		
 	/**
 	 * Gets value from configuration

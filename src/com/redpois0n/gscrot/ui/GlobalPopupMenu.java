@@ -137,12 +137,12 @@ public class GlobalPopupMenu {
 	    mnAfterCapture.setIcon(IconUtils.getIcon(""));
 	    
 	    JCheckBoxMenuItem mntmURLClipboard = new JCheckBoxMenuItem("Copy URL to clipboard");
-	    mntmURLClipboard.setSelected(Config.get("copy-url-to-clipboard", "true").equalsIgnoreCase("true"));
+	    mntmURLClipboard.setSelected(Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true"));
 	    mntmURLClipboard.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		boolean b = ((JCheckBoxMenuItem) e.getSource()).isSelected();
 	    		
-	    		Config.put("copy-url-to-clipboard", b + "");
+	    		Config.put(Config.KEY_COPY_URL_TO_CLIPBOARD, b + "");
 	    	}
 	    });
 	    mnAfterCapture.add(mntmURLClipboard);
