@@ -164,6 +164,12 @@ public class GlobalPopupMenu {
 	    popup.add(mnImageProcessors);
 	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	    
+	    // After upload    
+	    JMenu mnAfterCapture = new JMenu("After Capture");
+	    mnAfterCapture.setIcon(IconUtils.getIcon("after-capture"));
+	    	    
+	    popup.add(mnAfterCapture);
 	    	    
 	    // After upload    
 	    JMenu mnAfterUpload = new JMenu("After Upload");
