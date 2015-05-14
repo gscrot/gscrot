@@ -161,9 +161,7 @@ public class WindowsUtils {
 		 * @return an java.awt.Rectangle for the RECT
 		 */
 		public Rectangle getRectangle() {
-			System.out.println(title + "\t\tx: " + rect.left + " y: " + rect.top + "\n\n\n\n");
-
-			return new Rectangle(rect.left, rect.top, rect.right, rect.bottom);
+			return new Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 		}
 
 		/**
