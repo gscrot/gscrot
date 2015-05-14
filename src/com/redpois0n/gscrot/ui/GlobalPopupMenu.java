@@ -169,6 +169,16 @@ public class GlobalPopupMenu {
 	    JMenu mnAfterCapture = new JMenu("After Capture");
 	    mnAfterCapture.setIcon(IconUtils.getIcon("after-capture"));
 	    	    
+	    JCheckBoxMenuItem mntmImageClipboard = new JCheckBoxMenuItem("Copy Image to clipboard");
+	    mntmImageClipboard.setSelected(Config.get(Config.KEY_COPY_IMAGE_TO_CLIPBOARD, "true").equalsIgnoreCase("true"));
+	    mntmImageClipboard.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		boolean b = ((JCheckBoxMenuItem) e.getSource()).isSelected();
+	    		
+	    		Config.put(Config.KEY_COPY_IMAGE_TO_CLIPBOARD, b + "");
+	    	}
+	    });
+	    mnAfterCapture.add(mntmImageClipboard);
 	    popup.add(mnAfterCapture);
 	    	    
 	    // After upload    

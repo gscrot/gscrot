@@ -95,6 +95,10 @@ public class Capture extends Thread {
 		setStatus(Status.STARTING);
 		MainFrame.INSTANCE.add(this);
 		
+		if (Config.get(Config.KEY_COPY_IMAGE_TO_CLIPBOARD, "true").equalsIgnoreCase("true")) {
+			ClipboardHelper.setImage(image);
+		}
+		
 		try {
 			Graphics2D g = image.createGraphics();
 			
