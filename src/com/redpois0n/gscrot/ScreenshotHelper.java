@@ -53,13 +53,13 @@ public class ScreenshotHelper {
 	public static void captureScreen(GraphicsDevice screen) {
 		try {
 			BufferedImage image = ScreenshotHelper.getScreen(screen);
-			capture(image);
+			process(image);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void capture(BufferedImage image) {
+	public static void process(BufferedImage image) {
 		Capture p = new Capture(Type.MONITOR, image);
 		p.start();
 	}

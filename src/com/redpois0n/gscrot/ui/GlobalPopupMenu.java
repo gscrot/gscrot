@@ -58,7 +58,7 @@ public class GlobalPopupMenu {
 	    mntmAllMonitors.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			try {
-					ScreenshotHelper.capture(ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
+					ScreenshotHelper.process(ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
