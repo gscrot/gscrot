@@ -162,10 +162,12 @@ public class GlobalPopupMenu {
 	    }
 	    
 	    popup.add(mnImageProcessors);
+	    
+	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 	    	    
-	    // After capture    
-	    JMenu mnAfterCapture = new JMenu("After Capture");
-	    mnAfterCapture.setIcon(IconUtils.getIcon(""));
+	    // After upload    
+	    JMenu mnAfterUpload = new JMenu("After Upload");
+	    mnAfterUpload.setIcon(IconUtils.getIcon("after-upload"));
 	    
 	    JCheckBoxMenuItem mntmURLClipboard = new JCheckBoxMenuItem("Copy URL to clipboard");
 	    mntmURLClipboard.setSelected(Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true"));
@@ -176,9 +178,9 @@ public class GlobalPopupMenu {
 	    		Config.put(Config.KEY_COPY_URL_TO_CLIPBOARD, b + "");
 	    	}
 	    });
-	    mnAfterCapture.add(mntmURLClipboard);
+	    mnAfterUpload.add(mntmURLClipboard);
 	    
-	    popup.add(mnAfterCapture);
+	    popup.add(mnAfterUpload);
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 	    
 	    // Settings item
