@@ -151,29 +151,44 @@ public class WindowsUtils {
 			this.title = title;
 			this.process = process;
 		}
-
+		
 		public int getHwnd() {
 			return hwnd;
 		}
 
+		/**
+		 * @return an java.awt.Rectangle for the RECT
+		 */
 		public Rectangle getRectangle() {
 			return new Rectangle(rect.left, rect.top, rect.right, rect.bottom);
 		}
 
+		/**
+		 * @return the title of this window
+		 */
 		public String getTitle() {
 			return title;
 		}
 
+		/**
+		 * @return if this window is minimized or not
+		 */
 		public boolean isMinimized() {
 			return rect.left <= -32000;
 		}
 
-		public String toString() {
-			return String.format("(%d,%d)-(%d,%d) : \"%s\" %s", rect.left, rect.top, rect.right, rect.bottom, title, process);
-		}
-
+		/**
+		 * @return the process file icon, not the window icon
+		 */
 		public Icon getIcon() {
 			return FileSystemView.getFileSystemView().getSystemIcon(new File(process));
+		}
+
+		/**
+		 * Brings this window to front using SetForegroundWindow
+		 */
+		public void bringToFront() {
+			WindowsUtils.User32.INSTANCE.SetForegroundWindow(hwnd);			
 		}
 	}
 }

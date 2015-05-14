@@ -113,7 +113,7 @@ public class GlobalPopupMenu {
 			    	
 			    	item.addActionListener(new ActionListener() {
 			    		public void actionPerformed(ActionEvent e) {
-			    			WindowsUtils.User32.INSTANCE.SetForegroundWindow(window.getHwnd());
+			    			window.bringToFront();
 			    		}
 			    	});
 			    	
