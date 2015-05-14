@@ -9,6 +9,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
 import com.redpois0n.gscrot.Capture.Type;
+import com.redpois0n.gscrot.WindowsUtils.NativeWindow;
 
 public class ScreenshotHelper {
 	
@@ -92,6 +93,12 @@ public class ScreenshotHelper {
         GraphicsDevice[] screens = ge.getScreenDevices();
 
         return screens;
+	}
+	
+	public static BufferedImage capture(NativeWindow window) throws Exception {
+		window.bringToFront();
+		
+		return capture(window.getRectangle());
 	}
 
 }

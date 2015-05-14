@@ -113,7 +113,11 @@ public class GlobalPopupMenu {
 			    	
 			    	item.addActionListener(new ActionListener() {
 			    		public void actionPerformed(ActionEvent e) {
-			    			window.bringToFront();
+			    			try {
+								ScreenshotHelper.process(ScreenshotHelper.capture(window));
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
 			    		}
 			    	});
 			    	
