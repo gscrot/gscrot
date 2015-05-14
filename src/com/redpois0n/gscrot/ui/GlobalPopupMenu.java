@@ -102,8 +102,8 @@ public class GlobalPopupMenu {
 	    
 	    if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
 	    	// Windows item
-		    JMenu mntmWindows = new JMenu("Windows");
-		    mntmWindows.setIcon(IconUtils.getIcon("monitor"));
+		    JMenu mntmWindows = new JMenu("Window");
+		    mntmWindows.setIcon(IconUtils.getIcon("window"));
 		    
 		    List<NativeWindow> windows = WindowsUtils.getWindows();
 		    
