@@ -37,7 +37,7 @@ public class WindowsUtils {
 		User32.INSTANCE.EnumWindows(new WndEnumProc() {
 			public boolean callback(int hWnd, int lParam) {
 				if (User32.INSTANCE.IsWindowVisible(hWnd)) {
-					NativeRectagle r = new NativeRectagle();
+					NativeRectangle r = new NativeRectangle();
 					User32.INSTANCE.GetWindowRect(hWnd, r);
 					byte[] buffer = new byte[1024];
 					User32.INSTANCE.GetWindowTextA(hWnd, buffer, buffer.length);
@@ -86,7 +86,7 @@ public class WindowsUtils {
 
 		public abstract boolean IsWindowVisible(int hWnd);
 
-		public abstract int GetWindowRect(int hWnd, NativeRectagle r);
+		public abstract int GetWindowRect(int hWnd, NativeRectangle r);
 
 		public abstract void GetWindowTextA(int hWnd, byte[] buffer, int buflen);
 
@@ -119,7 +119,7 @@ public class WindowsUtils {
 
 	};
 
-	public static class NativeRectagle extends Structure {
+	public static class NativeRectangle extends Structure {
 
 		public int left;
 		public int right;
@@ -130,8 +130,9 @@ public class WindowsUtils {
 		protected List<String> getFieldOrder() {
 			List<String> list = new ArrayList<String>();
 			list.add("left");
-			list.add("right");
 			list.add("top");
+
+			list.add("right");
 			list.add("bottom");
 
 			return list;
@@ -141,11 +142,11 @@ public class WindowsUtils {
 	public static class NativeWindow {
 
 		private int hwnd;
-		private NativeRectagle rect;
+		private NativeRectangle rect;
 		private String title;
 		private String process;
 
-		public NativeWindow(int hwnd, NativeRectagle rect, String title, String process) {
+		public NativeWindow(int hwnd, NativeRectangle rect, String title, String process) {
 			this.hwnd = hwnd;
 			this.rect = rect;
 			this.title = title;
@@ -160,6 +161,8 @@ public class WindowsUtils {
 		 * @return an java.awt.Rectangle for the RECT
 		 */
 		public Rectangle getRectangle() {
+			System.out.println(title + "\t\tx: " + rect.left + " y: " + rect.top + "\n\n\n\n");
+
 			return new Rectangle(rect.left, rect.top, rect.right, rect.bottom);
 		}
 
