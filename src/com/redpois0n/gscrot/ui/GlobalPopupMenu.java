@@ -21,9 +21,12 @@ import com.redpois0n.gscrot.Config;
 import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
+import com.redpois0n.gscrot.WindowsUtils;
+import com.redpois0n.gscrot.WindowsUtils.NativeWindow;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
+import com.redpois0n.oslib.OperatingSystem;
 
 public class GlobalPopupMenu {
 	
@@ -95,7 +98,31 @@ public class GlobalPopupMenu {
 	    
 	    mnCapture.add(mntmMonitor);
 	    
-	    popup.add(mnCapture);
+	    popup.add(mnCapture);  
+	    
+	    if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
+	    	// Windows item
+		    JMenu mntmWindows = new JMenu("Windows");
+		    mntmWindows.setIcon(IconUtils.getIcon("monitor"));
+		    
+		    List<NativeWindow> windows = WindowsUtils.getWindows();
+		    
+		    for (final NativeWindow window : windows) {	    	
+		    	if (window.getTitle().length() > 0) {
+		    		JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
+			    	
+			    	item.addActionListener(new ActionListener() {
+			    		public void actionPerformed(ActionEvent e) {
+			    			WindowsUtils.User32.INSTANCE.SetForegroundWindow(window.getHwnd());
+			    		}
+			    	});
+			    	
+			    	mntmWindows.add(item);
+		    	}
+		    }
+		    
+		    mnCapture.add(mntmWindows);
+	    }
 	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 
