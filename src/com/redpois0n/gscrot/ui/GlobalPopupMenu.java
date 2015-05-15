@@ -155,7 +155,7 @@ public class GlobalPopupMenu {
 	    JMenu mnImageProcessors = new JMenu("Image Processors");
 	    mnImageProcessors.setIcon(IconUtils.getIcon("image-processor"));
 	    	    
-	    for (ImageProcessor processor: ImageProcessor.getAllProcessors()) {
+	    for (ImageProcessor processor: ImageProcessor.getBinaryProcessors()) {
 	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
 	    	mntmProcessor.setIcon(processor.getIcon());
 	    	mnImageProcessors.add(mntmProcessor);
