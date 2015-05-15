@@ -31,6 +31,7 @@ _at 287c3ee22222048349ffd543da4e244ed08c33b9_
 - [graphslib](https://github.com/redpois0n/graphslib)
 - [oslib](https://github.com/redpois0n/oslib)
 - [jna](https://github.com/twall/jna)
+- [nativewindowlib](https://github.com/redpois0n/nativewindowlib)
 
 ## Notes
 

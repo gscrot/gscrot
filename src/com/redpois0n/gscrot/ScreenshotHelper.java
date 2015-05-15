@@ -8,8 +8,9 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
+import nativewindowlib.WindowsUtils.NativeWindow;
+
 import com.redpois0n.gscrot.Capture.Type;
-import com.redpois0n.gscrot.WindowsUtils.NativeWindow;
 
 public class ScreenshotHelper {
 	

@@ -16,6 +16,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
+import nativewindowlib.WindowsUtils;
+import nativewindowlib.WindowsUtils.NativeWindow;
+
 import com.redpois0n.gscrot.BinaryImageProcessor;
 import com.redpois0n.gscrot.CaptureUploader;
 import com.redpois0n.gscrot.Config;
@@ -23,8 +26,6 @@ import com.redpois0n.gscrot.GraphicsImageProcessor;
 import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
-import com.redpois0n.gscrot.WindowsUtils;
-import com.redpois0n.gscrot.WindowsUtils.NativeWindow;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
