@@ -104,7 +104,7 @@ public class Capture extends Thread {
 			Graphics2D g = image.createGraphics();
 			
 			for (GraphicsImageProcessor processor : ImageProcessor.getGraphicsProcessors()) {
-				processor.process(g);
+				processor.process(g, image.getWidth(), image.getHeight());
 			}
 			
 			for (BinaryImageProcessor processor : ImageProcessor.getBinaryProcessors()) {

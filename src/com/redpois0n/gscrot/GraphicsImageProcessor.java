@@ -10,6 +10,6 @@ public abstract class GraphicsImageProcessor extends ImageProcessor {
 		super(name, icon);
 	}
 
-	public abstract void process(Graphics2D g);
+	public abstract void process(Graphics2D g, int width, int height);
 
 }
