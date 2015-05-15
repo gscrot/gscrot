@@ -110,6 +110,8 @@ public class Capture extends Thread {
 
 			if (uploader != null) {
 				this.response = uploader.process(this);
+			} else {
+				throw new Exception("No uploader selected");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
