@@ -65,10 +65,9 @@ public class Capture extends Thread {
 	private final Format format;
 	private final BufferedImage image;
 	
+	private byte[] binary;
 	private String filename;
-	
 	private Status status;
-	
 	private UploadResponse response;
 	
 	public Capture(Type type, BufferedImage image, String filename) {
@@ -100,10 +99,16 @@ public class Capture extends Thread {
 		}
 		
 		try {
+			loadBinary();
+
 			Graphics2D g = image.createGraphics();
 			
 			for (GraphicsImageProcessor processor : ImageProcessor.getGraphicsProcessors()) {
 				processor.process(g);
+			}
+			
+			for (BinaryImageProcessor processor : ImageProcessor.getBinaryProcessors()) {
+				binary = processor.process(binary);
 			}
 			
 			CaptureUploader uploader = CaptureUploader.getSelected();
@@ -140,14 +145,22 @@ public class Capture extends Thread {
 	}
 	
 	/**
+	 * Creates byte array for this image
+	 * @throws Exception
+	 */
+	public void loadBinary() throws Exception {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(image, format.toString(), baos);
+		this.binary = baos.toByteArray();
+	}
+	
+	/**
 	 * Returns this capture as a byte array
 	 * @return
 	 * @throws Exception
 	 */
 	public byte[] getBinary() throws Exception {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(image, format.toString(), baos);
-		return baos.toByteArray();
+		return binary;
 	}
 	
 	public void setStatus(Status status) {
