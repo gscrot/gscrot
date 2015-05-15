@@ -16,8 +16,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
+import com.redpois0n.gscrot.BinaryImageProcessor;
 import com.redpois0n.gscrot.CaptureUploader;
 import com.redpois0n.gscrot.Config;
+import com.redpois0n.gscrot.GraphicsImageProcessor;
 import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
@@ -155,7 +157,13 @@ public class GlobalPopupMenu {
 	    JMenu mnImageProcessors = new JMenu("Image Processors");
 	    mnImageProcessors.setIcon(IconUtils.getIcon("image-processor"));
 	    	    
-	    for (ImageProcessor processor: ImageProcessor.getBinaryProcessors()) {
+	    for (BinaryImageProcessor processor: ImageProcessor.getBinaryProcessors()) {
+	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
+	    	mntmProcessor.setIcon(processor.getIcon());
+	    	mnImageProcessors.add(mntmProcessor);
+	    }
+	    
+	    for (GraphicsImageProcessor processor: ImageProcessor.getGraphicsProcessors()) {
 	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
 	    	mntmProcessor.setIcon(processor.getIcon());
 	    	mnImageProcessors.add(mntmProcessor);
