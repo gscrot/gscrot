@@ -1,6 +1,5 @@
 package com.redpois0n.gscrot;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,10 +63,4 @@ public abstract class ImageProcessor {
 	public ImageIcon getIcon() {
 		return icon;
 	}
-
-	/**
-	 * Called when an image is taken before passed to uploader
-	 * @param g
-	 */
-	public abstract void process(Graphics2D g);
 }
