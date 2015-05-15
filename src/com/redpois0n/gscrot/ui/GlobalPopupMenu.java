@@ -17,7 +17,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
 import nativewindowlib.NativeWindow;
-import nativewindowlib.WindowsUtils;
+import nativewindowlib.WindowUtils;
 
 import com.redpois0n.gscrot.BinaryImageProcessor;
 import com.redpois0n.gscrot.CaptureUploader;
@@ -108,7 +108,7 @@ public class GlobalPopupMenu {
 		    JMenu mntmWindows = new JMenu("Window");
 		    mntmWindows.setIcon(IconUtils.getIcon("window"));
 		    
-		    List<NativeWindow> windows = WindowsUtils.getWindows();
+		    List<NativeWindow> windows = WindowUtils.getWindows();
 		    
 		    for (final NativeWindow window : windows) {	    	
 		    	if (window.getTitle().length() > 0) {
