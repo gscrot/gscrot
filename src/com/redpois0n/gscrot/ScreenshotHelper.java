@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
-import nativewindowlib.WindowsUtils.NativeWindow;
+import nativewindowlib.NativeWindow;
 
 import com.redpois0n.gscrot.Capture.Type;
 

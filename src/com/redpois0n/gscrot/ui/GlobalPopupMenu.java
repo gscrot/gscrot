@@ -16,8 +16,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
+import nativewindowlib.NativeWindow;
 import nativewindowlib.WindowsUtils;
-import nativewindowlib.WindowsUtils.NativeWindow;
 
 import com.redpois0n.gscrot.BinaryImageProcessor;
 import com.redpois0n.gscrot.CaptureUploader;
