@@ -17,6 +17,7 @@ import pluginlib.PluginLoader;
 
 import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.ui.RegionCapture;
+import com.redpois0n.gscrot.ui.ScreenColorPicker;
 
 public class Main {
 	
@@ -78,6 +79,14 @@ public class Main {
 		BufferedImage screenShot = ScreenshotHelper.capture(rect);
 		
 		RegionCapture frame = new RegionCapture(rect, screenShot);
+		frame.setVisible(true);
+	}
+	
+	public static void createColorPicker() throws Exception {
+		Rectangle rect = ScreenshotHelper.getWholeDesktop();
+		BufferedImage screenShot = ScreenshotHelper.capture(rect);
+		
+		RegionCapture frame = new ScreenColorPicker(rect, screenShot);
 		frame.setVisible(true);
 	}
 }

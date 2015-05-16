@@ -130,6 +130,25 @@ public class GlobalPopupMenu {
 		    mnCapture.add(mntmWindows);
 	    }
 	    
+	    
+		// Tools category
+		JMenu mnTools = new JMenu("Tools");
+		mnTools.setIcon(IconUtils.getIcon("toolbox"));
+		
+		JMenuItem mntmScreenColorPicker = new JMenuItem("Screen Color Picker", IconUtils.getIcon("pipette-color"));
+		mntmScreenColorPicker.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Main.createColorPicker();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		mnTools.add(mntmScreenColorPicker);
+		
+		popup.add(mnTools);
+	    
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
 
 	    // Image uploaders
