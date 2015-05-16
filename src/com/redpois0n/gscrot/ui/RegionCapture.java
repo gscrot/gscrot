@@ -32,7 +32,7 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 	public static final float OPACITY = 0.5F;
 	
 	protected Rectangle rect;
-	protected Image image;
+	protected BufferedImage image;
 	
 	protected int x;
 	protected int y;
@@ -49,7 +49,7 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		this(rect, null);
 	}
 	
-	public RegionCapture(Rectangle rect, Image image) {
+	public RegionCapture(Rectangle rect, BufferedImage image) {
 		this.rect = rect;
 		this.image = image;
 		setUndecorated(true);
@@ -91,6 +91,121 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		}
 	}
 	
+	public void paintComponent(Graphics g) {
+		if (g instanceof Graphics2D) {
+			((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+		}				
+		
+		// Get values in "order" to not fuck up rectangles
+		
+		int x = Math.min(RegionCapture.this.x, RegionCapture.this.x2);
+		int y = Math.min(RegionCapture.this.y, RegionCapture.this.y2);
+		int x2 = Math.max(RegionCapture.this.x, RegionCapture.this.x2);
+		int y2 = Math.max(RegionCapture.this.y, RegionCapture.this.y2);
+		
+		// If nothing is selected, default to x and y
+		int tx = x2 == 0 ? x : x2;
+		int ty = y2 == 0 ? y : y2;
+		
+		if (image != null) {
+			// Draw image over frame
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+			
+			// Set color to transparent black
+			g.setColor(new Color(0, 0, 0, 100));							 
+		} else {
+			g.setColor(Color.black);
+		}	
+
+		// Draw black transparent color over all areas that isn't being selected
+		if (x2 == 0 && y2 == 0) {
+			g.fillRect(0, 0, getWidth(), getHeight());
+		} else {
+			g.fillRect(0, 0, x, getHeight());
+			g.fillRect(x, 0, getWidth(), y);			
+
+			g.fillRect(tx, y, getWidth(), getHeight());
+			g.fillRect(x, ty, tx - x, getHeight());		
+		}
+		
+		
+		Image cursor = IconUtils.getIcon("cursor").getImage();
+		
+		g.setFont(new Font("Arial", Font.BOLD, 16));
+
+		RenderUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
+				
+		boolean selected = x2 - x != 0 && y2 - y != 0;
+		
+		if (selected) {
+			g.setColor(Color.white);
+			g.drawRect(x, y, tx - x, ty - y);
+			RenderUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
+			RenderUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
+		}
+		
+		// Reset all values to global
+		
+		x = RegionCapture.this.x;
+		y = RegionCapture.this.y;
+		x2 = RegionCapture.this.x2;
+		y2 = RegionCapture.this.y2;
+		
+		tx = x2 == 0 ? x : x2;
+		ty = y2 == 0 ? y : y2;
+		
+		// Cross over screen(s)
+		g.setColor(Color.white);
+		RenderUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
+		RenderUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
+
+		// Cursor
+		g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
+
+		BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
+		int pos = PREVIEW_SIZE / PREVIEW_SCALE;
+		pos /= 2;
+
+		Graphics2D pg = preview.createGraphics();
+
+		pg.drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
+
+		preview = RenderUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
+
+		pg = preview.createGraphics();
+
+		int cheight = preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1;
+
+		// Crosshair
+		pg.setColor(new Color(0, 0, 255, 100));
+		// north
+		pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, 0, PREVIEW_SCALE, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1);
+
+		// west
+		pg.fillRect(0, cheight, preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE);
+
+		// east
+		pg.fillRect(preview.getWidth() / 2 + PREVIEW_SCALE - 2, cheight, preview.getWidth() / 2, PREVIEW_SCALE);
+
+		// south
+		pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
+
+		RenderUtils.grid(preview, PREVIEW_SCALE);
+
+		// dot in middle off crosshair
+		pg.setColor(Color.black);
+		pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);
+
+		preview = RenderUtils.createCircle(preview);
+
+		// draw preview
+		if (isInsideSelection(x2 + 1, y2 + 1)) {
+			g.drawImage(preview, x2 - PREVIEW_SIZE, y2 - PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SIZE, null);
+		} else {
+			g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
+		}
+	}
+	
 	private class CoverPanel extends JPanel {
 		
 		public CoverPanel() {
@@ -101,118 +216,7 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 		public void paintComponent(Graphics g) {		
 			super.paintComponent(g);
 			
-			if (g instanceof Graphics2D) {
-				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
-			}				
-			
-			// Get values in "order" to not fuck up rectangles
-			
-			int x = Math.min(RegionCapture.this.x, RegionCapture.this.x2);
-			int y = Math.min(RegionCapture.this.y, RegionCapture.this.y2);
-			int x2 = Math.max(RegionCapture.this.x, RegionCapture.this.x2);
-			int y2 = Math.max(RegionCapture.this.y, RegionCapture.this.y2);
-			
-			// If nothing is selected, default to x and y
-			int tx = x2 == 0 ? x : x2;
-			int ty = y2 == 0 ? y : y2;
-			
-			if (image != null) {
-				// Draw image over frame
-				g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-				
-				// Set color to transparent black
-				g.setColor(new Color(0, 0, 0, 100));							 
-			} else {
-				g.setColor(Color.black);
-			}	
-
-			// Draw black transparent color over all areas that isn't being selected
-			if (x2 == 0 && y2 == 0) {
-				g.fillRect(0, 0, getWidth(), getHeight());
-			} else {
-				g.fillRect(0, 0, x, getHeight());
-				g.fillRect(x, 0, getWidth(), y);			
-
-				g.fillRect(tx, y, getWidth(), getHeight());
-				g.fillRect(x, ty, tx - x, getHeight());		
-			}
-			
-			
-			Image cursor = IconUtils.getIcon("cursor").getImage();
-			
-			g.setFont(new Font("Arial", Font.BOLD, 16));
-
-			RenderUtils.drawOutlinedString("X " + (x + rect.x) + " / Y " + (y + rect.y), x + 2, y - 2, Color.white, Color.black, g);	
-					
-			boolean selected = x2 - x != 0 && y2 - y != 0;
-			
-			if (selected) {
-				g.setColor(Color.white);
-				g.drawRect(x, y, tx - x, ty - y);
-				RenderUtils.drawMovingRect(x, y, tx - x, ty - y, g, seed);
-				RenderUtils.drawOutlinedString("Width " + (x2 - x) + " / Height " + (y2 - y), x + 2, y - 4 - g.getFontMetrics().getHeight(), Color.white, Color.black, g);	
-			}
-			
-			// Reset all values to global
-			
-			x = RegionCapture.this.x;
-			y = RegionCapture.this.y;
-			x2 = RegionCapture.this.x2;
-			y2 = RegionCapture.this.y2;
-			
-			tx = x2 == 0 ? x : x2;
-			ty = y2 == 0 ? y : y2;
-			
-			// Cross over screen(s)
-			g.setColor(Color.white);
-			RenderUtils.drawMovingRect(tx, 0, 0, getHeight(), g, seed);
-			RenderUtils.drawMovingRect(0, ty, getWidth(), 0, g, seed);
-
-			// Cursor
-			g.drawImage(cursor, tx - cursor.getWidth(null) / 2, ty - cursor.getHeight(null) / 2, null);
-
-			BufferedImage preview = new BufferedImage(PREVIEW_SIZE, PREVIEW_SIZE, BufferedImage.TYPE_INT_RGB);
-			int pos = PREVIEW_SIZE / PREVIEW_SCALE;
-			pos /= 2;
-
-			Graphics2D pg = preview.createGraphics();
-
-			pg.drawImage(image, 0, 0, PREVIEW_SIZE, PREVIEW_SIZE, x2 - pos, y2 - pos, x2 + PREVIEW_SIZE - pos, y2 + PREVIEW_SIZE - pos, null);
-
-			preview = RenderUtils.scale(preview, BufferedImage.TYPE_INT_RGB, PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SCALE);
-
-			pg = preview.createGraphics();
-
-			int cheight = preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1;
-
-			// Crosshair
-			pg.setColor(new Color(0, 0, 255, 100));
-			// north
-			pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, 0, PREVIEW_SCALE, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1);
-
-			// west
-			pg.fillRect(0, cheight, preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE);
-
-			// east
-			pg.fillRect(preview.getWidth() / 2 + PREVIEW_SCALE - 2, cheight, preview.getWidth() / 2, PREVIEW_SCALE);
-
-			// south
-			pg.fillRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 + PREVIEW_SCALE - 2, PREVIEW_SCALE, preview.getHeight() / 2);
-
-			RenderUtils.grid(preview, PREVIEW_SCALE);
-
-			// dot in middle off crosshair
-			pg.setColor(Color.black);
-			pg.drawRect(preview.getWidth() / 2 - PREVIEW_SCALE / 2 + 1, preview.getHeight() / 2 - PREVIEW_SCALE / 2 + 1, PREVIEW_SCALE, PREVIEW_SCALE);
-
-			preview = RenderUtils.createCircle(preview);
-
-			// draw preview
-			if (isInsideSelection(x2 + 1, y2 + 1)) {
-				g.drawImage(preview, x2 - PREVIEW_SIZE, y2 - PREVIEW_SIZE, PREVIEW_SIZE, PREVIEW_SIZE, null);
-			} else {
-				g.drawImage(preview, x2, y2, PREVIEW_SIZE, PREVIEW_SIZE, null);
-			}
+			RegionCapture.this.paintComponent(g);
 		}
 	}
 	
@@ -229,11 +233,18 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 	 * Called when enter is pressed or mouse released, if preferred
 	 */
 	public void submit() {
-		setVisible(false);
-		dispose();
+		close();
 		
 		Capture capture = new Capture(Capture.Type.REGION, getSelection());
 		capture.start();
+	}
+	
+	/**
+	 * Closes this frame
+	 */
+	public void close() {
+		setVisible(false);
+		dispose();
 	}
 	
 	public BufferedImage getSelection() {
