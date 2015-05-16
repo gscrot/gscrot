@@ -108,26 +108,25 @@ public class GlobalPopupMenu {
 		    JMenu mntmWindows = new JMenu("Window");
 		    mntmWindows.setIcon(IconUtils.getIcon("window"));
 		    
-		    List<NativeWindow> windows = WindowUtils.getWindows();
-		    
-		    for (final NativeWindow window : windows) {	    	
-		    	if (window.getTitle().length() > 0) {
-		    		JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
-			    	
-			    	item.addActionListener(new ActionListener() {
-			    		public void actionPerformed(ActionEvent e) {
-			    			try {
-								ScreenshotHelper.process(ScreenshotHelper.capture(window));
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-			    		}
-			    	});
-			    	
-			    	mntmWindows.add(item);
-		    	}
-		    }
-		    
+			List<NativeWindow> windows = WindowUtils.getVisibleWindows();
+
+			for (final NativeWindow window : windows) {
+				JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
+
+				item.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							ScreenshotHelper.process(ScreenshotHelper.capture(window));
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				});
+
+				mntmWindows.add(item);
+
+			}
+
 		    mnCapture.add(mntmWindows);
 	    }
 	    
