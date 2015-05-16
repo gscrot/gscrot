@@ -31,20 +31,19 @@ public class RegionCapture extends JFrame implements KeyListener, MouseMotionLis
 	public static final int PREVIEW_SCALE = (int) PREVIEW_SCALEF;
 	public static final float OPACITY = 0.5F;
 	
-	private Rectangle rect;
-	private Image image;
+	protected Rectangle rect;
+	protected Image image;
 	
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
-	private int x2;
-	private int y2;
+	protected int x2;
+	protected int y2;
 	
-	private boolean dragging;
-	private int seed;
+	protected boolean dragging;
+	protected int seed;
 	
 	private RepaintThread thread;
-	
 
 	public RegionCapture(Rectangle rect) {
 		this(rect, null);
