@@ -3,9 +3,13 @@ package com.redpois0n.gscrot.ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import com.redpois0n.gscrot.ClipboardHelper;
+import com.redpois0n.gscrot.TrayIconHelper;
 
 @SuppressWarnings("serial")
 public class ScreenColorPicker extends RegionCapture {
@@ -16,9 +20,19 @@ public class ScreenColorPicker extends RegionCapture {
 		super(rect, image);
 	}
 	
+	/**
+	 * Copy selected pixel color to clipboard in format "red, green, blue"
+	 */
 	@Override
 	public void submit() {
-		
+		if (selected != null) {
+			String s = selected.getRed() + ", " + selected.getGreen() + ", " + selected.getBlue();
+			ClipboardHelper.setString(s);
+			
+			close();
+			
+			TrayIconHelper.showMessage(s + " copied to clipboard", MessageType.INFO);
+		}
 	}
 	
 	@Override
@@ -34,6 +48,9 @@ public class ScreenColorPicker extends RegionCapture {
 		}
 	}
 	
+	/**
+	 * When mouse is pressed, get selected color at clicked pixel
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		int array[] = new int[1];
@@ -42,6 +59,9 @@ public class ScreenColorPicker extends RegionCapture {
 		selected = new Color(array[0]);
 	}
 	
+	/**
+	 * Disable dragging by overriding mouseDragged()
+	 */
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		
