@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.TrayIcon.MessageType;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -104,11 +106,24 @@ public class Capture extends Thread {
 
 			Graphics2D g = image.createGraphics();
 			
-			for (GraphicsImageProcessor processor : ImageProcessor.getGraphicsProcessors()) {
+			List<GraphicsImageProcessor> gips = new ArrayList<GraphicsImageProcessor>();
+			List<BinaryImageProcessor> bips = new ArrayList<BinaryImageProcessor>();
+			
+			for (Object processor : ImageProcessor.getEnabled()) {
+				if (processor instanceof GraphicsImageProcessor) {
+					GraphicsImageProcessor gip = (GraphicsImageProcessor) processor;
+					gips.add(gip);
+				} else if (processor instanceof BinaryImageProcessor) {
+					BinaryImageProcessor bip = (BinaryImageProcessor) processor;
+					bips.add(bip);
+				}
+			}
+			
+			for (GraphicsImageProcessor processor : gips) {
 				processor.process(g, image.getWidth(), image.getHeight());
 			}
 			
-			for (BinaryImageProcessor processor : ImageProcessor.getBinaryProcessors()) {
+			for (BinaryImageProcessor processor : bips) {
 				binary = processor.process(binary);
 			}
 			
