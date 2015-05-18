@@ -18,7 +18,8 @@ public class Capture extends Thread {
 	public static enum Type {
 		REGION("Region", "region-select"), 
 		MONITOR("Monitor", "monitor"), 
-		FULL("Fullscreen", null);
+		FULL("Fullscreen", null), 
+		WINDOW("Window", "window");
 		
 		private final String textual;
 		private final String icon;

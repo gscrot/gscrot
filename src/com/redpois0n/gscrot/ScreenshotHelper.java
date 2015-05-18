@@ -55,14 +55,14 @@ public class ScreenshotHelper {
 	public static void captureScreen(GraphicsDevice screen) {
 		try {
 			BufferedImage image = ScreenshotHelper.getScreen(screen);
-			process(image);
+			process(Type.MONITOR, image);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void process(BufferedImage image) {
-		Capture p = new Capture(Type.MONITOR, image);
+	public static void process(Type type, BufferedImage image) {
+		Capture p = new Capture(type, image);
 		p.start();
 	}
 	

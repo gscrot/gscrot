@@ -20,6 +20,7 @@ import nativewindowlib.NativeWindow;
 import nativewindowlib.WindowUtils;
 
 import com.redpois0n.gscrot.BinaryImageProcessor;
+import com.redpois0n.gscrot.Capture.Type;
 import com.redpois0n.gscrot.CaptureUploader;
 import com.redpois0n.gscrot.Config;
 import com.redpois0n.gscrot.GraphicsImageProcessor;
@@ -61,7 +62,7 @@ public class GlobalPopupMenu {
 	    mntmAllMonitors.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			try {
-					ScreenshotHelper.process(ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
+					ScreenshotHelper.process(Type.FULL, ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -116,7 +117,7 @@ public class GlobalPopupMenu {
 				item.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ScreenshotHelper.process(ScreenshotHelper.capture(window));
+							ScreenshotHelper.process(Type.WINDOW, ScreenshotHelper.capture(window));
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
