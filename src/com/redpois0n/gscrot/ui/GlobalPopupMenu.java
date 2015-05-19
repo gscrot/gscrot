@@ -2,6 +2,7 @@ package com.redpois0n.gscrot.ui;
 
 import iconlib.IconUtils;
 
+import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -147,6 +149,14 @@ public class GlobalPopupMenu {
 			}
 		});
 		mnTools.add(mntmScreenColorPicker);
+		
+		JMenuItem mntmColorPicker = new JMenuItem("Color Picker");
+		mntmColorPicker.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color color = JColorChooser.showDialog(null, "Color Picker", Color.black);
+			}
+		});
+		mnTools.add(mntmColorPicker);
 		
 		popup.add(mnTools);
 	    

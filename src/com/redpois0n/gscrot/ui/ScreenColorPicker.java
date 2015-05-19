@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 import com.redpois0n.gscrot.ClipboardHelper;
 import com.redpois0n.gscrot.TrayIconHelper;
+import com.redpois0n.gscrot.util.Utils;
 
 @SuppressWarnings("serial")
 public class ScreenColorPicker extends RegionCapture {
@@ -26,12 +27,8 @@ public class ScreenColorPicker extends RegionCapture {
 	@Override
 	public void submit() {
 		if (selected != null) {
-			String s = selected.getRed() + ", " + selected.getGreen() + ", " + selected.getBlue();
-			ClipboardHelper.setString(s);
-			
+			Utils.setColorInClipboard(selected);
 			close();
-			
-			TrayIconHelper.showMessage(s + " copied to clipboard", MessageType.INFO);
 		}
 	}
 	
