@@ -2,6 +2,7 @@ package com.redpois0n.gscrot.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -195,7 +196,7 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		Capture capture = getSelectedCapture();
 		
 		if (capture != null) {			
-			UploadResponse r = capture.getResponse();
+			final UploadResponse r = capture.getResponse();
 			
 			popupMenu.removeAll();
 			
@@ -208,6 +209,15 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 					popupMenu.add(new URLMenuItem("Open removal link", r.getRemoveUrl()));
 				}
 			}
+			
+			JMenuItem mntmResponse = new JMenuItem("View Response");
+			mntmResponse.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println(r.getRaw());
+				}
+			});
+			popupMenu.add(mntmResponse);
 		}
 	}
 }
