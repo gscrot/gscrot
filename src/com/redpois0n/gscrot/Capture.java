@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 
 import com.redpois0n.gscrot.ui.MainFrame;
-import com.redpois0n.gscrot.util.NameFormatter;
+import com.redpois0n.gscrot.utils.NameFormatter;
 
 public class Capture extends Thread {
 	

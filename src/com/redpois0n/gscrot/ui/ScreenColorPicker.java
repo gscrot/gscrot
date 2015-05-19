@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 import com.redpois0n.gscrot.ClipboardHelper;
 import com.redpois0n.gscrot.TrayIconHelper;
-import com.redpois0n.gscrot.util.Utils;
+import com.redpois0n.gscrot.utils.Utils;
 
 @SuppressWarnings("serial")
 public class ScreenColorPicker extends RegionCapture {

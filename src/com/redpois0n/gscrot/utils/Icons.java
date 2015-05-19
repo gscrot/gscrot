@@ -1,4 +1,4 @@
-package com.redpois0n.gscrot.util;
+package com.redpois0n.gscrot.utils;
 
 import iconlib.IconUtils;
 

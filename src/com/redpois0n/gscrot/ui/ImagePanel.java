@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import com.redpois0n.gscrot.util.ImageUtils;
+import com.redpois0n.gscrot.utils.ImageUtils;
 
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel {

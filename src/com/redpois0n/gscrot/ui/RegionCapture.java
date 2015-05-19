@@ -21,7 +21,7 @@ import javax.swing.event.MouseInputListener;
 
 import com.redpois0n.gscrot.Capture;
 import com.redpois0n.gscrot.RenderUtils;
-import com.redpois0n.gscrot.util.ImageUtils;
+import com.redpois0n.gscrot.utils.ImageUtils;
 
 @SuppressWarnings("serial")
 public class RegionCapture extends JFrame implements KeyListener, MouseMotionListener, MouseInputListener {

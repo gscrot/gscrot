@@ -24,7 +24,7 @@ import com.redpois0n.gscrot.Capture;
 import com.redpois0n.gscrot.UploadResponse;
 import com.redpois0n.gscrot.Version;
 import com.redpois0n.gscrot.ui.components.URLMenuItem;
-import com.redpois0n.gscrot.util.Icons;
+import com.redpois0n.gscrot.utils.Icons;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements PopupMenuListener {
