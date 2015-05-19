@@ -150,7 +150,7 @@ public class GlobalPopupMenu {
 		});
 		mnTools.add(mntmScreenColorPicker);
 		
-		JMenuItem mntmColorPicker = new JMenuItem("Color Picker");
+		JMenuItem mntmColorPicker = new JMenuItem("Color Picker", IconUtils.getIcon("color"));
 		mntmColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Color color = JColorChooser.showDialog(null, "Color Picker", Color.black);
