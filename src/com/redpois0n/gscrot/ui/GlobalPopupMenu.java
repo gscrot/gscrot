@@ -33,6 +33,7 @@ import com.redpois0n.gscrot.ScreenshotHelper;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
+import com.redpois0n.gscrot.utils.Utils;
 import com.redpois0n.oslib.OperatingSystem;
 
 public class GlobalPopupMenu {
@@ -144,6 +145,7 @@ public class GlobalPopupMenu {
 		mntmColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Color color = JColorChooser.showDialog(null, "Color Picker", Color.black);
+				Utils.setColorInClipboard(color);
 			}
 		});
 		btnTools.add(mntmColorPicker);
