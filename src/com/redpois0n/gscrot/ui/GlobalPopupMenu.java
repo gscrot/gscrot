@@ -236,7 +236,7 @@ public class GlobalPopupMenu {
 	    
 	    popup.add(mnAfterUpload);
 	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
-	    
+	 
 	    // Settings item
 	    JMenu mnSettings = new JMenu("Settings");
 	    mnSettings.setIcon(IconUtils.getIcon("settings"));

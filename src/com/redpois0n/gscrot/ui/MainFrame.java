@@ -29,6 +29,9 @@ import com.redpois0n.gscrot.utils.Icons;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements PopupMenuListener {
 
+	/**
+	 * Global frame instance
+	 */
 	public static final MainFrame INSTANCE = new MainFrame();
 	
 	private MenuPanel menuPanel;
@@ -49,7 +52,34 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		menuPanel = new MenuPanel();
 		sp.setViewportView(menuPanel);
 		
-		add(sp, BorderLayout.WEST);
+		add(sp, BorderLayout.WEST);		
+		
+		JScrollPane scrollPaneTable = new JScrollPane();
+		table = new CaptureTable();
+		table.addMouseListener(new CaptureClickListener());
+		scrollPaneTable.setViewportView(table);
+		
+		popupMenu = new JPopupMenu();
+		popupMenu.addPopupMenuListener(this);
+		addPopup(table, popupMenu);
+		
+		JScrollPane scrollPaneImage = new JScrollPane();
+		imagePanel = new ImagePanel();
+		scrollPaneImage.setViewportView(imagePanel);
+		
+		splitPane = new JSplitPane();
+		splitPane.setLeftComponent(scrollPaneTable);
+		splitPane.setRightComponent(scrollPaneImage);
+		add(splitPane, BorderLayout.CENTER);
+		
+		rebuildMenu();
+	}
+	
+	/**
+	 * Recreates the menu panel
+	 */
+	public void rebuildMenu() {
+		menuPanel.removeAll();
 		
 		JPopupMenu global = GlobalPopupMenu.getPopupMenu();
 
@@ -86,30 +116,14 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 				menuPanel.addComponent((JComponent) c);
 			}
 		}
-		
-		JScrollPane scrollPaneTable = new JScrollPane();
-		table = new CaptureTable();
-		table.addMouseListener(new CaptureClickListener());
-		scrollPaneTable.setViewportView(table);
-		
-		popupMenu = new JPopupMenu();
-		popupMenu.addPopupMenuListener(this);
-		addPopup(table, popupMenu);
-		
-		JScrollPane scrollPaneImage = new JScrollPane();
-		imagePanel = new ImagePanel();
-		scrollPaneImage.setViewportView(imagePanel);
-		
-		splitPane = new JSplitPane();
-		splitPane.setLeftComponent(scrollPaneTable);
-		splitPane.setRightComponent(scrollPaneImage);
-		add(splitPane, BorderLayout.CENTER);
-		
-		
 	}
 
-	public void add(Capture p) {
-		table.add(p);
+	/**
+	 * Add capture to global table
+	 * @param capture
+	 */
+	public void add(Capture capture) {
+		table.add(capture);
 	}
 	
 	@Override
@@ -123,6 +137,10 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		});
 	}
 	
+	/**
+	 * Sets the frame title beginning with gscrot version - message
+	 * @param s the title to append
+	 */
 	@Override
 	public void setTitle(String s) {
 		String title = "gscrot " + Version.getVersion();
@@ -191,6 +209,9 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		
 	}
 
+	/**
+	 * Adds menu items to popup menu depending on the selected capture
+	 */
 	@Override
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		Capture capture = getSelectedCapture();

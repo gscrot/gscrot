@@ -33,4 +33,12 @@ public class MenuPanel extends JPanel {
 	public void addComponent(JComponent j) {
 		bar.add(j);
 	}
+	
+	/**
+	 * Removes all components in {@link #bar}
+	 */
+	@Override
+	public void removeAll() {
+		bar.removeAll();
+	}
 }
