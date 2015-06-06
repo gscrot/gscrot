@@ -7,10 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -72,52 +69,15 @@ public class MainFrame extends JFrame implements PopupMenuListener {
 		splitPane.setRightComponent(scrollPaneImage);
 		add(splitPane, BorderLayout.CENTER);
 		
-		rebuildMenu();
-	}
-	
-	/**
-	 * Recreates the menu panel
-	 */
-	public void rebuildMenu() {
-		menuPanel.removeAll();
-		
-		JPopupMenu global = GlobalPopupMenu.getPopupMenu();
-
-		for (Component c : global.getComponents()) {
-			if (c instanceof JMenu) {
-				JMenu m = (JMenu) c;
-
-				final JButton btn = new JButton(m.getText(), m.getIcon());
-				menuPanel.addButton(btn);
-
-				final JPopupMenu menu2 = new JPopupMenu();
-
-				btn.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
-						menu2.show((Component) e.getSource(), btn.getWidth(), 0);
-						menu2.requestFocus();
-					}
-				});
-
-				for (Component c1 : m.getMenuComponents()) {
-					menu2.add(c1);
-				}
-			} else if (c instanceof JMenuItem) {
-				JMenuItem mi = (JMenuItem) c;
-				JButton btn = new JButton(mi.getText(), mi.getIcon());
-				menuPanel.addButton(btn);
-
-				for (ActionListener l : mi.getActionListeners()) {
-					btn.addActionListener(l);
-				}
-			} else if (c instanceof JSeparator) {
+		for (Component c : GlobalPopupMenu.getMenu()) {
+			if (c instanceof JSeparator) {
 				menuPanel.addSeparator();
-			} else if (c instanceof JComponent) {
-				menuPanel.addComponent((JComponent) c);
+			} else {
+				menuPanel.add(c);
 			}
 		}
 	}
-
+	
 	/**
 	 * Add capture to global table
 	 * @param capture

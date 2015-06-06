@@ -3,13 +3,10 @@ package com.redpois0n.gscrot.ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.TrayIcon.MessageType;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import com.redpois0n.gscrot.ClipboardHelper;
-import com.redpois0n.gscrot.TrayIconHelper;
 import com.redpois0n.gscrot.utils.Utils;
 
 @SuppressWarnings("serial")

@@ -3,8 +3,6 @@ package com.redpois0n.gscrot.ui;
 import java.awt.Component;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
@@ -19,19 +17,21 @@ public class MenuPanel extends JPanel {
 		bar = new JToolBar(null, JToolBar.VERTICAL);
 		bar.setFloatable(false);
 		bar.setAlignmentX(Component.LEFT_ALIGNMENT);
-		add(bar);
+		super.add(bar);
 	}
 
-	public void addButton(JButton btn) {
-		bar.add(btn);
-	}
-
+	/**
+	 * Adds separator to {@link #bar}
+	 */
 	public void addSeparator() {
 		bar.addSeparator();
 	}
 	
-	public void addComponent(JComponent j) {
-		bar.add(j);
+	@Override
+	public Component add(Component c) {
+		bar.add(c);
+		
+		return c;
 	}
 	
 	/**

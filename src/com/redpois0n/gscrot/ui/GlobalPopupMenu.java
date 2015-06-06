@@ -3,6 +3,7 @@ package com.redpois0n.gscrot.ui;
 import iconlib.IconUtils;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,14 +39,14 @@ public class GlobalPopupMenu {
 	
 	public static final List<JMenuItem> SETTINGS_ITEMS = new ArrayList<JMenuItem>();
 	
-	public static JPopupMenu getPopupMenu() {
-	    JPopupMenu popup = new JPopupMenu();
-	    
-	    // Capture category
-	    JMenu mnCapture = new JMenu("Capture");
-	    mnCapture.setIcon(IconUtils.getIcon("camera"));
-	    
-	    JMenuItem mntmRegion = new JMenuItem("Region", IconUtils.getIcon("region-select"));
+	public static List<Component> getMenu() {
+		List<Component> list = new ArrayList<Component>();
+		
+		// Capture
+		JDropDownButton btnCapture = new JDropDownButton("Capture", IconUtils.getIcon("camera"));
+	    list.add(btnCapture);
+
+		JMenuItem mntmRegion = new JMenuItem("Region", IconUtils.getIcon("region-select"));
 	    mntmRegion.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		try {
@@ -55,12 +56,10 @@ public class GlobalPopupMenu {
 				}
 	    	}
 	    });
-	    mnCapture.add(mntmRegion);
+	    btnCapture.getMenu().add(mntmRegion);
 	    
-	    // All monitors
 	    JMenuItem mntmAllMonitors = new JMenuItem("All Monitors");
 	    mntmAllMonitors.setIcon(IconUtils.getIcon("monitor-all"));
-	    
 	    mntmAllMonitors.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			try {
@@ -70,13 +69,10 @@ public class GlobalPopupMenu {
 				}
     		}
     	});
+	    btnCapture.getMenu().add(mntmAllMonitors);
 	    
-	    mnCapture.add(mntmAllMonitors);
-	    
-	    // Monitor item
 	    JMenu mntmMonitor = new JMenu("Monitor");
 	    mntmMonitor.setIcon(IconUtils.getIcon("monitor"));
-	    
 	    GraphicsDevice[] devices = ScreenshotHelper.getScreens();
 	    
 	    JMenuItem mntmPickMonitor = new JMenuItem("Pick Monitor...", IconUtils.getIcon("monitor-select"));
@@ -102,16 +98,12 @@ public class GlobalPopupMenu {
 	    	mntmMonitor.add(item);
 	    }
 	    
-	    mnCapture.add(mntmMonitor);
-	    
-	    popup.add(mnCapture);  
-	    
 	    if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
 	    	// Windows item
-		    JMenu mntmWindows = new JMenu("Window");
+		    final JMenu mntmWindows = new JMenu("Window");
 		    mntmWindows.setIcon(IconUtils.getIcon("window"));
 		    
-			List<NativeWindow> windows = WindowUtils.getVisibleWindows();
+		    List<NativeWindow> windows = WindowUtils.getVisibleWindows();
 
 			for (final NativeWindow window : windows) {
 				JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
@@ -130,14 +122,12 @@ public class GlobalPopupMenu {
 
 			}
 
-		    mnCapture.add(mntmWindows);
+		    btnCapture.add(mntmWindows);
 	    }
 	    
-	    
-		// Tools category
-		JMenu mnTools = new JMenu("Tools");
-		mnTools.setIcon(IconUtils.getIcon("toolbox"));
-		
+	    // Tools
+	    JDropDownButton btnTools = new JDropDownButton("Tools", IconUtils.getIcon("toolbox"));
+	    list.add(btnTools);
 		JMenuItem mntmScreenColorPicker = new JMenuItem("Screen Color Picker", IconUtils.getIcon("pipette-color"));
 		mntmScreenColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +138,7 @@ public class GlobalPopupMenu {
 				}
 			}
 		});
-		mnTools.add(mntmScreenColorPicker);
+		btnTools.add(mntmScreenColorPicker);
 		
 		JMenuItem mntmColorPicker = new JMenuItem("Color Picker", IconUtils.getIcon("color"));
 		mntmColorPicker.addActionListener(new ActionListener() {
@@ -156,18 +146,16 @@ public class GlobalPopupMenu {
 				Color color = JColorChooser.showDialog(null, "Color Picker", Color.black);
 			}
 		});
-		mnTools.add(mntmColorPicker);
-		
-		popup.add(mnTools);
-	    
-	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+		btnTools.add(mntmColorPicker);
+			    
+	    list.add(new JSeparator(JSeparator.HORIZONTAL));
 
-	    // Image uploaders
-	    ButtonGroup group = new ButtonGroup();
 	    
-	    JMenu mnImageUploaders = new JMenu("Image Uploaders");
-	    mnImageUploaders.setIcon(IconUtils.getIcon("drive-upload"));
-	    	    
+	    // Image Uploaders
+	    ButtonGroup group = new ButtonGroup();
+
+	    JDropDownButton btnImageUploaders = new JDropDownButton("Image Uploaders", IconUtils.getIcon("drive-upload"));
+	    list.add(btnImageUploaders);
 	    CaptureUploader selectedUploader = CaptureUploader.getSelected();
 	    for (CaptureUploader uploader : CaptureUploader.getAllUploaders()) {
 	    	CaptureUploaderCheckBoxMenuItem mntmUploader = new CaptureUploaderCheckBoxMenuItem(uploader);
@@ -175,38 +163,31 @@ public class GlobalPopupMenu {
 	    	
 	    	mntmUploader.setSelected(uploader == selectedUploader);
 
-		    mnImageUploaders.add(mntmUploader);
+		    btnImageUploaders.add(mntmUploader);
 		    
 		    group.add(mntmUploader);
 	    }
-	    
-	    popup.add(mnImageUploaders);
-	    
+	    	    
 	    // Image processors
-	    	    
-	    JMenu mnImageProcessors = new JMenu("Image Processors");
-	    mnImageProcessors.setIcon(IconUtils.getIcon("image-processor"));
-	    	    
+	    JDropDownButton btnImageProcessors = new JDropDownButton("Image Processors", IconUtils.getIcon("image-processor"));
+	    list.add(btnImageProcessors);
 	    for (BinaryImageProcessor processor: ImageProcessor.getBinaryProcessors()) {
 	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
 	    	mntmProcessor.setIcon(processor.getIcon());
-	    	mnImageProcessors.add(mntmProcessor);
+	    	btnImageProcessors.add(mntmProcessor);
 	    }
 	    
 	    for (GraphicsImageProcessor processor: ImageProcessor.getGraphicsProcessors()) {
 	    	ImageProcessorCheckBoxMenuItem mntmProcessor = new ImageProcessorCheckBoxMenuItem(processor);
 	    	mntmProcessor.setIcon(processor.getIcon());
-	    	mnImageProcessors.add(mntmProcessor);
+	    	btnImageProcessors.add(mntmProcessor);
 	    }
-	    
-	    popup.add(mnImageProcessors);
-	    
-	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	    	    
+	    list.add(new JSeparator(JSeparator.HORIZONTAL));
 	    
 	    // After upload    
-	    JMenu mnAfterCapture = new JMenu("After Capture");
-	    mnAfterCapture.setIcon(IconUtils.getIcon("after-capture"));
-	    	    
+	    JDropDownButton btnAfterCapture = new JDropDownButton("After Capture", IconUtils.getIcon("after-capture"));
+	    list.add(btnAfterCapture);
 	    JCheckBoxMenuItem mntmImageClipboard = new JCheckBoxMenuItem("Copy Image to clipboard");
 	    mntmImageClipboard.setSelected(Config.get(Config.KEY_COPY_IMAGE_TO_CLIPBOARD, "true").equalsIgnoreCase("true"));
 	    mntmImageClipboard.addActionListener(new ActionListener() {
@@ -216,12 +197,11 @@ public class GlobalPopupMenu {
 	    		Config.put(Config.KEY_COPY_IMAGE_TO_CLIPBOARD, b + "");
 	    	}
 	    });
-	    mnAfterCapture.add(mntmImageClipboard);
-	    popup.add(mnAfterCapture);
+	    btnAfterCapture.add(mntmImageClipboard);
 	    	    
 	    // After upload    
-	    JMenu mnAfterUpload = new JMenu("After Upload");
-	    mnAfterUpload.setIcon(IconUtils.getIcon("after-upload"));
+	    JDropDownButton btnAfterUpload = new JDropDownButton("After Upload", IconUtils.getIcon("after-upload"));
+	    list.add(btnAfterUpload);
 	    
 	    JCheckBoxMenuItem mntmURLClipboard = new JCheckBoxMenuItem("Copy URL to clipboard");
 	    mntmURLClipboard.setSelected(Config.get(Config.KEY_COPY_URL_TO_CLIPBOARD, "true").equalsIgnoreCase("true"));
@@ -232,14 +212,13 @@ public class GlobalPopupMenu {
 	    		Config.put(Config.KEY_COPY_URL_TO_CLIPBOARD, b + "");
 	    	}
 	    });
-	    mnAfterUpload.add(mntmURLClipboard);
+	    btnAfterUpload.add(mntmURLClipboard);
 	    
-	    popup.add(mnAfterUpload);
-	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	   	list.add(new JSeparator(JSeparator.HORIZONTAL));
 	 
-	    // Settings item
-	    JMenu mnSettings = new JMenu("Settings");
-	    mnSettings.setIcon(IconUtils.getIcon("settings"));
+	    // Settings
+	    JDropDownButton mnSettings = new JDropDownButton("Settings", IconUtils.getIcon("settings"));
+	    list.add(mnSettings);
 
 	    JMenuItem mntmApplicationSettings = new JMenuItem("Application Settings", IconUtils.getIcon("settings"));
 	    mntmApplicationSettings.addActionListener(new ActionListener() {
@@ -252,27 +231,30 @@ public class GlobalPopupMenu {
 	    mnSettings.add(mntmApplicationSettings);
 	    
 	    if (SETTINGS_ITEMS.size() > 0) {
-	    	mnSettings.addSeparator();
+	    	mnSettings.getMenu().addSeparator();
 	    	for (JMenuItem item : SETTINGS_ITEMS) {
 	    		mnSettings.add(item);
 	    	}
 	    }
-	    	    
-	    popup.add(mnSettings);
+	    	    	    
+	    list.add(new JSeparator(JSeparator.HORIZONTAL));
 	    
-	    popup.add(new JSeparator(JSeparator.HORIZONTAL));
+	    list.add(Box.createVerticalGlue());
 	    
-	    popup.add(Box.createVerticalGlue());
-	    
-	    // Exit item
-	    JMenuItem mntmExit = new JMenuItem("Exit", IconUtils.getIcon("cross"));
+	    // Exit
+	    JDropDownButton mntmExit = new JDropDownButton("Exit", IconUtils.getIcon("cross"));
+	    list.add(mntmExit);
 	    mntmExit.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		System.exit(0);
 	    	}
-	    });
+	    });	    
 	    
-	    popup.add(mntmExit);
+		return list;
+	}
+	
+	public static JPopupMenu getPopupMenu() {
+	    JPopupMenu popup = new JPopupMenu();
 	    
 	    return popup;
 	}
