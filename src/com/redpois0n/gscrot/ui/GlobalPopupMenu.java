@@ -120,9 +120,7 @@ public class GlobalPopupMenu {
 				});
 
 				mntmWindows.add(item);
-
 			}
-
 		    btnCapture.add(mntmWindows);
 	    }
 	    
@@ -150,7 +148,7 @@ public class GlobalPopupMenu {
 		});
 		btnTools.add(mntmColorPicker);
 			    
-	    list.add(new JSeparator(JSeparator.HORIZONTAL));
+	    list.add(new JSeparator());
 
 	    
 	    // Image Uploaders
@@ -185,7 +183,7 @@ public class GlobalPopupMenu {
 	    	btnImageProcessors.add(mntmProcessor);
 	    }
 	    	    
-	    list.add(new JSeparator(JSeparator.HORIZONTAL));
+	    list.add(new JSeparator());
 	    
 	    // After upload    
 	    JDropDownButton btnAfterCapture = new JDropDownButton("After Capture", IconUtils.getIcon("after-capture"));
@@ -216,7 +214,7 @@ public class GlobalPopupMenu {
 	    });
 	    btnAfterUpload.add(mntmURLClipboard);
 	    
-	   	list.add(new JSeparator(JSeparator.HORIZONTAL));
+	   	list.add(new JSeparator());
 	 
 	    // Settings
 	    JDropDownButton mnSettings = new JDropDownButton("Settings", IconUtils.getIcon("settings"));
@@ -239,7 +237,7 @@ public class GlobalPopupMenu {
 	    	}
 	    }
 	    	    	    
-	    list.add(new JSeparator(JSeparator.HORIZONTAL));
+	    list.add(new JSeparator());
 	    
 	    list.add(Box.createVerticalGlue());
 	    
