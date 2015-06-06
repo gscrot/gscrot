@@ -12,6 +12,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 
+import com.redpois0n.gscrot.exceptions.InvalidUploaderException;
 import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.utils.NameFormatter;
 
@@ -132,7 +133,7 @@ public class Capture extends Thread {
 			if (uploader != null) {
 				this.response = uploader.process(this);
 			} else {
-				throw new Exception("No uploader selected");
+				throw new InvalidUploaderException("No uploader selected");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
