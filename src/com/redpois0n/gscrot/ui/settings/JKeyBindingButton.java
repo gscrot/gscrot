@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 
+import com.redpois0n.gscrot.keys.KeyBinding;
 import com.redpois0n.gscrot.keys.KeyBindings;
 
 @SuppressWarnings("serial")
@@ -14,7 +15,7 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 	private int[] keys = new int[KeyBindings.MAX_KEYS];
 	private int index;
 
-	public JKeyBindingButton() {
+	public JKeyBindingButton(KeyBinding binding) {
 		setFocusable(true);
 
 		addKeyListener(this);

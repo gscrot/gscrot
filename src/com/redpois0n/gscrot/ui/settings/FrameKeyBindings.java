@@ -5,6 +5,7 @@ import iconlib.IconUtils;
 import javax.swing.JFrame;
 
 import com.redpois0n.gscrot.keys.KeyBinding;
+import com.redpois0n.gscrot.keys.KeyBindings;
 import com.redpois0n.gscrot.ui.JKeyBindingPanel;
 
 @SuppressWarnings("serial")
@@ -18,7 +19,9 @@ public class FrameKeyBindings extends JFrame {
 		setLayout(null);
 		
 		for (int i = 0; i < KeyBinding.Type.values().length; i++) {
-			JKeyBindingPanel panel = new JKeyBindingPanel(KeyBinding.Type.values()[i].name());
+			KeyBinding.Type type = KeyBinding.Type.values()[i];
+			
+			JKeyBindingPanel panel = new JKeyBindingPanel(type.name(), KeyBindings.KEYBINDINGS.get(type));
 			panel.setBounds(10, 10 + i * 30, getWidth() - 30, 25);
 			
 			add(panel);

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.redpois0n.gscrot.keys.KeyBinding;
 import com.redpois0n.gscrot.ui.settings.JKeyBindingButton;
 
 @SuppressWarnings("serial")
@@ -17,13 +18,13 @@ public class JKeyBindingPanel extends JPanel {
 	
 	private JKeyBindingButton btn;
 	
-	public JKeyBindingPanel(String text) {
+	public JKeyBindingPanel(String text, KeyBinding binding) {
 		
 		JLabel label = new JLabel("  " + text);
 		label.setPreferredSize(new Dimension(5000, 50));
 		label.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
-		btn = new JKeyBindingButton();
+		btn = new JKeyBindingButton(binding);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
