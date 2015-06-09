@@ -1,7 +1,6 @@
 package com.redpois0n.gscrot.ui.settings;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
+import iconlib.IconUtils;
 
 import javax.swing.JFrame;
 
@@ -13,6 +12,8 @@ public class FrameKeyBindings extends JFrame {
 
 	public FrameKeyBindings() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Key bindings");
+		setIconImage(IconUtils.getIcon("keys").getImage());
 		setBounds(100, 100, 450, 300);
 		setLayout(null);
 		
