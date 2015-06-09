@@ -1,4 +1,4 @@
-package com.redpois0n.gscrot.ui.settings;
+package com.redpois0n.gscrot.ui.components;
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.redpois0n.gscrot.keys.KeyBinding;
-import com.redpois0n.gscrot.ui.settings.JKeyBindingButton;
+import com.redpois0n.gscrot.ui.components.JKeyBindingButton;
 
 @SuppressWarnings("serial")
 public class JKeyBindingPanel extends JPanel {
