@@ -6,23 +6,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.redpois0n.gscrot.keys.KeyBinding;
 
 public class Config {
 	
 	public static final Map<String, String> CONFIG = new HashMap<String, String>();
 	public static final File CONFIG_FILE = new File(".gscrot");
-	
-	public static List<KeyBinding> KEYBINDINGS = new ArrayList<KeyBinding>();
-	public static final File KEYBINDINGS_FILE = new File(".keys");
 	
 	public static final String KEY_COPY_URL_TO_CLIPBOARD = "copy-url-to-clipboard";
 	public static final String KEY_COPY_IMAGE_TO_CLIPBOARD = "copy-image-to-clipboard";
@@ -67,9 +58,6 @@ public class Config {
 		}
 		
 		reader.close();
-		
-		KEYBINDINGS.clear();
-		KEYBINDINGS = (List<KeyBinding>) new ObjectInputStream(new FileInputStream(KEYBINDINGS_FILE)).readObject(); 
 	}
 	
 	public static void save() throws Exception {
@@ -84,8 +72,6 @@ public class Config {
 		}
 		
 		writer.close();
-		
-		new ObjectOutputStream(new FileOutputStream(KEYBINDINGS_FILE)).writeObject(KEYBINDINGS);
 	}
 
 }

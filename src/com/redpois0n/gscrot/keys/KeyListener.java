@@ -6,8 +6,6 @@ import java.util.List;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import com.redpois0n.gscrot.Config;
-
 public class KeyListener implements NativeKeyListener {
 	
 	private static final List<Integer> pressed = new ArrayList<Integer>();
@@ -20,7 +18,9 @@ public class KeyListener implements NativeKeyListener {
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		pressed.add(e.getKeyCode());
 		
-		for (KeyBinding kb : Config.KEYBINDINGS) {
+		for (KeyBinding.Type k : KeyBindings.KEYBINDINGS.keySet()) {
+			KeyBinding kb = KeyBindings.KEYBINDINGS.get(k);
+			
 			boolean trigger = false;
 			for (int i : kb.getKeys()) {
 				if (pressed.contains(i)) {
@@ -31,8 +31,8 @@ public class KeyListener implements NativeKeyListener {
 				}
 			}
 			
-			if (trigger) {
-				kb.trigger();
+			if (trigger && KeyBindings.ACTIONS.containsKey(k)) {
+				KeyBindings.ACTIONS.get(k).run();
 			}
 		}
 	}
