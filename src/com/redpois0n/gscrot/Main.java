@@ -15,6 +15,7 @@ import org.jnativehook.GlobalScreen;
 
 import pluginlib.PluginLoader;
 
+import com.redpois0n.gscrot.keys.KeyListener;
 import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.ui.RegionCapture;
 import com.redpois0n.gscrot.ui.ScreenColorPicker;

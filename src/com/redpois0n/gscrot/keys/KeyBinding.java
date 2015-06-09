@@ -1,4 +1,4 @@
-package com.redpois0n.gscrot;
+package com.redpois0n.gscrot.keys;
 
 import java.util.ArrayList;
 import java.util.List;
