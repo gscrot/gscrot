@@ -7,15 +7,20 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 
 import com.redpois0n.gscrot.keys.KeyBinding;
+import com.redpois0n.gscrot.keys.KeyBinding.Type;
 import com.redpois0n.gscrot.keys.KeyBindings;
 
 @SuppressWarnings("serial")
 public class JKeyBindingButton extends JButton implements KeyListener {
 
+	private Type type;
+	
 	private int[] keys = new int[KeyBindings.MAX_KEYS];
 	private int index;
 
-	public JKeyBindingButton(KeyBinding.Type type, KeyBinding binding) {
+	public JKeyBindingButton(Type type, KeyBinding binding) {
+		this.type = type;
+		
 		setFocusable(true);
 
 		addKeyListener(this);
@@ -26,6 +31,8 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 			for (int i = 0; i < keys.length; i++) {
 				keys[i] = binding.getKeys().get(i);
 			}
+			
+			setKeyText();
 		}
 	}
 
@@ -36,8 +43,11 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		}
 
 		keys[index++] = e.getKeyCode();
+		System.out.println("ADDED KEY " + e.getKeyCode());
 
 		setKeyText();
+		
+		KeyBindings.KEYBINDINGS.put(type, getKeyBinding());
 	}
 
 	private void setKeyText() {
@@ -68,4 +78,12 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		return this.keys;
 	}
 
+	public KeyBinding getKeyBinding() {
+		int[] k = new int[index + 1];
+		for (int i = 0; i < index; i++) {
+			k[i] = keys[i];
+		}
+		
+		return new KeyBinding(k);
+	}
 }
