@@ -15,6 +15,7 @@ import org.jnativehook.GlobalScreen;
 
 import pluginlib.PluginLoader;
 
+import com.redpois0n.gscrot.keys.KeyBindings;
 import com.redpois0n.gscrot.keys.KeyListener;
 import com.redpois0n.gscrot.ui.MainFrame;
 import com.redpois0n.gscrot.ui.RegionCapture;
@@ -43,6 +44,7 @@ public class Main {
 		
 		try {
 			Config.load();
+			KeyBindings.load();
 		} catch (FileNotFoundException e) {
 
 		} catch (Exception e) {

@@ -54,12 +54,12 @@ public class KeyBinding implements Serializable {
 	
 	private List<Integer> keys = new ArrayList<Integer>();
 		
-	public KeyBinding(Integer... keys) {
+	public KeyBinding(int... keys) {
 		for (Integer i : keys) {
 			this.keys.add(i);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString();

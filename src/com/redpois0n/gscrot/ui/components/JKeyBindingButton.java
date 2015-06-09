@@ -39,15 +39,21 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (index >= keys.length) {
+			clear();
 			index = 0;
 		}
 
 		keys[index++] = e.getKeyCode();
-		System.out.println("ADDED KEY " + e.getKeyCode());
 
 		setKeyText();
 		
 		KeyBindings.KEYBINDINGS.put(type, getKeyBinding());
+	}
+	
+	private void clear() {
+		for (int i = 0; i < keys.length; i++) {
+			keys[i] = 0;
+		}
 	}
 
 	private void setKeyText() {
@@ -79,11 +85,6 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 	}
 
 	public KeyBinding getKeyBinding() {
-		int[] k = new int[index + 1];
-		for (int i = 0; i < index; i++) {
-			k[i] = keys[i];
-		}
-		
-		return new KeyBinding(k);
+		return new KeyBinding(keys);
 	}
 }

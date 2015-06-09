@@ -13,21 +13,31 @@ public class KeyListener implements NativeKeyListener {
 	public static boolean isPressed(int keycode) {
 		return pressed.contains(keycode);
 	}
+	
+	private static void removePressed(int keycode) {
+		for (int i = 0; i < pressed.size(); i++) {
+			if (pressed.get(i).equals(keycode)) {
+				pressed.remove(i);
+			}
+		}
+	}
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
-		pressed.add(e.getKeyCode());
+		pressed.add(e.getRawCode());
 		
 		for (KeyBinding.Type k : KeyBindings.KEYBINDINGS.keySet()) {
 			KeyBinding kb = KeyBindings.KEYBINDINGS.get(k);
 			
 			boolean trigger = false;
 			for (int i : kb.getKeys()) {
-				if (pressed.contains(i)) {
-					trigger = true;
-				} else {
-					trigger = false;
-					break;
+				if (i != 0) {
+					if (pressed.contains(i)) {
+						trigger = true;
+					} else {
+						trigger = false;
+						break;
+					}
 				}
 			}
 			
@@ -39,11 +49,7 @@ public class KeyListener implements NativeKeyListener {
 
 	@Override
 	public void nativeKeyReleased(NativeKeyEvent e) {
-		for (int i = 0; i < pressed.size(); i++) {
-			if (pressed.get(i).equals(e.getKeyCode())) {
-				pressed.remove(i);
-			}
-		}
+		removePressed(e.getRawCode());
 	}
 
 	@Override

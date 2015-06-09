@@ -21,7 +21,7 @@ public class KeyBindings {
 		for (int i = 0; i < len; i++) {
 			KeyBinding.Type type = KeyBinding.Type.values()[i];
 			
-			Integer[] keys = new Integer[KeyBindings.MAX_KEYS];
+			int[] keys = new int[KeyBindings.MAX_KEYS];
 			
 			for (int k = 0; i < KeyBindings.MAX_KEYS; i++) {
 				keys[k] = dis.readInt();
