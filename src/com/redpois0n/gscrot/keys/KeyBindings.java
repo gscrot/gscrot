@@ -8,8 +8,6 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.redpois0n.gscrot.ui.settings.JKeyBindingButton;
-
 public class KeyBindings {
 	
 	public static Map<KeyBinding.Type, Runnable> ACTIONS = new HashMap<KeyBinding.Type, Runnable>();
@@ -25,9 +23,9 @@ public class KeyBindings {
 		for (int i = 0; i < len; i++) {
 			KeyBinding.Type type = KeyBinding.Type.values()[i];
 			
-			Integer[] keys = new Integer[JKeyBindingButton.MAX_KEYS];
+			Integer[] keys = new Integer[KeyBindings.MAX_KEYS];
 			
-			for (int k = 0; i < JKeyBindingButton.MAX_KEYS; i++) {
+			for (int k = 0; i < KeyBindings.MAX_KEYS; i++) {
 				keys[k] = dis.readInt();
 			}
 			
@@ -55,5 +53,10 @@ public class KeyBindings {
 		
 		dos.close();
 	}
+
+	/**
+	 * Maximum keys allowed
+	 */
+	public static final int MAX_KEYS = 3;
 
 }

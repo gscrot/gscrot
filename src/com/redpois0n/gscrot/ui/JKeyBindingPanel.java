@@ -1,18 +1,16 @@
 package com.redpois0n.gscrot.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import com.redpois0n.gscrot.ui.settings.JKeyBindingButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.redpois0n.gscrot.ui.settings.JKeyBindingButton;
 
 @SuppressWarnings("serial")
 public class JKeyBindingPanel extends JPanel {

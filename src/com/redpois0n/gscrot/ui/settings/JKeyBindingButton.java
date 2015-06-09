@@ -6,15 +6,12 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 
+import com.redpois0n.gscrot.keys.KeyBindings;
+
 @SuppressWarnings("serial")
 public class JKeyBindingButton extends JButton implements KeyListener {
 
-	/**
-	 * Maximum keys allowed
-	 */
-	public static final int MAX_KEYS = 3;
-
-	private int[] keys = new int[MAX_KEYS];
+	private int[] keys = new int[KeyBindings.MAX_KEYS];
 	private int index;
 
 	public JKeyBindingButton() {
