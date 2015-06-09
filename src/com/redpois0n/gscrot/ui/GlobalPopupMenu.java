@@ -229,8 +229,16 @@ public class GlobalPopupMenu {
 				new FrameSettings().setVisible(true);
 			} 	
 	    });
-	    
 	    mnSettings.add(mntmApplicationSettings);
+	    
+	    JMenuItem mntmKeyBindings = new JMenuItem("Keybindings", IconUtils.getIcon("keys"));
+	    mntmApplicationSettings.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+			} 	
+	    });
+	    mnSettings.add(mntmKeyBindings);
 	    
 	    if (SETTINGS_ITEMS.size() > 0) {
 	    	mnSettings.getMenu().addSeparator();
