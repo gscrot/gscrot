@@ -1,5 +1,6 @@
 package com.redpois0n.gscrot.ui.settings;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -20,6 +21,8 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		setFocusable(true);
 
 		addKeyListener(this);
+		
+		super.setPreferredSize(new Dimension(150, 15));
 	}
 
 	@Override
