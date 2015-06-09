@@ -1,4 +1,4 @@
-package com.redpois0n.gscrot.ui;
+package com.redpois0n.gscrot.ui.components;
 
 import java.awt.BorderLayout;
 import java.awt.GraphicsDevice;

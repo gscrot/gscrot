@@ -32,6 +32,8 @@ import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
+import com.redpois0n.gscrot.ui.components.JDropDownButton;
+import com.redpois0n.gscrot.ui.components.MonitorPicker;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
 import com.redpois0n.gscrot.utils.Utils;
 import com.redpois0n.oslib.OperatingSystem;
