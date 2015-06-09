@@ -77,12 +77,19 @@ public class Main {
 		GlobalScreen.addNativeKeyListener(new KeyListener());
 	}
 
-	public static void createBackground() throws Exception {
-		Rectangle rect = ScreenshotHelper.getWholeDesktop();
-		BufferedImage screenShot = ScreenshotHelper.capture(rect);
-		
-		RegionCapture frame = new RegionCapture(rect, screenShot);
-		frame.setVisible(true);
+	/**
+	 * Creates RegionCapture covering the whole screen
+	 */
+	public static void createBackground() {
+		try {
+			Rectangle rect = ScreenshotHelper.getWholeDesktop();
+			BufferedImage screenShot = ScreenshotHelper.capture(rect);
+			
+			RegionCapture frame = new RegionCapture(rect, screenShot);
+			frame.setVisible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	public static void createColorPicker() throws Exception {

@@ -2,7 +2,6 @@ package com.redpois0n.gscrot.ui;
 
 import iconlib.IconUtils;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,6 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -30,13 +28,13 @@ import com.redpois0n.gscrot.GraphicsImageProcessor;
 import com.redpois0n.gscrot.ImageProcessor;
 import com.redpois0n.gscrot.Main;
 import com.redpois0n.gscrot.ScreenshotHelper;
+import com.redpois0n.gscrot.Tools;
 import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.JDropDownButton;
 import com.redpois0n.gscrot.ui.components.MonitorPicker;
 import com.redpois0n.gscrot.ui.settings.FrameKeyBindings;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
-import com.redpois0n.gscrot.utils.Utils;
 import com.redpois0n.oslib.OperatingSystem;
 
 public class GlobalPopupMenu {
@@ -53,11 +51,7 @@ public class GlobalPopupMenu {
 		JMenuItem mntmRegion = new JMenuItem("Region", IconUtils.getIcon("region-select"));
 	    mntmRegion.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		try {
-					Main.createBackground();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				Main.createBackground();
 	    	}
 	    });
 	    btnCapture.getMenu().add(mntmRegion);
@@ -66,11 +60,7 @@ public class GlobalPopupMenu {
 	    mntmAllMonitors.setIcon(IconUtils.getIcon("monitor-all"));
 	    mntmAllMonitors.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
-    			try {
-					ScreenshotHelper.process(Type.FULL, ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+    			ScreenshotHelper.captureAll();
     		}
     	});
 	    btnCapture.getMenu().add(mntmAllMonitors);
@@ -133,11 +123,7 @@ public class GlobalPopupMenu {
 		JMenuItem mntmScreenColorPicker = new JMenuItem("Screen Color Picker", IconUtils.getIcon("pipette-color"));
 		mntmScreenColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Main.createColorPicker();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				Tools.callScreenColorPicker();
 			}
 		});
 		btnTools.add(mntmScreenColorPicker);
@@ -145,8 +131,7 @@ public class GlobalPopupMenu {
 		JMenuItem mntmColorPicker = new JMenuItem("Color Picker", IconUtils.getIcon("color"));
 		mntmColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Color color = JColorChooser.showDialog(null, "Color Picker", Color.black);
-				Utils.setColorInClipboard(color);
+				Tools.callColorPicker();
 			}
 		});
 		btnTools.add(mntmColorPicker);

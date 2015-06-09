@@ -9,9 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KeyBindings {
-	
-	public static Map<KeyBinding.Type, Runnable> ACTIONS = new HashMap<KeyBinding.Type, Runnable>();
-	
+		
 	public static Map<KeyBinding.Type, KeyBinding> KEYBINDINGS = new HashMap<KeyBinding.Type, KeyBinding>();
 	public static final File KEYBINDINGS_FILE = new File(".keys");
 	

@@ -4,13 +4,50 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.redpois0n.gscrot.Main;
+import com.redpois0n.gscrot.ScreenshotHelper;
+import com.redpois0n.gscrot.Tools;
+
 public class KeyBinding implements Serializable {
 	
 	public static enum Type {
-		REGION,
-		FULLSCREEN,
-		REGION_COLOR,
-		PICK_COLOR
+		REGION(new Runnable() {
+			@Override
+			public void run() {
+				Main.createBackground();
+			}
+		}),
+		
+		FULLSCREEN(new Runnable() {
+			@Override
+			public void run() {
+    			ScreenshotHelper.captureAll();
+			}
+		}),
+		
+		REGION_COLOR(new Runnable() {
+			@Override
+			public void run() {
+				Tools.callScreenColorPicker();
+			}
+		}),
+		
+		PICK_COLOR(new Runnable() {
+			@Override
+			public void run() {
+				Tools.callColorPicker();
+			}
+		});
+		
+		private Runnable run;
+		
+		private Type(Runnable run) {
+			this.run = run;
+		}
+		
+		public void trigger() {
+			run.run();
+		}
 	}
 	
 	private static final long serialVersionUID = 1607444383964747069L;

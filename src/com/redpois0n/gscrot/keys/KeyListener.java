@@ -31,8 +31,8 @@ public class KeyListener implements NativeKeyListener {
 				}
 			}
 			
-			if (trigger && KeyBindings.ACTIONS.containsKey(k)) {
-				KeyBindings.ACTIONS.get(k).run();
+			if (trigger) {
+				k.trigger();
 			}
 		}
 	}

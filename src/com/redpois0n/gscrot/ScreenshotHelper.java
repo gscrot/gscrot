@@ -102,4 +102,12 @@ public class ScreenshotHelper {
 		return capture(window.getRectangle());
 	}
 
+	public static void captureAll() {
+		try {
+			ScreenshotHelper.process(Type.FULL, ScreenshotHelper.capture(ScreenshotHelper.getWholeDesktop()));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}		
+	}
+
 }
