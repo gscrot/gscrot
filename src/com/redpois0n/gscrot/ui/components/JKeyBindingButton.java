@@ -15,12 +15,18 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 	private int[] keys = new int[KeyBindings.MAX_KEYS];
 	private int index;
 
-	public JKeyBindingButton(KeyBinding binding) {
+	public JKeyBindingButton(KeyBinding.Type type, KeyBinding binding) {
 		setFocusable(true);
 
 		addKeyListener(this);
 		
-		super.setPreferredSize(new Dimension(150, 15));
+		setPreferredSize(new Dimension(150, 15));
+		
+		if (binding != null) {
+			for (int i = 0; i < keys.length; i++) {
+				keys[i] = binding.getKeys().get(i);
+			}
+		}
 	}
 
 	@Override

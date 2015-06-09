@@ -18,13 +18,13 @@ public class JKeyBindingPanel extends JPanel {
 	
 	private JKeyBindingButton btn;
 	
-	public JKeyBindingPanel(String text, KeyBinding binding) {
+	public JKeyBindingPanel(String text, KeyBinding.Type type, KeyBinding binding) {
 		
 		JLabel label = new JLabel("  " + text);
 		label.setPreferredSize(new Dimension(5000, 50));
 		label.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
-		btn = new JKeyBindingButton(binding);
+		btn = new JKeyBindingButton(type, binding);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
