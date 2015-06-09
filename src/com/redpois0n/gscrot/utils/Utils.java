@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.TrayIcon.MessageType;
 
 import com.redpois0n.gscrot.ClipboardHelper;
-import com.redpois0n.gscrot.TrayIconHelper;
+import com.redpois0n.gscrot.ui.TrayIconHelper;
 
 public class Utils {
 	

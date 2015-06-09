@@ -1,4 +1,4 @@
-package com.redpois0n.gscrot;
+package com.redpois0n.gscrot.ui;
 
 import iconlib.IconUtils;
 
@@ -14,9 +14,6 @@ import javax.swing.SwingUtilities;
 
 import statusicon.StatusIcon;
 import statusicon.StatusIcon.Mode;
-
-import com.redpois0n.gscrot.ui.GlobalPopupMenu;
-import com.redpois0n.gscrot.ui.MainFrame;
 
 public class TrayIconHelper {
 	

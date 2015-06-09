@@ -14,6 +14,7 @@ import javax.swing.Icon;
 
 import com.redpois0n.gscrot.exceptions.InvalidUploaderException;
 import com.redpois0n.gscrot.ui.MainFrame;
+import com.redpois0n.gscrot.ui.TrayIconHelper;
 import com.redpois0n.gscrot.utils.NameFormatter;
 
 public class Capture extends Thread {
