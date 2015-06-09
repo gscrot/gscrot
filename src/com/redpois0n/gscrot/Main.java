@@ -25,7 +25,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -72,6 +72,7 @@ public class Main {
 		logger.setLevel(Level.OFF);
 
 		GlobalScreen.registerNativeHook();
+		GlobalScreen.addNativeKeyListener(new KeyListener());
 	}
 
 	public static void createBackground() throws Exception {
