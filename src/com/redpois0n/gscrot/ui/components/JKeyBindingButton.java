@@ -26,11 +26,13 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		addKeyListener(this);
 		
 		setPreferredSize(new Dimension(150, 15));
-		
+
 		if (binding != null) {
 			for (int i = 0; i < keys.length; i++) {
 				keys[i] = binding.getKeys().get(i);
 			}
+			
+			index = 3;
 			
 			setKeyText();
 		}
@@ -60,10 +62,12 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		String text = "";
 
 		for (int i = 0; i < index; i++) {
-			text += KeyEvent.getKeyText(keys[i]);
+			if (keys[i] != 0) {
+				text += KeyEvent.getKeyText(keys[i]);
 
-			if (i + 1 < index) {
-				text += " + ";
+				if (i + 1 < index && keys[i + 1] != 0) {
+					text += " + ";
+				}
 			}
 		}
 

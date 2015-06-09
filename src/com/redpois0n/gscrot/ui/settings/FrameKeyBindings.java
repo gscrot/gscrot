@@ -20,7 +20,7 @@ public class FrameKeyBindings extends JFrame {
 		
 		for (int i = 0; i < KeyBinding.Type.values().length; i++) {
 			KeyBinding.Type type = KeyBinding.Type.values()[i];
-			
+						
 			JKeyBindingPanel panel = new JKeyBindingPanel(type.name(), type, KeyBindings.KEYBINDINGS.get(type));
 			panel.setBounds(10, 10 + i * 30, getWidth() - 30, 25);
 			
