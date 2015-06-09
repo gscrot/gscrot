@@ -6,6 +6,13 @@ import java.util.List;
 
 public abstract class KeyBinding implements Serializable {
 	
+	public static enum Type {
+		REGION,
+		FULLSCREEN,
+		REGION_COLOR,
+		PICK_COLOR
+	}
+	
 	private static final long serialVersionUID = 1607444383964747069L;
 	
 	private List<Integer> keys = new ArrayList<Integer>();
