@@ -19,11 +19,11 @@ public class KeyBindings {
 		int len = dis.readInt();
 		
 		for (int i = 0; i < len; i++) {
-			KeyBinding.Type type = KeyBinding.Type.values()[i];
+			KeyBinding.Type type = KeyBinding.Type.values()[dis.readInt()];
 			
 			int[] keys = new int[KeyBindings.MAX_KEYS];
 			
-			for (int k = 0; i < KeyBindings.MAX_KEYS; i++) {
+			for (int k = 0; k < KeyBindings.MAX_KEYS; k++) {
 				keys[k] = dis.readInt();
 			}
 			
