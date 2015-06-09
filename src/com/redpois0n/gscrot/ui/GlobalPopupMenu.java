@@ -34,6 +34,7 @@ import com.redpois0n.gscrot.ui.components.CaptureUploaderCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.ImageProcessorCheckBoxMenuItem;
 import com.redpois0n.gscrot.ui.components.JDropDownButton;
 import com.redpois0n.gscrot.ui.components.MonitorPicker;
+import com.redpois0n.gscrot.ui.settings.FrameKeyBindings;
 import com.redpois0n.gscrot.ui.settings.FrameSettings;
 import com.redpois0n.gscrot.utils.Utils;
 import com.redpois0n.oslib.OperatingSystem;
@@ -232,10 +233,10 @@ public class GlobalPopupMenu {
 	    mnSettings.add(mntmApplicationSettings);
 	    
 	    JMenuItem mntmKeyBindings = new JMenuItem("Keybindings", IconUtils.getIcon("keys"));
-	    mntmApplicationSettings.addActionListener(new ActionListener() {
+	    mntmKeyBindings.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+				new FrameKeyBindings().setVisible(true);
 			} 	
 	    });
 	    mnSettings.add(mntmKeyBindings);
