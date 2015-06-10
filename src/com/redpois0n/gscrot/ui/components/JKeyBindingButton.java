@@ -9,16 +9,19 @@ import javax.swing.JButton;
 import com.redpois0n.gscrot.keys.KeyBinding;
 import com.redpois0n.gscrot.keys.KeyBinding.Type;
 import com.redpois0n.gscrot.keys.KeyBindings;
+import com.redpois0n.gscrot.ui.JKeyBindingPanel;
 
 @SuppressWarnings("serial")
 public class JKeyBindingButton extends JButton implements KeyListener {
 
+	private JKeyBindingPanel parent;
 	private Type type;
 	
 	private int[] keys = new int[KeyBindings.MAX_KEYS];
 	private int index;
 
-	public JKeyBindingButton(Type type, KeyBinding binding) {
+	public JKeyBindingButton(JKeyBindingPanel parent, Type type, KeyBinding binding) {
+		this.parent = parent;
 		this.type = type;
 		
 		setFocusable(true);
@@ -34,7 +37,7 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 			
 			index = 3;
 			
-			setKeyText();
+			update();
 		}
 	}
 
@@ -47,9 +50,13 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 
 		keys[index++] = e.getKeyCode();
 
-		setKeyText();
+		update();
 		
 		KeyBindings.KEYBINDINGS.put(type, getKeyBinding());
+	}
+	
+	public void update() {
+		setKeyText();
 	}
 	
 	private void clear() {

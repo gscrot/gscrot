@@ -24,7 +24,7 @@ public class JKeyBindingPanel extends JPanel {
 		label.setPreferredSize(new Dimension(5000, 50));
 		label.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
-		btn = new JKeyBindingButton(type, binding);
+		btn = new JKeyBindingButton(this, type, binding);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
