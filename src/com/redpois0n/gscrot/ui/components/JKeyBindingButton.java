@@ -1,8 +1,11 @@
 package com.redpois0n.gscrot.ui.components;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
@@ -12,7 +15,7 @@ import com.redpois0n.gscrot.keys.KeyBindings;
 import com.redpois0n.gscrot.ui.JKeyBindingPanel;
 
 @SuppressWarnings("serial")
-public class JKeyBindingButton extends JButton implements KeyListener {
+public class JKeyBindingButton extends JButton implements KeyListener, MouseListener {
 
 	private JKeyBindingPanel parent;
 	private Type type;
@@ -27,18 +30,26 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		setFocusable(true);
 
 		addKeyListener(this);
+		addMouseListener(this);
 		
 		setPreferredSize(new Dimension(150, 15));
 
 		if (binding != null) {
+			boolean zero = true;
+			
 			for (int i = 0; i < keys.length; i++) {
 				keys[i] = binding.getKeys().get(i);
+				
+				if (keys[i] != 0) {
+					zero = false;
+				}
 			}
 			
-			index = 3;
-			
-			update();
+			index = zero ? 0 : KeyBindings.MAX_KEYS;
 		}
+		
+		update();
+
 	}
 
 	@Override
@@ -51,15 +62,38 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		keys[index++] = e.getKeyCode();
 
 		update();
+	}
+	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		clear();
+		update();
+		setText("Press to enter keys...");
+	}
+	
+	@Override
+	public void setBackground(Color c) {
+		super.setBackground(c);
 		
-		KeyBindings.KEYBINDINGS.put(type, getKeyBinding());
+		if (parent != null) {
+			parent.setBackground(c);
+		}
 	}
 	
 	public void update() {
+		if (index == 0) {
+			setBackground(new Color(250, 250, 210));
+		} else {
+			setBackground(new Color(152, 251, 152));
+		}
+
 		setKeyText();
+		KeyBindings.KEYBINDINGS.put(type, getKeyBinding());
 	}
 	
 	private void clear() {
+		index = 0;
 		for (int i = 0; i < keys.length; i++) {
 			keys[i] = 0;
 		}
@@ -67,6 +101,10 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 
 	private void setKeyText() {
 		String text = "";
+		
+		if (index == 0) {
+			text = "Press to enter keys...";
+		}
 
 		for (int i = 0; i < index; i++) {
 			if (keys[i] != 0) {
@@ -81,16 +119,6 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 		setText(text);
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-
-	}
-	
 	public int[] getKeys() {
 		return this.keys;
 	}
@@ -98,4 +126,23 @@ public class JKeyBindingButton extends JButton implements KeyListener {
 	public KeyBinding getKeyBinding() {
 		return new KeyBinding(keys);
 	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
+
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void keyReleased(KeyEvent e) { }
+
+	@Override
+	public void keyTyped(KeyEvent e) { }
+	
 }
