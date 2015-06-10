@@ -27,6 +27,8 @@ public class JKeyBindingButton extends JButton implements KeyListener, MouseList
 		this.parent = parent;
 		this.type = type;
 		
+		clear();
+		
 		setFocusable(true);
 
 		addKeyListener(this);
@@ -82,7 +84,9 @@ public class JKeyBindingButton extends JButton implements KeyListener, MouseList
 	}
 	
 	public void update() {
-		if (index == 0) {
+		if (index > 0 && parent.getParentPanel().isConflicting(parent, keys)) {
+			setBackground(Color.red);
+		} else if (index == 0) {
 			setBackground(new Color(250, 250, 210));
 		} else {
 			setBackground(new Color(152, 251, 152));

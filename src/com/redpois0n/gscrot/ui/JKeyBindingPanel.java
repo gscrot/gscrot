@@ -12,13 +12,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.redpois0n.gscrot.keys.KeyBinding;
 import com.redpois0n.gscrot.ui.components.JKeyBindingButton;
+import com.redpois0n.gscrot.ui.settings.FrameKeyBindings;
 
 @SuppressWarnings("serial")
 public class JKeyBindingPanel extends JPanel {
 	
 	private JKeyBindingButton btn;
+	private FrameKeyBindings parent;
 	
-	public JKeyBindingPanel(String text, KeyBinding.Type type, KeyBinding binding) {
+	public JKeyBindingPanel(FrameKeyBindings parent, String text, KeyBinding.Type type, KeyBinding binding) {
+		this.parent = parent;
 		
 		JLabel label = new JLabel("  " + text);
 		label.setPreferredSize(new Dimension(5000, 50));
@@ -39,6 +42,14 @@ public class JKeyBindingPanel extends JPanel {
 				.addComponent(btn, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
+	}
+	
+	public FrameKeyBindings getParentPanel() {
+		return parent;
+	}
+	
+	public JKeyBindingButton getButton() {
+		return btn;
 	}
 
 }
