@@ -11,38 +11,48 @@ import com.redpois0n.gscrot.Tools;
 public class KeyBinding implements Serializable {
 	
 	public static enum Type {
-		REGION(new Runnable() {
+		REGION("Capture Region", new Runnable() {
 			@Override
 			public void run() {
 				Main.createBackground();
 			}
 		}),
 		
-		FULLSCREEN(new Runnable() {
+		FULLSCREEN("Capture all screens", new Runnable() {
 			@Override
 			public void run() {
     			ScreenshotHelper.captureAll();
 			}
 		}),
 		
-		REGION_COLOR(new Runnable() {
+		REGION_COLOR("Grab color from screen", new Runnable() {
 			@Override
 			public void run() {
 				Tools.callScreenColorPicker();
 			}
 		}),
 		
-		PICK_COLOR(new Runnable() {
+		PICK_COLOR("Open color picker", new Runnable() {
 			@Override
 			public void run() {
 				Tools.callColorPicker();
 			}
 		});
 		
+		private String text;
 		private Runnable run;
 		
-		private Type(Runnable run) {
+		private Type(String text, Runnable run) {
+			this.text = text;
 			this.run = run;
+		}
+		
+		/**
+		 * Returns {@link #text}
+		 */
+		@Override
+		public String toString() {
+			return text;
 		}
 		
 		public void trigger() {

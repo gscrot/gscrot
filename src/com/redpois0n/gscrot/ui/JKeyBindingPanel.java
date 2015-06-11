@@ -20,10 +20,10 @@ public class JKeyBindingPanel extends JPanel {
 	private JKeyBindingButton btn;
 	private FrameKeyBindings parent;
 	
-	public JKeyBindingPanel(FrameKeyBindings parent, String text, KeyBinding.Type type, KeyBinding binding) {
+	public JKeyBindingPanel(FrameKeyBindings parent, KeyBinding.Type type, KeyBinding binding) {
 		this.parent = parent;
 		
-		JLabel label = new JLabel("  " + text);
+		JLabel label = new JLabel("  " + type.toString());
 		label.setPreferredSize(new Dimension(5000, 50));
 		label.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
