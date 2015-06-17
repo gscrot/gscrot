@@ -76,11 +76,11 @@ public class Capture extends Thread {
 	private UploadResponse response;
 	
 	public Capture(Type type, BufferedImage image, String filename) {
-		this(type, Format.getFromString(Config.get("preferred-format", "png")), image, filename);
+		this(type, Format.getFromString(Config.get(Config.KEY_PREFERRED_FORMAT, "png")), image, filename);
 	}
 	
 	public Capture(Type type, BufferedImage image) {
-		this(type, Format.getFromString(Config.get("preferred-format", "png")), image, NameFormatter.format(Config.get("filename", "image")));
+		this(type, Format.getFromString(Config.get(Config.KEY_PREFERRED_FORMAT, "png")), image, NameFormatter.format(Config.get(Config.KEY_DEFAULT_FILENAME, "image")));
 	}
 	
 	public Capture(Type type, Format format, BufferedImage image, String filename) {

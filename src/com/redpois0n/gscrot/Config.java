@@ -17,6 +17,8 @@ public class Config {
 	
 	public static final String KEY_COPY_URL_TO_CLIPBOARD = "copy-url-to-clipboard";
 	public static final String KEY_COPY_IMAGE_TO_CLIPBOARD = "copy-image-to-clipboard";
+	public static final String KEY_PREFERRED_FORMAT = "preferred-format";
+	public static final String KEY_DEFAULT_FILENAME = "image";
 		
 	/**
 	 * Gets value from configuration
