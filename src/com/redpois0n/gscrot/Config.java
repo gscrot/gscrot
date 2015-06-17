@@ -35,6 +35,16 @@ public class Config {
 	}
 	
 	/**
+	 * Gets value as boolean from configuration
+	 * @param k
+	 * @param def default value
+	 * @return
+	 */
+	public static boolean get(String k, boolean def) {
+		return get(k, def + "").equalsIgnoreCase("true");
+	}
+	
+	/**
 	 * Sets value in configuration
 	 * @param k
 	 * @param v
