@@ -33,10 +33,6 @@ _at 287c3ee22222048349ffd543da4e244ed08c33b9_
 - [jna](https://github.com/twall/jna)
 - [nativewindowlib](https://github.com/redpois0n/nativewindowlib)
 
-## Notes
-
-Getting active windows is only available on Windows using JNA
-
 ## How to build
 
 Compile from source into an runnable JAR with [pyjar](https://github.com/redpois0n/pyjar)
