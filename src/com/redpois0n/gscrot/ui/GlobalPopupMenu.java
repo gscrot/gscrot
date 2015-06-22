@@ -92,8 +92,8 @@ public class GlobalPopupMenu {
 	    	mntmMonitor.add(item);
 	    }
 	    
-	    if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
-	    	// Windows item
+	    // Get all windows if system is using X11 (or Windows) (not sure if OS X does)
+	    if (OperatingSystem.getOperatingSystem().getType() != OperatingSystem.OSX) {
 		    final JMenu mntmWindows = new JMenu("Window");
 		    mntmWindows.setIcon(IconUtils.getIcon("window"));
 		    
