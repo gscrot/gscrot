@@ -16,6 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import nativewindowlib.NativeWindow;
 import nativewindowlib.WindowUtils;
@@ -93,28 +95,47 @@ public class GlobalPopupMenu {
 	    }
 	    
 	    try {
-			// Get all windows if system is using X11 (or Windows) (not sure if OS X does)
+			// Get all windows if system is using X11 (or Windows)
 			if (OperatingSystem.getOperatingSystem().getType() != OperatingSystem.OSX) {
 			    final JMenu mntmWindows = new JMenu("Window");
-			    mntmWindows.setIcon(IconUtils.getIcon("window"));
 			    
-			    List<NativeWindow> windows = WindowUtils.getVisibleWindows();
+			    mntmWindows.addMenuListener(new MenuListener() {
+			    	@Override
+					public void menuCanceled(MenuEvent e) {
+						
+					}
 
-				for (final NativeWindow window : windows) {
-					JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
+					@Override
+					public void menuDeselected(MenuEvent e) {
 
-					item.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							try {
-								ScreenshotHelper.process(Type.WINDOW, ScreenshotHelper.capture(window));
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
+					}
+
+					@Override
+					public void menuSelected(MenuEvent e) {
+						mntmWindows.removeAll();
+						
+						List<NativeWindow> windows = WindowUtils.getVisibleWindows();
+
+						for (final NativeWindow window : windows) {
+							JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
+
+							item.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									try {
+										ScreenshotHelper.process(Type.WINDOW, ScreenshotHelper.capture(window));
+									} catch (Exception ex) {
+										ex.printStackTrace();
+									}
+								}
+							});
+
+							mntmWindows.add(item);
 						}
-					});
-
-					mntmWindows.add(item);
-				}
+					}	
+			    });
+			    
+			    mntmWindows.setIcon(IconUtils.getIcon("window"));
+			    			 
 			    btnCapture.add(mntmWindows);
 			}
 		} catch (Exception e1) {
