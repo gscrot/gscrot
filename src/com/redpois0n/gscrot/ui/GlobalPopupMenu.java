@@ -92,30 +92,34 @@ public class GlobalPopupMenu {
 	    	mntmMonitor.add(item);
 	    }
 	    
-	    // Get all windows if system is using X11 (or Windows) (not sure if OS X does)
-	    if (OperatingSystem.getOperatingSystem().getType() != OperatingSystem.OSX) {
-		    final JMenu mntmWindows = new JMenu("Window");
-		    mntmWindows.setIcon(IconUtils.getIcon("window"));
-		    
-		    List<NativeWindow> windows = WindowUtils.getVisibleWindows();
+	    try {
+			// Get all windows if system is using X11 (or Windows) (not sure if OS X does)
+			if (OperatingSystem.getOperatingSystem().getType() != OperatingSystem.OSX) {
+			    final JMenu mntmWindows = new JMenu("Window");
+			    mntmWindows.setIcon(IconUtils.getIcon("window"));
+			    
+			    List<NativeWindow> windows = WindowUtils.getVisibleWindows();
 
-			for (final NativeWindow window : windows) {
-				JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
+				for (final NativeWindow window : windows) {
+					JMenuItem item = new JMenuItem(window.getTitle(), window.getIcon());
 
-				item.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							ScreenshotHelper.process(Type.WINDOW, ScreenshotHelper.capture(window));
-						} catch (Exception ex) {
-							ex.printStackTrace();
+					item.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							try {
+								ScreenshotHelper.process(Type.WINDOW, ScreenshotHelper.capture(window));
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
 						}
-					}
-				});
+					});
 
-				mntmWindows.add(item);
+					mntmWindows.add(item);
+				}
+			    btnCapture.add(mntmWindows);
 			}
-		    btnCapture.add(mntmWindows);
-	    }
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	    
 	    // Tools
 	    JDropDownButton btnTools = new JDropDownButton("Tools", IconUtils.getIcon("toolbox"));
