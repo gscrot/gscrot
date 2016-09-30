@@ -1,8 +1,7 @@
 package com.redpois0n.gscrot;
 
-import java.util.Date;
+import java.util.Calendar;
 
-@SuppressWarnings("deprecation")
 public class Logger {
 
 	public static void log(Object obj) {
@@ -14,19 +13,24 @@ public class Logger {
 	}
 
 	public static String getTimeString() {
-		Date date = new Date(System.currentTimeMillis());
+		int HOUR_OF_DAY = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		String hours = (HOUR_OF_DAY + "").length() == 1 ? "0" + HOUR_OF_DAY : Integer.toString(HOUR_OF_DAY);
 
-		String hours = (date.getHours() + "").length() == 1 ? "0" + date.getHours() : Integer.toString(date.getHours());
-		String minutes = (date.getMinutes() + "").length() == 1 ? "0" + date.getMinutes() : Integer.toString(date.getMinutes());
-		String seconds = (date.getSeconds() + "").length() == 1 ? "0" + date.getSeconds() : Integer.toString(date.getSeconds());
+		int MINUTE = Calendar.getInstance().get(Calendar.MINUTE);
+		String minutes = (MINUTE + "").length() == 1 ? "0" + MINUTE : Integer.toString(MINUTE);
+
+		int SECOND = Calendar.getInstance().get(Calendar.SECOND);
+		String seconds = (SECOND + "").length() == 1 ? "0" + SECOND : Integer.toString(SECOND);
 
 		String time = hours + ":" + minutes + ":" + seconds;
-		
+
 		return time;
 	}
-	
+
 	/**
-	 * getTimeString() but replaces : with - which is invalid in path names (at least on Windows)
+	 * getTimeString() but replaces : with - which is invalid in path names (at
+	 * least on Windows)
+	 * 
 	 * @return
 	 */
 	public static String getTimeFileString() {
